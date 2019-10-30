@@ -26,12 +26,11 @@
       "@nuxt/vue-app"
     ]
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.vue",
-    "tests/**/*.ts",
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  // "include": [
+  //   "src/**/*.ts",
+  //   "src/**/*.vue"
+  // ],
+  // "exclude": [
+  //   "node_modules"
+  // ]
 }
