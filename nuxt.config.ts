@@ -1,6 +1,9 @@
 import NuxtConfiguration from '@nuxt/config'
 
 const config: NuxtConfiguration = {
+  /* ビルドモジュール */
+  buildModules: ['@nuxt/typescript-build'],
+  /* SPAモードで起動 */
   mode: 'spa',
   /*
    ** Headers of the page
