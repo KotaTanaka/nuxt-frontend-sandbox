@@ -5,6 +5,8 @@ const config: NuxtConfiguration = {
   buildModules: ['@nuxt/typescript-build'],
   /* SPAモードで起動 */
   mode: 'spa',
+  /** ソースディレクトリ */
+  srcDir: 'src/',
   /*
    ** Headers of the page
    */
