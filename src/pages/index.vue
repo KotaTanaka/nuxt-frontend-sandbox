@@ -10,7 +10,9 @@ import { Component, Vue } from 'vue-property-decorator'
  * トップページ
  * @author kotatanaka
  */
-@Component({})
+@Component({
+  layout: 'default'
+})
 export default class TopPage extends Vue {}
 </script>
 
