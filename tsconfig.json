@@ -18,19 +18,18 @@
     "baseUrl": ".",
     "paths": {
       "@/*": [
-        "src/*"
+        "./src/*"
       ]
     },
     "types": [
       "@types/node",
-      "@nuxt/vue-app"
+      "@nuxt/types"
     ]
   },
-  // "include": [
-  //   "src/**/*.ts",
-  //   "src/**/*.vue"
-  // ],
-  // "exclude": [
-  //   "node_modules"
-  // ]
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
