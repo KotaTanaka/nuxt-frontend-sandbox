@@ -7,9 +7,7 @@ const config: Configuration = {
   mode: 'spa',
   /* ソースディレクトリ */
   srcDir: 'src/',
-  /*
-   ** Headers of the page
-   */
+  /* ページヘッダ */
   head: {
     title: process.env.npm_package_name || '',
     meta: [
@@ -23,47 +21,19 @@ const config: Configuration = {
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
-  /*
-   ** Customize the progress-bar color
-   */
+  /* プログレスバー */
   loading: { color: '#fff' },
-  /*
-   ** Global CSS
-   */
+  /* グローバルCSS */
   css: [],
-  /*
-   ** Plugins to load before mounting the App
-   */
+  /* プラグイン */
   plugins: [],
-  /*
-   ** Nuxt.js dev-modules
-   */
-  devModules: [
-    // Doc: https://github.com/nuxt-community/eslint-module
-    '@nuxtjs/eslint-module'
-  ],
-  /*
-   ** Nuxt.js modules
-   */
-  modules: [
-    // Doc: https://bootstrap-vue.js.org/docs/
-    'bootstrap-vue/nuxt',
-    // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios',
-    '@nuxtjs/pwa'
-  ],
-  /*
-   ** Axios module configuration
-   ** See https://axios.nuxtjs.org/options
-   */
+  /* Nuxtモジュール */
+  modules: ['bootstrap-vue/nuxt', '@nuxtjs/axios', '@nuxtjs/pwa'],
+  /* Axios */
   axios: {},
-  /*
-   ** Build configuration
-   */
+  /* Build configuration */
   build: {
-    /*
-     ** You can extend webpack config here
-     */
+    /* Webpack の拡張 */
     extend() {}
   }
 }
