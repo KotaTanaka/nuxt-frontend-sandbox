@@ -1,11 +1,11 @@
-import NuxtConfiguration from '@nuxt/config'
+import { Configuration } from '@nuxt/types'
 
-const config: NuxtConfiguration = {
+const config: Configuration = {
   /* ビルドモジュール */
   buildModules: ['@nuxt/typescript-build'],
-  /* SPAモードで起動 */
+  /* 起動モード */
   mode: 'spa',
-  /** ソースディレクトリ */
+  /* ソースディレクトリ */
   srcDir: 'src/',
   /*
    ** Headers of the page
