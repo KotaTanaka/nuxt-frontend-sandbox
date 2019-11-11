@@ -30,7 +30,9 @@ const config: Configuration = {
   /* Nuxtモジュール */
   modules: ['bootstrap-vue/nuxt', '@nuxtjs/axios', '@nuxtjs/pwa'],
   /* Axios */
-  axios: {},
+  axios: {
+    baseURL: 'http://localhost:7070'
+  },
   /* Build configuration */
   build: {
     /* Webpack の拡張 */
