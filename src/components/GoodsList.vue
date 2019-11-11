@@ -17,7 +17,7 @@ import { IGoodsListElement } from '@/interfaces/api/Goods'
 @Component
 export default class GoodsList extends Vue {
   @Prop({ type: Array, required: true })
-  goodsList: Array<IGoodsListElement> = []
+  goodsList?: Array<IGoodsListElement>
 }
 </script>
 
