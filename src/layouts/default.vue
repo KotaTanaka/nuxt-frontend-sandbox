@@ -1,7 +1,8 @@
 <template lang="pug">
-.app
+v-app
   AppHeader
-  nuxt
+  .app-container
+    nuxt
 </template>
 
 <script lang="ts">
@@ -21,7 +22,7 @@ export default class DefaultLayout extends Vue {}
 </script>
 
 <style lang="scss">
-.app {
+.app-container {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

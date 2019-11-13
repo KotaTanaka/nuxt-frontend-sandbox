@@ -1,6 +1,9 @@
 <template lang="pug">
-.header
-  h1.heading 商品管理
+.app-header
+  v-app-bar(color="deep-purple accent-4" dark)
+    v-app-bar-nav-icon
+    v-toolbar-title 商品管理
+    v-spacer
 </template>
 
 <script lang="ts">
@@ -14,17 +17,4 @@ import { Component, Vue } from 'nuxt-property-decorator'
 export default class AppHeader extends Vue {}
 </script>
 
-<style lang="scss">
-.header {
-  background-color: #2c3e50;
-  color: white;
-  height: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  > .heading {
-    font-size: 25px;
-  }
-}
-</style>
+<style lang="scss"></style>
