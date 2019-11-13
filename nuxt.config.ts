@@ -28,10 +28,25 @@ const config: Configuration = {
   /* プラグイン */
   plugins: [],
   /* Nuxtモジュール */
-  modules: ['bootstrap-vue/nuxt', '@nuxtjs/axios', '@nuxtjs/pwa'],
+  modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/pwa',
+    '@nuxtjs/vuetify',
+    '@nuxtjs/font-awesome',
+    'bootstrap-vue/nuxt'
+  ],
   /* Axios */
   axios: {
     baseURL: 'http://localhost:7070'
+  },
+  /* Vuetify */
+  vuetify: {
+    theme: {
+      primary: '#3f51b5',
+      secondary: '#b0bec5',
+      accent: '#8c9eff',
+      error: '#b71c1c'
+    }
   },
   /* Build configuration */
   build: {
