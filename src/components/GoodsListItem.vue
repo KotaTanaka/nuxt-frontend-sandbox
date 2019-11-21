@@ -1,8 +1,13 @@
 <template lang="pug">
-v-container
-  v-row
-    v-col(v-for="goods in goodsList" :key="goods.id")
-      GoodsListItem(:goods="goods")
+v-card
+  v-card-text
+    div 商品ID: {{ goods.id }}
+    p(class="display-1 text--primary") {{ goods.name }}
+    p {{ goods.price }} 円
+    div(class="text--primary") {{ goods.description }}
+  v-card-actions
+    v-btn(text) 編集
+    v-btn(text) 削除
 </template>
 
 <script lang="ts">
@@ -10,20 +15,15 @@ import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
 // from app
 import { IGoodsListElement } from '@/interfaces/api/Goods'
-import GoodsListItem from '@/components/GoodsListItem.vue'
 
 /**
- * 商品リスト
+ * 商品リスト要素
  * @author kotatanaka
  */
-@Component({
-  components: {
-    GoodsListItem
-  }
-})
+@Component
 export default class GoodsList extends Vue {
   @Prop({ type: Array, required: true })
-  goodsList?: Array<IGoodsListElement>
+  goods: IGoodsListElement
 }
 </script>
 
