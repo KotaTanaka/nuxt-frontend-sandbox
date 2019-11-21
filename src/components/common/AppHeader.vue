@@ -4,6 +4,7 @@
     v-app-bar-nav-icon
     v-toolbar-title 商品管理
     v-spacer
+    nuxt-link(to="/") トップ
 </template>
 
 <script lang="ts">
