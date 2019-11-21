@@ -1,5 +1,5 @@
 <template lang="pug">
-v-card
+v-card(min-width="300")
   v-card-text
     div 商品ID: {{ goods.id }}
     p(class="display-1 text--primary") {{ goods.name }}
