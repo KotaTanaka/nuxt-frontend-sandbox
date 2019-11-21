@@ -1,6 +1,6 @@
 <template lang="pug">
-div
-  h1 商品一覧
+v-container
+  PageHeading(title="商品一覧")
   GoodsList(:goodsList="goodsList")
 </template>
 
@@ -8,6 +8,7 @@ div
 import { Component, Vue } from 'nuxt-property-decorator'
 
 // from app
+import PageHeading from '@/components/common/PageHeading.vue'
 import GoodsList from '@/components/GoodsList.vue'
 
 /**
@@ -17,6 +18,7 @@ import GoodsList from '@/components/GoodsList.vue'
 @Component({
   layout: 'default',
   components: {
+    PageHeading,
     GoodsList
   }
 })
@@ -33,4 +35,4 @@ export default class GoodsPage extends Vue {
 }
 </script>
 
-<style></style>
+<style lang="scss"></style>
