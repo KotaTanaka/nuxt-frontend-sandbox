@@ -1,5 +1,5 @@
 <template lang="pug">
-v-card(min-width="300")
+v-card(min-width="300" @click="toDateil")
   v-card-text
     div 商品ID: {{ goods.id }}
     p(class="display-1 text--primary") {{ goods.name }}
@@ -12,6 +12,7 @@ v-card(min-width="300")
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { PAGE_URL } from '@/constants'
 
 // from app
 import { IGoodsListElement } from '@/interfaces/api/Goods'
@@ -24,6 +25,11 @@ import { IGoodsListElement } from '@/interfaces/api/Goods'
 export default class GoodsList extends Vue {
   @Prop({ type: Array, required: true })
   goods: IGoodsListElement
+
+  /** 詳細画面への遷移 */
+  toDateil() {
+    this.$router.push(PAGE_URL.GOODS_DETAIL.replace('$id', `${this.goods.id}`))
+  }
 }
 </script>
 
