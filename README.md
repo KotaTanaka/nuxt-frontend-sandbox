@@ -27,4 +27,4 @@ $ npm i
 $ npm run dev
 ```
 
-→ http://localhost:3000 で起動します。
+→ http://localhost:5050 で起動します。

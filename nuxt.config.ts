@@ -1,6 +1,15 @@
 import { Configuration } from '@nuxt/types'
 
+/** 環境変数 */
+const { NUXT_HOST = '0.0.0.0', NUXT_PORT = '5050' } = process.env
+
+/** Nuxtの設定 */
 const config: Configuration = {
+  /* 開発サーバー */
+  server: {
+    host: NUXT_HOST,
+    port: NUXT_PORT
+  },
   /* ビルドモジュール */
   buildModules: ['@nuxt/typescript-build'],
   /* 起動モード */
