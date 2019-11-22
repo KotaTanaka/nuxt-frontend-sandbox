@@ -1,7 +1,7 @@
 import { ActionTree, GetterTree, MutationTree } from 'vuex'
 
 // from app
-import { API_ENDPOINT } from '@/constants/url'
+import { API_ENDPOINT } from '@/constants'
 import { RootStore } from '@/store'
 import {
   IGoodsListElement,
