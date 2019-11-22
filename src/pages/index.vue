@@ -3,7 +3,7 @@ v-container.top-page
   h1 商品管理コンソール
   .links
     nuxt-link.link(to="/goods") 商品一覧
-    nuxt-link.link(to="/") ページ未作成
+    nuxt-link.link(to="/goods/new") 新規登録
 </template>
 
 <script lang="ts">
