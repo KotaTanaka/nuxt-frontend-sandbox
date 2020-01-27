@@ -1,12 +1,12 @@
 <template lang="pug">
 v-dialog(v-model="dialog" persistent max-width="290")
-  v-card
+  v-card.confirm
     v-card-title(class="headline") {{ title }}
     v-card-text {{ message }}
     v-card-actions
       v-spacer
-      v-btn(color="green" text @click.native="onClickCancel") Cancel
-      v-btn(color="green" text @click.native="onClickOK") OK
+      v-btn(@click.native="onClickCancel") キャンセル
+      v-btn(color="red" @click.native="onClickOK") 削除
 </template>
 
 <script lang="ts">
@@ -35,4 +35,8 @@ export default class ConfirmDialog extends Vue {
 }
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.confirm {
+  padding: 16px;
+}
+</style>
