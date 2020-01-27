@@ -3,11 +3,13 @@ import { NuxtAxiosInstance } from '@nuxtjs/axios'
 
 // from app
 import { GoodsStore } from './goods'
+import { UserStore } from './user'
 
 /** Store */
 export interface RootStore {
   $axios: NuxtAxiosInstance
   goods: GoodsStore
+  user: UserStore
 }
 
 /** Mutations */
