@@ -3,10 +3,12 @@ import { ActionTree, GetterTree, MutationTree } from 'vuex'
 // from app
 import { API_ENDPOINT } from '@/constants'
 import { RootStore } from '@/store'
+import { ICreateGoodsRequestBody } from '@/interfaces/api/request/Goods'
 import {
   IGoodsListElement,
   IGoodsListingResponse,
-  IGoodsDetailResponse
+  IGoodsDetailResponse,
+  ICreateGoodsResponse
 } from '@/interfaces/api/response/Goods'
 
 /** Store */
@@ -81,6 +83,28 @@ export const actions: ActionTree<GoodsStore, RootStore> = {
         }
       )
       commit('setGoodsDetailResponse', response)
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.log(err)
+    }
+  },
+
+  /** 商品登録 */
+  async registerGoods(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    { commit },
+    payload: { token: string; body: ICreateGoodsRequestBody }
+  ): Promise<void> {
+    try {
+      await this.$axios.$post<ICreateGoodsResponse>(
+        API_ENDPOINT.GOODS,
+        payload.body,
+        {
+          headers: {
+            Authorization: `Bearer ${payload.token}`
+          }
+        }
+      )
     } catch (err) {
       // eslint-disable-next-line no-console
       console.log(err)

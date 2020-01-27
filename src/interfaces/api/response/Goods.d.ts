@@ -32,3 +32,16 @@ export interface IGoodsDetailResponse {
   createdAt: string
   updatedAt: string
 }
+
+/**
+ * 商品登録APIレスポンス
+ * path: /app/goods
+ * method: POST
+ * type: Response
+ */
+export interface ICreateGoodsResponse extends IGoodsIdResponse {}
+
+/** 商品IDのみのレスポンス */
+interface IGoodsIdResponse {
+  id: string
+}
