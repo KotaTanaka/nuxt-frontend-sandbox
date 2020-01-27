@@ -1,28 +1,34 @@
 <template lang="pug">
 v-card(min-width="300").item
-  v-card-text(@click="toDateil").content
+  v-card-text(@click="toDatail").content
     div 商品ID: {{ goods.id }}
     p(class="display-1 text--primary") {{ goods.name }}
     p {{ goods.price }} 円
     div(class="text--primary") {{ goods.description }}
   v-card-actions
-    v-btn(text) 編集
+    v-btn(text @click.native.stop="openEditModal") 編集
     v-btn(text @click.native.stop="openDeleteModal") 削除
-    ConfirmDialog(
-      :dialog="isDeleteModalVisible"
-      title="商品の削除"
-      message="本当に削除しますか？"
-      @close="closeDeleteModal"
-      @submit="deleteGoods"
-    )
+  GoodsEditModal(
+    :dialog="isEditModalVisible"
+    :goods="goods"
+    @close="closeEditModal"
+  )
+  ConfirmDialog(
+    :dialog="isDeleteModalVisible"
+    title="商品の削除"
+    message="本当に削除しますか？"
+    @close="closeDeleteModal"
+    @submit="deleteGoods"
+  )
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { PAGE_URL } from '@/constants'
 
 // from app
+import { PAGE_URL } from '@/constants'
 import ConfirmDialog from '@/components/common/ConfirmDialog.vue'
+import GoodsEditModal from '@/components/GoodsEditModal.vue'
 import { IGoodsListElement } from '@/interfaces/api/response/Goods'
 
 /**
@@ -31,7 +37,8 @@ import { IGoodsListElement } from '@/interfaces/api/response/Goods'
  */
 @Component({
   components: {
-    ConfirmDialog
+    ConfirmDialog,
+    GoodsEditModal
   }
 })
 export default class GoodsListItem extends Vue {
@@ -39,9 +46,10 @@ export default class GoodsListItem extends Vue {
   goods: IGoodsListElement
 
   isDeleteModalVisible = false
+  isEditModalVisible = false
 
   /** 詳細画面への遷移 */
-  toDateil() {
+  toDatail() {
     this.$router.push(PAGE_URL.GOODS_DETAIL.replace('$id', `${this.goods.id}`))
   }
 
@@ -50,9 +58,19 @@ export default class GoodsListItem extends Vue {
     this.isDeleteModalVisible = true
   }
 
+  /** 商品情報編集 */
+  openEditModal() {
+    this.isEditModalVisible = true
+  }
+
   /** 商品削除キャンセル */
   closeDeleteModal() {
     this.isDeleteModalVisible = false
+  }
+
+  /** 商品編集キャンセル/完了 */
+  closeEditModal() {
+    this.isEditModalVisible = false
   }
 
   /** 商品削除の実行 */
