@@ -9,7 +9,7 @@ v-container
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
 // from app
-import { IGoodsListElement } from '@/interfaces/api/Goods'
+import { IGoodsListElement } from '@/interfaces/api/response/Goods'
 import GoodsListItem from '@/components/GoodsListItem.vue'
 
 /**

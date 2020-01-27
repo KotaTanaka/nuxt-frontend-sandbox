@@ -15,7 +15,7 @@ import { Component, Prop, Vue } from 'nuxt-property-decorator'
 import { PAGE_URL } from '@/constants'
 
 // from app
-import { IGoodsListElement } from '@/interfaces/api/Goods'
+import { IGoodsListElement } from '@/interfaces/api/response/Goods'
 
 /**
  * 商品リスト要素

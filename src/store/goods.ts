@@ -7,7 +7,7 @@ import {
   IGoodsListElement,
   IGoodsListingResponse,
   IGoodsDetailResponse
-} from '@/interfaces/api/Goods'
+} from '@/interfaces/api/response/Goods'
 
 /** Store */
 export interface GoodsStore {
