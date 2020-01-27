@@ -16,6 +16,7 @@ import PageHeading from '@/components/common/PageHeading.vue'
  */
 @Component({
   layout: 'default',
+  middleware: 'authentication',
   components: {
     PageHeading
   }
@@ -23,7 +24,7 @@ import PageHeading from '@/components/common/PageHeading.vue'
 export default class GoodsDetailPage extends Vue {
   async fetch({ store, route }): Promise<void> {
     await store.dispatch('goods/fetchGoodsDetail', {
-      token: '9cb5e40545364a0a928beafbfdd81d6e',
+      token: store.state.user.userToken,
       id: route.params.id
     })
   }

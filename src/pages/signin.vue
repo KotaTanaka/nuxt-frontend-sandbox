@@ -18,6 +18,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
+import { PAGE_URL } from '@/constants'
 
 /**
  * ログインページ
@@ -34,7 +35,21 @@ export default class SigninPage extends Vue {
   idRules = []
   passRules = []
 
-  onClick() {}
+  async onClick() {
+    try {
+      await this.$store.dispatch('user/signin', {
+        body: {
+          id: this.id,
+          password: this.password
+        }
+      })
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.log(err)
+    }
+
+    this.$router.push(PAGE_URL.TOP)
+  }
 }
 </script>
 

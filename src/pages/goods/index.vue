@@ -17,6 +17,7 @@ import GoodsList from '@/components/GoodsList.vue'
  */
 @Component({
   layout: 'default',
+  middleware: 'authentication',
   components: {
     PageHeading,
     GoodsList
@@ -25,7 +26,7 @@ import GoodsList from '@/components/GoodsList.vue'
 export default class GoodsPage extends Vue {
   async fetch({ store }): Promise<void> {
     await store.dispatch('goods/fetchGoodsList', {
-      token: '9cb5e40545364a0a928beafbfdd81d6e'
+      token: store.state.user.userToken
     })
   }
 

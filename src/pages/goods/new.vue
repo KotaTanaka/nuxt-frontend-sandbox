@@ -15,6 +15,7 @@ import PageHeading from '@/components/common/PageHeading.vue'
  */
 @Component({
   layout: 'default',
+  middleware: 'authentication',
   components: {
     PageHeading
   }
