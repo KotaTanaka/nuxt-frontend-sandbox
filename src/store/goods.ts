@@ -8,7 +8,8 @@ import {
   IGoodsListElement,
   IGoodsListingResponse,
   IGoodsDetailResponse,
-  ICreateGoodsResponse
+  ICreateGoodsResponse,
+  IDeleteGoodsResponse
 } from '@/interfaces/api/response/Goods'
 
 /** Store */
@@ -45,6 +46,15 @@ export const mutations: MutationTree<GoodsStore> = {
   /** 商品詳細データのセット */
   setGoodsDetailResponse(state: GoodsStore, response: IGoodsDetailResponse) {
     state.goods = response
+  },
+  /** 商品削除後の一覧更新 */
+  setNewGoodsListAfterDelete(
+    state: GoodsStore,
+    response: IDeleteGoodsResponse
+  ) {
+    state.goodsList = state.goodsList.filter(
+      (goods) => goods.id !== response.id
+    )
   }
 }
 
@@ -105,6 +115,29 @@ export const actions: ActionTree<GoodsStore, RootStore> = {
           }
         }
       )
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.log(err)
+    }
+  },
+
+  /** 商品削除 */
+  async deleteGoods(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    { commit },
+    payload: { token: string; id: string }
+  ): Promise<void> {
+    try {
+      const response = await this.$axios.$delete<IDeleteGoodsResponse>(
+        API_ENDPOINT.GOODS_ONE.replace('$1', payload.id),
+        {
+          headers: {
+            Authorization: `Bearer ${payload.token}`
+          }
+        }
+      )
+
+      commit('setNewGoodsListAfterDelete', response)
     } catch (err) {
       // eslint-disable-next-line no-console
       console.log(err)

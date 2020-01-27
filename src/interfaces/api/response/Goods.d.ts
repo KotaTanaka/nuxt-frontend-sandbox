@@ -41,7 +41,15 @@ export interface IGoodsDetailResponse {
  */
 export interface ICreateGoodsResponse extends IGoodsIdResponse {}
 
+/**
+ * 商品削除APIレスポンス
+ * path: /app/goods/:id
+ * method: DELETE
+ * type: Response
+ */
+export interface IDeleteGoodsResponse extends IGoodsIdResponse {}
+
 /** 商品IDのみのレスポンス */
 interface IGoodsIdResponse {
-  id: string
+  id: number
 }
