@@ -29,9 +29,7 @@ import { PAGE_URL } from '@/constants'
  * 商品登録カード
  * @author kotatanaka
  */
-@Component({
-  layout: 'default'
-})
+@Component
 export default class GoodsNew extends Vue {
   name = ''
   description = ''
