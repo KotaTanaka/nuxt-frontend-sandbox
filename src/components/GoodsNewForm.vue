@@ -2,18 +2,18 @@
 .goods-new
   v-form(v-model="valid").form
     v-text-field(
-      v-model="name"
+      v-model="nameValue"
       :rules="nameRules"
       label="商品名"
       required
     )
     v-text-field(
-      v-model="description"
+      v-model="descriptionValue"
       :rules="descriptionRules"
       label="商品説明"
     )
     v-text-field(
-      v-model="price"
+      v-model="priceValue"
       :rules="priceRules"
       label="価格"
       required
@@ -23,19 +23,22 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
+
+// from app
 import { PAGE_URL } from '@/constants'
 
 /**
- * 商品登録カード
+ * 商品登録フォーム
  * @author kotatanaka
  */
 @Component
-export default class GoodsNew extends Vue {
-  name = ''
-  description = ''
-  price = 0
-  valid = true
+export default class GoodsNewForm extends Vue {
+  nameValue = ''
+  descriptionValue = ''
+  priceValue = 0
 
+  // TODO バリデーション
+  valid = true
   nameRules = []
   descriptionRules = []
   priceRules = []
@@ -44,9 +47,9 @@ export default class GoodsNew extends Vue {
     try {
       await this.$store.dispatch('goods/registerGoods', {
         body: {
-          name: this.name,
-          description: this.description,
-          price: this.price
+          name: this.nameValue,
+          description: this.descriptionValue,
+          price: this.priceValue
         },
         token: this.$store.state.user.userToken
       })

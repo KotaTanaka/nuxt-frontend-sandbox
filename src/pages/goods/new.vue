@@ -10,7 +10,7 @@ import { Component, Vue } from 'nuxt-property-decorator'
 
 // from app
 import PageHeading from '@/components/common/PageHeading.vue'
-import GoodsNew from '@/components/GoodsNew.vue'
+import GoodsNewForm from '@/components/GoodsNewForm.vue'
 
 /**
  * 商品登録ページ
@@ -21,7 +21,7 @@ import GoodsNew from '@/components/GoodsNew.vue'
   middleware: 'authentication',
   components: {
     PageHeading,
-    GoodsNew
+    GoodsNewForm
   }
 })
 export default class GoodsNewPage extends Vue {}

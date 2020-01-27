@@ -18,6 +18,8 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
+
+// from app
 import { PAGE_URL } from '@/constants'
 
 /**
