@@ -42,6 +42,14 @@ export interface IGoodsDetailResponse {
 export interface ICreateGoodsResponse extends IGoodsIdResponse {}
 
 /**
+ * 商品編集APIレスポンス
+ * path: /app/goods/:id
+ * method: PUT
+ * type: Response
+ */
+export interface IUpdateGoodsResponse extends IGoodsIdResponse {}
+
+/**
  * 商品削除APIレスポンス
  * path: /app/goods/:id
  * method: DELETE

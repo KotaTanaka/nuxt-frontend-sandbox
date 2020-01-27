@@ -9,3 +9,12 @@ export interface ICreateGoodsRequestBody {
   description: string
   price: number
 }
+
+/**
+ * 商品編集APIリクエストボディ
+ * path: /app/goods/:id
+ * method: PUT
+ * type: Request
+ */
+export interface IUpdateGoodsRequestBody
+  extends Partial<ICreateGoodsRequestBody> {}
