@@ -43,12 +43,12 @@ export default class SigninPage extends Vue {
           password: this.password
         }
       })
+
+      this.$router.push(PAGE_URL.TOP)
     } catch (err) {
       // eslint-disable-next-line no-console
       console.log(err)
     }
-
-    this.$router.push(PAGE_URL.TOP)
   }
 }
 </script>
