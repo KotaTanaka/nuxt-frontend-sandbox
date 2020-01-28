@@ -4,12 +4,14 @@
 
 商品管理SPA [Nuxt.js]
 
-[バックエンドリポジトリ goods-api-kotlin](https://github.com/KotaTanaka/goods-api-kotlin)
+*[バックエンドリポジトリ goods-api-kotlin](https://github.com/KotaTanaka/goods-api-kotlin)*
 
 ## Technology
 
-* Nuxt.js
-* TypeScript
+* **Nuxt.js**
+* script - **TypeScript**
+* template - **pug**
+* style - **SCSS**
 
 ## Getting Started
 
