@@ -2,7 +2,7 @@
 v-container
   PageHeading(title="商品登録")
   .contents
-    GoodsNew
+    GoodsNewForm
 </template>
 
 <script lang="ts">
