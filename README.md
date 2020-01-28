@@ -1,12 +1,17 @@
 # goods-spa-nuxt
+
+## About
+
 商品管理SPA [Nuxt.js]
 
-## 技術要素
+[バックエンドリポジトリ goods-api-kotlin](https://github.com/KotaTanaka/goods-api-kotlin)
+
+## Technology
 
 * Nuxt.js
-* Type Script
+* TypeScript
 
-## ローカル開発環境構築
+## Getting Started
 
 * ソースコードのクローン
 
@@ -27,4 +32,4 @@ $ npm i
 $ npm run dev
 ```
 
-→ http://localhost:5050 で起動します。
+→ http://localhost:5050
