@@ -11,7 +11,7 @@
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
 // from app
-import Breadcrumb from '@/components/common/Breadcrumb.vue'
+import Breadcrumb from '@/components/partials/Breadcrumb.vue'
 import { IBreadcrumb } from '@/interfaces/app'
 
 /**

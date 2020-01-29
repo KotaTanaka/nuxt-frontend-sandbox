@@ -10,7 +10,7 @@ import { Component, Vue } from 'nuxt-property-decorator'
 
 // from app
 import { PAGE_URL } from '@/constants'
-import PageHeading from '@/components/common/PageHeading.vue'
+import PageHeading from '@/components/partials/PageHeading.vue'
 import GoodsDetailTable from '@/components/GoodsDetailTable.vue'
 import { IBreadcrumb } from '@/interfaces/app'
 import { IGoodsDetailResponse } from '@/interfaces/api/response/Goods'

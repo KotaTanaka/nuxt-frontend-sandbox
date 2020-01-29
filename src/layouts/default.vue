@@ -7,7 +7,7 @@ v-app
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import AppHeader from '@/components/common/AppHeader.vue'
+import AppHeader from '@/components/partials/AppHeader.vue'
 
 /**
  * デフォルトレイアウト

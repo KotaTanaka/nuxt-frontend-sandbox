@@ -27,7 +27,7 @@ import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
 // from app
 import { PAGE_URL } from '@/constants'
-import ConfirmDialog from '@/components/common/ConfirmDialog.vue'
+import ConfirmDialog from '@/components/partials/ConfirmDialog.vue'
 import GoodsEditModal from '@/components/GoodsEditModal.vue'
 import { IGoodsListElement } from '@/interfaces/api/response/Goods'
 
