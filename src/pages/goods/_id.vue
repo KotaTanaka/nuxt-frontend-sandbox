@@ -1,7 +1,8 @@
 <template lang="pug">
 v-container
   PageHeading(title="商品詳細")
-  p {{ goods.id }}
+  .contents
+    GoodsDetailTable(:goods="goods")
 </template>
 
 <script lang="ts">
@@ -9,6 +10,7 @@ import { Component, Vue } from 'nuxt-property-decorator'
 
 // from app
 import PageHeading from '@/components/common/PageHeading.vue'
+import GoodsDetailTable from '@/components/GoodsDetailTable.vue'
 
 /**
  * 商品詳細ページ
@@ -18,7 +20,8 @@ import PageHeading from '@/components/common/PageHeading.vue'
   layout: 'default',
   middleware: 'authentication',
   components: {
-    PageHeading
+    PageHeading,
+    GoodsDetailTable
   }
 })
 export default class GoodsDetailPage extends Vue {
