@@ -1,19 +1,34 @@
 <template lang="pug">
 .page-heading
   h1 {{ title }}
+  Breadcrumb(
+    v-if="breadcrumbList.length > 1"
+    :breadcrumbList="breadcrumbList"
+  )
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
+// from app
+import Breadcrumb from '@/components/common/Breadcrumb.vue'
+import { IBreadcrumb } from '@/interfaces/app'
+
 /**
- * ページヘッダタイトル
+ * ページ見出し
  * @author kotatanaka
  */
-@Component
+@Component({
+  components: {
+    Breadcrumb
+  }
+})
 export default class PageHeading extends Vue {
   @Prop({ type: String, required: true })
   title: string
+
+  @Prop({ type: Array, required: true })
+  breadcrumbList: Array<IBreadcrumb>
 }
 </script>
 
