@@ -1,6 +1,6 @@
 <template lang="pug">
 v-container
-  PageHeading(title="商品登録")
+  PageHeading(title="商品登録" :breadcrumbList="breadcrumbList")
   .contents
     GoodsNewForm
 </template>
@@ -9,8 +9,10 @@ v-container
 import { Component, Vue } from 'nuxt-property-decorator'
 
 // from app
+import { PAGE_URL } from '@/constants'
 import PageHeading from '@/components/common/PageHeading.vue'
 import GoodsNewForm from '@/components/GoodsNewForm.vue'
+import { IBreadcrumb } from '@/interfaces/app'
 
 /**
  * 商品登録ページ
@@ -24,7 +26,14 @@ import GoodsNewForm from '@/components/GoodsNewForm.vue'
     GoodsNewForm
   }
 })
-export default class GoodsNewPage extends Vue {}
+export default class GoodsNewPage extends Vue {
+  get breadcrumbList(): Array<IBreadcrumb> {
+    return [
+      { name: 'トップ', path: PAGE_URL.TOP },
+      { name: '商品登録', path: this.$route.path }
+    ]
+  }
+}
 </script>
 
 <style lang="scss">
