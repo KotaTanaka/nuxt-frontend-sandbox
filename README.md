@@ -25,13 +25,13 @@ $ git clone git@github.com:KotaTanaka/goods-spa-nuxt.git
 
 ```
 $ cd goods-spa-nuxt
-$ npm i
+$ yarn
 ```
 
 * アプリケーション起動
 
 ```
-$ npm run dev
+$ yarn dev
 ```
 
 → http://localhost:5050
