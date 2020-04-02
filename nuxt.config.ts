@@ -42,7 +42,8 @@ const config: Configuration = {
     '@nuxtjs/pwa',
     '@nuxtjs/vuetify',
     '@nuxtjs/font-awesome',
-    'bootstrap-vue/nuxt'
+    'bootstrap-vue/nuxt',
+    'nuxt-mq'
   ],
   /* Axios */
   axios: {
@@ -55,6 +56,13 @@ const config: Configuration = {
       secondary: '#b0bec5',
       accent: '#8c9eff',
       error: '#b71c1c'
+    }
+  },
+  mq: {
+    defaultBreakpoint: 'default',
+    breakpoints: {
+      sp: 401,
+      pc: Infinity
     }
   },
   /* Build configuration */
