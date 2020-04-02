@@ -1,4 +1,5 @@
 import { ActionTree, GetterTree, MutationTree } from 'vuex';
+import Cookie from 'js-cookie';
 
 // from app
 import { API_ENDPOINT } from '@/constants';
@@ -8,22 +9,19 @@ import { ILoginResponse } from '@/interfaces/api/response/User';
 
 /** Store */
 export interface UserStore {
-  userId: string;
   userToken: string;
 }
 
 /** State */
 export const state = (): UserStore => ({
-  userId: '',
   userToken: '',
 });
 
 /** Mutations */
 export const mutations: MutationTree<UserStore> = {
-  /** ログインユーザー情報のセット */
-  setLoginResponse(state: UserStore, response: ILoginResponse) {
-    state.userId = response.id;
-    state.userToken = response.loginToken;
+  /** ユーザートークンのセット */
+  setUserToken(state: UserStore, userToken: string) {
+    state.userToken = userToken;
   },
 };
 
@@ -40,7 +38,8 @@ export const actions: ActionTree<UserStore, RootStore> = {
         payload.body,
       );
 
-      commit('setLoginResponse', response);
+      Cookie.set('user_token', response.loginToken);
+      commit('setUserToken', response.loginToken);
     } catch (err) {
       // eslint-disable-next-line no-console
       console.log(err);
