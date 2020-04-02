@@ -61,7 +61,7 @@ const config: Configuration = {
   mq: {
     defaultBreakpoint: 'default',
     breakpoints: {
-      sp: 401,
+      sp: 600,
       pc: Infinity
     }
   },
