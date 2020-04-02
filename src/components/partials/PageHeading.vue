@@ -2,7 +2,7 @@
 .page-heading
   h1 {{ title }}
   Breadcrumb(
-    v-if="breadcrumbList.length > 1"
+    v-if="breadcrumbList.length > 1 && $mq === 'pc'"
     :breadcrumbList="breadcrumbList"
   )
 </template>
