@@ -5,14 +5,14 @@ v-container
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
+import { Component, Vue } from 'nuxt-property-decorator';
 
 // from app
-import { PAGE_URL } from '@/constants'
-import PageHeading from '@/components/partials/PageHeading.vue'
-import GoodsList from '@/components/GoodsList.vue'
-import { IBreadcrumb } from '@/interfaces/app'
-import { IGoodsListElement } from '@/interfaces/api/response/Goods'
+import { PAGE_URL } from '@/constants';
+import PageHeading from '@/components/partials/PageHeading.vue';
+import GoodsList from '@/components/GoodsList.vue';
+import { IBreadcrumb } from '@/interfaces/app';
+import { IGoodsListElement } from '@/interfaces/api/response/Goods';
 
 /**
  * 商品一覧ページ
@@ -23,25 +23,25 @@ import { IGoodsListElement } from '@/interfaces/api/response/Goods'
   middleware: 'authentication',
   components: {
     PageHeading,
-    GoodsList
-  }
+    GoodsList,
+  },
 })
 export default class GoodsPage extends Vue {
   async fetch({ store }): Promise<void> {
     await store.dispatch('goods/fetchGoodsList', {
-      token: store.state.user.userToken
-    })
+      token: store.state.user.userToken,
+    });
   }
 
   get goodsList(): Array<IGoodsListElement> {
-    return this.$store.state.goods.goodsList
+    return this.$store.state.goods.goodsList;
   }
 
   get breadcrumbList(): Array<IBreadcrumb> {
     return [
       { name: 'トップ', path: PAGE_URL.TOP },
-      { name: '商品一覧', path: this.$route.path }
-    ]
+      { name: '商品一覧', path: this.$route.path },
+    ];
   }
 }
 </script>

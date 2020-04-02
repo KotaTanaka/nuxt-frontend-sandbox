@@ -5,6 +5,6 @@
  * type: Request
  */
 export interface ILoginRequestBody {
-  id: string
-  password: string
+  id: string;
+  password: string;
 }

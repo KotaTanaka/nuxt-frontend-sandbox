@@ -5,9 +5,9 @@
  * type: Request
  */
 export interface ICreateGoodsRequestBody {
-  name: string
-  description: string
-  price: number
+  name: string;
+  description: string;
+  price: number;
 }
 
 /**

@@ -23,13 +23,13 @@ v-card(min-width="300").item
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { Component, Prop, Vue } from 'nuxt-property-decorator';
 
 // from app
-import { PAGE_URL } from '@/constants'
-import ConfirmDialog from '@/components/partials/ConfirmDialog.vue'
-import GoodsEditModal from '@/components/GoodsEditModal.vue'
-import { IGoodsListElement } from '@/interfaces/api/response/Goods'
+import { PAGE_URL } from '@/constants';
+import ConfirmDialog from '@/components/partials/ConfirmDialog.vue';
+import GoodsEditModal from '@/components/GoodsEditModal.vue';
+import { IGoodsListElement } from '@/interfaces/api/response/Goods';
 
 /**
  * 商品リスト要素
@@ -38,39 +38,39 @@ import { IGoodsListElement } from '@/interfaces/api/response/Goods'
 @Component({
   components: {
     ConfirmDialog,
-    GoodsEditModal
-  }
+    GoodsEditModal,
+  },
 })
 export default class GoodsListItem extends Vue {
   @Prop({ type: Object, required: true })
-  goods: IGoodsListElement
+  goods: IGoodsListElement;
 
-  isDeleteModalVisible = false
-  isEditModalVisible = false
+  isDeleteModalVisible = false;
+  isEditModalVisible = false;
 
   /** 詳細画面への遷移 */
   toDatail() {
-    this.$router.push(PAGE_URL.GOODS_DETAIL.replace('$id', `${this.goods.id}`))
+    this.$router.push(PAGE_URL.GOODS_DETAIL.replace('$id', `${this.goods.id}`));
   }
 
   /** 商品削除確認 */
   openDeleteModal() {
-    this.isDeleteModalVisible = true
+    this.isDeleteModalVisible = true;
   }
 
   /** 商品情報編集 */
   openEditModal() {
-    this.isEditModalVisible = true
+    this.isEditModalVisible = true;
   }
 
   /** 商品削除キャンセル */
   closeDeleteModal() {
-    this.isDeleteModalVisible = false
+    this.isDeleteModalVisible = false;
   }
 
   /** 商品編集キャンセル/完了 */
   closeEditModal() {
-    this.isEditModalVisible = false
+    this.isEditModalVisible = false;
   }
 
   /** 商品削除の実行 */
@@ -78,13 +78,13 @@ export default class GoodsListItem extends Vue {
     try {
       await this.$store.dispatch('goods/deleteGoods', {
         token: this.$store.state.user.userToken,
-        id: this.goods.id
-      })
+        id: this.goods.id,
+      });
 
-      this.isDeleteModalVisible = false
+      this.isDeleteModalVisible = false;
     } catch (err) {
       // eslint-disable-next-line no-console
-      console.log(err)
+      console.log(err);
     }
   }
 }

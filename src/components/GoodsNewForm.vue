@@ -22,10 +22,10 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
+import { Component, Vue } from 'nuxt-property-decorator';
 
 // from app
-import { PAGE_URL } from '@/constants'
+import { PAGE_URL } from '@/constants';
 
 /**
  * 商品登録フォーム
@@ -33,15 +33,15 @@ import { PAGE_URL } from '@/constants'
  */
 @Component
 export default class GoodsNewForm extends Vue {
-  nameValue = ''
-  descriptionValue = ''
-  priceValue = 0
+  nameValue = '';
+  descriptionValue = '';
+  priceValue = 0;
 
   // TODO バリデーション
-  valid = true
-  nameRules = []
-  descriptionRules = []
-  priceRules = []
+  valid = true;
+  nameRules = [];
+  descriptionRules = [];
+  priceRules = [];
 
   async onClick() {
     try {
@@ -49,15 +49,15 @@ export default class GoodsNewForm extends Vue {
         body: {
           name: this.nameValue,
           description: this.descriptionValue,
-          price: this.priceValue
+          price: this.priceValue,
         },
-        token: this.$store.state.user.userToken
-      })
+        token: this.$store.state.user.userToken,
+      });
 
-      this.$router.push(PAGE_URL.GOODS)
+      this.$router.push(PAGE_URL.GOODS);
     } catch (err) {
       // eslint-disable-next-line no-console
-      console.log(err)
+      console.log(err);
     }
   }
 }

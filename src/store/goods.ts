@@ -1,29 +1,29 @@
-import { ActionTree, GetterTree, MutationTree } from 'vuex'
+import { ActionTree, GetterTree, MutationTree } from 'vuex';
 
 // from app
-import { API_ENDPOINT } from '@/constants'
-import { RootStore } from '@/store'
+import { API_ENDPOINT } from '@/constants';
+import { RootStore } from '@/store';
 import {
   ICreateGoodsRequestBody,
-  IUpdateGoodsRequestBody
-} from '@/interfaces/api/request/Goods'
+  IUpdateGoodsRequestBody,
+} from '@/interfaces/api/request/Goods';
 import {
   IGoodsListElement,
   IGoodsListingResponse,
   IGoodsDetailResponse,
   ICreateGoodsResponse,
   IUpdateGoodsResponse,
-  IDeleteGoodsResponse
-} from '@/interfaces/api/response/Goods'
+  IDeleteGoodsResponse,
+} from '@/interfaces/api/response/Goods';
 
 /** Store */
 export interface GoodsStore {
   /** 商品総数 */
-  total: number
+  total: number;
   /** 商品リスト */
-  goodsList: Array<IGoodsListElement>
+  goodsList: Array<IGoodsListElement>;
   /** 商品詳細 */
-  goods: IGoodsDetailResponse
+  goods: IGoodsDetailResponse;
 }
 
 /** State */
@@ -36,31 +36,31 @@ export const state = (): GoodsStore => ({
     description: '',
     price: 0,
     createdAt: '',
-    updatedAt: ''
-  }
-})
+    updatedAt: '',
+  },
+});
 
 /** Mutations */
 export const mutations: MutationTree<GoodsStore> = {
   /** 商品一覧データのセット */
   setGoodsListingResponse(state: GoodsStore, response: IGoodsListingResponse) {
-    state.total = response.total
-    state.goodsList = response.goodsList
+    state.total = response.total;
+    state.goodsList = response.goodsList;
   },
   /** 商品詳細データのセット */
   setGoodsDetailResponse(state: GoodsStore, response: IGoodsDetailResponse) {
-    state.goods = response
+    state.goods = response;
   },
   /** 商品削除後の一覧更新 */
   setNewGoodsListAfterDelete(
     state: GoodsStore,
-    response: IDeleteGoodsResponse
+    response: IDeleteGoodsResponse,
   ) {
     state.goodsList = state.goodsList.filter(
-      (goods) => goods.id !== response.id
-    )
-  }
-}
+      (goods) => goods.id !== response.id,
+    );
+  },
+};
 
 /** Actions */
 export const actions: ActionTree<GoodsStore, RootStore> = {
@@ -71,35 +71,35 @@ export const actions: ActionTree<GoodsStore, RootStore> = {
         API_ENDPOINT.GOODS,
         {
           headers: {
-            Authorization: `Bearer ${payload.token}`
-          }
-        }
-      )
-      commit('setGoodsListingResponse', response)
+            Authorization: `Bearer ${payload.token}`,
+          },
+        },
+      );
+      commit('setGoodsListingResponse', response);
     } catch (err) {
       // eslint-disable-next-line no-console
-      console.log(err)
+      console.log(err);
     }
   },
 
   /** 商品詳細取得 */
   async fetchGoodsDetail(
     { commit },
-    payload: { token: string; id: string }
+    payload: { token: string; id: string },
   ): Promise<void> {
     try {
       const response = await this.$axios.$get<IGoodsDetailResponse>(
         API_ENDPOINT.GOODS_ONE.replace('$1', payload.id),
         {
           headers: {
-            Authorization: `Bearer ${payload.token}`
-          }
-        }
-      )
-      commit('setGoodsDetailResponse', response)
+            Authorization: `Bearer ${payload.token}`,
+          },
+        },
+      );
+      commit('setGoodsDetailResponse', response);
     } catch (err) {
       // eslint-disable-next-line no-console
-      console.log(err)
+      console.log(err);
     }
   },
 
@@ -107,7 +107,7 @@ export const actions: ActionTree<GoodsStore, RootStore> = {
   async registerGoods(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     { commit },
-    payload: { token: string; body: ICreateGoodsRequestBody }
+    payload: { token: string; body: ICreateGoodsRequestBody },
   ): Promise<void> {
     try {
       await this.$axios.$post<ICreateGoodsResponse>(
@@ -115,13 +115,13 @@ export const actions: ActionTree<GoodsStore, RootStore> = {
         payload.body,
         {
           headers: {
-            Authorization: `Bearer ${payload.token}`
-          }
-        }
-      )
+            Authorization: `Bearer ${payload.token}`,
+          },
+        },
+      );
     } catch (err) {
       // eslint-disable-next-line no-console
-      console.log(err)
+      console.log(err);
     }
   },
 
@@ -129,7 +129,7 @@ export const actions: ActionTree<GoodsStore, RootStore> = {
   async updateGoods(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     { commit },
-    payload: { token: string; id: string; body: IUpdateGoodsRequestBody }
+    payload: { token: string; id: string; body: IUpdateGoodsRequestBody },
   ): Promise<void> {
     try {
       await this.$axios.$put<IUpdateGoodsResponse>(
@@ -137,38 +137,38 @@ export const actions: ActionTree<GoodsStore, RootStore> = {
         payload.body,
         {
           headers: {
-            Authorization: `Bearer ${payload.token}`
-          }
-        }
-      )
+            Authorization: `Bearer ${payload.token}`,
+          },
+        },
+      );
     } catch (err) {
       // eslint-disable-next-line no-console
-      console.log(err)
+      console.log(err);
     }
   },
 
   /** 商品削除 */
   async deleteGoods(
     { commit },
-    payload: { token: string; id: string }
+    payload: { token: string; id: string },
   ): Promise<void> {
     try {
       const response = await this.$axios.$delete<IDeleteGoodsResponse>(
         API_ENDPOINT.GOODS_ONE.replace('$1', payload.id),
         {
           headers: {
-            Authorization: `Bearer ${payload.token}`
-          }
-        }
-      )
+            Authorization: `Bearer ${payload.token}`,
+          },
+        },
+      );
 
-      commit('setNewGoodsListAfterDelete', response)
+      commit('setNewGoodsListAfterDelete', response);
     } catch (err) {
       // eslint-disable-next-line no-console
-      console.log(err)
+      console.log(err);
     }
-  }
-}
+  },
+};
 
 /** Getters */
-export const getters: GetterTree<GoodsStore, GoodsStore> = {}
+export const getters: GetterTree<GoodsStore, GoodsStore> = {};

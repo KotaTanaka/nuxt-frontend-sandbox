@@ -8,10 +8,10 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { Component, Prop, Vue } from 'nuxt-property-decorator';
 
 // from app
-import { IBreadcrumb } from '@/interfaces/app'
+import { IBreadcrumb } from '@/interfaces/app';
 
 /**
  * パンくず
@@ -20,7 +20,7 @@ import { IBreadcrumb } from '@/interfaces/app'
 @Component
 export default class Breadcrumb extends Vue {
   @Prop({ type: Array, required: true })
-  breadcrumbList: Array<IBreadcrumb>
+  breadcrumbList: Array<IBreadcrumb>;
 }
 </script>
 

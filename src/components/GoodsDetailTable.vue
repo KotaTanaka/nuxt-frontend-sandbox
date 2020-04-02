@@ -10,10 +10,10 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { Component, Prop, Vue } from 'nuxt-property-decorator';
 
 // from app
-import { IGoodsDetailResponse } from '@/interfaces/api/response/Goods'
+import { IGoodsDetailResponse } from '@/interfaces/api/response/Goods';
 
 /**
  * 商品詳細テーブル
@@ -22,10 +22,10 @@ import { IGoodsDetailResponse } from '@/interfaces/api/response/Goods'
 @Component
 export default class GoodsDetailTable extends Vue {
   @Prop({ type: Object, required: true })
-  goods: IGoodsDetailResponse
+  goods: IGoodsDetailResponse;
 
   get tableHeaders() {
-    return [{ value: 'name' }, { value: 'value' }]
+    return [{ value: 'name' }, { value: 'value' }];
   }
 
   get tableItems() {
@@ -34,8 +34,8 @@ export default class GoodsDetailTable extends Vue {
       { name: '説明', value: this.goods.description },
       { name: '価格', value: this.goods.price },
       { name: '登録日時', value: this.goods.createdAt },
-      { name: '更新日時', value: this.goods.updatedAt }
-    ]
+      { name: '更新日時', value: this.goods.updatedAt },
+    ];
   }
 }
 </script>

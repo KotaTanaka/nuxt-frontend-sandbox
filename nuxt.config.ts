@@ -1,14 +1,14 @@
-import { Configuration } from '@nuxt/types'
+import { Configuration } from '@nuxt/types';
 
 /** 環境変数 */
-const { NUXT_HOST = '0.0.0.0', NUXT_PORT = '5050' } = process.env
+const { NUXT_HOST = '0.0.0.0', NUXT_PORT = '5050' } = process.env;
 
 /** Nuxtの設定 */
 const config: Configuration = {
   /* 開発サーバー */
   server: {
     host: NUXT_HOST,
-    port: NUXT_PORT
+    port: NUXT_PORT,
   },
   /* ビルドモジュール */
   buildModules: ['@nuxt/typescript-build'],
@@ -25,10 +25,10 @@ const config: Configuration = {
       {
         hid: 'description',
         name: 'description',
-        content: '商品管理コンソール'
-      }
+        content: '商品管理コンソール',
+      },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
   /* プログレスバー */
   loading: { color: '#fff' },
@@ -43,11 +43,11 @@ const config: Configuration = {
     '@nuxtjs/vuetify',
     '@nuxtjs/font-awesome',
     'bootstrap-vue/nuxt',
-    'nuxt-mq'
+    'nuxt-mq',
   ],
   /* Axios */
   axios: {
-    baseURL: 'http://localhost:7070'
+    baseURL: 'http://localhost:7070',
   },
   /* Vuetify */
   vuetify: {
@@ -55,21 +55,21 @@ const config: Configuration = {
       primary: '#3f51b5',
       secondary: '#b0bec5',
       accent: '#8c9eff',
-      error: '#b71c1c'
-    }
+      error: '#b71c1c',
+    },
   },
   mq: {
     defaultBreakpoint: 'default',
     breakpoints: {
       sp: 600,
-      pc: Infinity
-    }
+      pc: Infinity,
+    },
   },
   /* Build configuration */
   build: {
     /* Webpack の拡張 */
-    extend() {}
-  }
-}
+    extend() {},
+  },
+};
 
-export default config
+export default config;

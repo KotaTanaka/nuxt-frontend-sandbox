@@ -28,10 +28,10 @@ v-dialog(v-model="dialog" persistent max-width="640")
 </template>
 
 <script lang="ts">
-import { Component, Emit, Prop, Vue } from 'nuxt-property-decorator'
+import { Component, Emit, Prop, Vue } from 'nuxt-property-decorator';
 
 // from app
-import { IGoodsDetailResponse } from '@/interfaces/api/response/Goods'
+import { IGoodsDetailResponse } from '@/interfaces/api/response/Goods';
 
 /**
  * 商品編集モーダル
@@ -40,26 +40,26 @@ import { IGoodsDetailResponse } from '@/interfaces/api/response/Goods'
 @Component
 export default class GoodsEditModal extends Vue {
   @Prop({ type: Boolean, required: true })
-  dialog: boolean
+  dialog: boolean;
 
   @Prop({ type: Object, required: true })
-  goods: IGoodsDetailResponse
+  goods: IGoodsDetailResponse;
 
-  nameValue = ''
-  descriptionValue = ''
-  priceValue = 0
+  nameValue = '';
+  descriptionValue = '';
+  priceValue = 0;
 
   // TODO バリデーション
-  valid = true
-  nameRules = []
-  descriptionRules = []
-  priceRules = []
+  valid = true;
+  nameRules = [];
+  descriptionRules = [];
+  priceRules = [];
 
   /** フォームの初期値に現在値をセット */
   mounted() {
-    this.nameValue = this.goods.name
-    this.descriptionValue = this.goods.description
-    this.priceValue = this.goods.price
+    this.nameValue = this.goods.name;
+    this.descriptionValue = this.goods.description;
+    this.priceValue = this.goods.price;
   }
 
   @Emit('close')
@@ -68,8 +68,8 @@ export default class GoodsEditModal extends Vue {
   /** 一覧の再取得  */
   async reload() {
     await this.$store.dispatch('goods/fetchGoodsList', {
-      token: this.$store.state.user.userToken
-    })
+      token: this.$store.state.user.userToken,
+    });
   }
 
   /** 更新実行 */
@@ -85,15 +85,15 @@ export default class GoodsEditModal extends Vue {
               ? this.descriptionValue
               : undefined,
           price:
-            this.priceValue !== this.goods.price ? this.priceValue : undefined
-        }
-      })
+            this.priceValue !== this.goods.price ? this.priceValue : undefined,
+        },
+      });
 
-      await this.reload()
-      this.$emit('close')
+      await this.reload();
+      this.$emit('close');
     } catch (err) {
       // eslint-disable-next-line no-console
-      console.log(err)
+      console.log(err);
     }
   }
 }

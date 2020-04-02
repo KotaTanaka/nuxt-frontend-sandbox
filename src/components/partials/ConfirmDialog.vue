@@ -10,7 +10,7 @@ v-dialog(v-model="dialog" persistent max-width="290")
 </template>
 
 <script lang="ts">
-import { Component, Emit, Prop, Vue } from 'nuxt-property-decorator'
+import { Component, Emit, Prop, Vue } from 'nuxt-property-decorator';
 
 /**
  * 最終確認モーダル
@@ -19,13 +19,13 @@ import { Component, Emit, Prop, Vue } from 'nuxt-property-decorator'
 @Component
 export default class ConfirmDialog extends Vue {
   @Prop({ type: Boolean, required: true })
-  dialog: boolean
+  dialog: boolean;
 
   @Prop({ type: String, required: true })
-  title: string
+  title: string;
 
   @Prop({ type: String, required: true })
-  message: string
+  message: string;
 
   @Emit('close')
   onClickCancel() {}

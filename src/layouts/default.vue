@@ -6,8 +6,8 @@ v-app
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
-import AppHeader from '@/components/partials/AppHeader.vue'
+import { Component, Vue } from 'nuxt-property-decorator';
+import AppHeader from '@/components/partials/AppHeader.vue';
 
 /**
  * デフォルトレイアウト
@@ -15,8 +15,8 @@ import AppHeader from '@/components/partials/AppHeader.vue'
  */
 @Component({
   components: {
-    AppHeader
-  }
+    AppHeader,
+  },
 })
 export default class DefaultLayout extends Vue {}
 </script>

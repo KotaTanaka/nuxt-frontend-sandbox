@@ -1,7 +1,7 @@
 /** パンくず */
 export interface IBreadcrumb {
   /** ページ名 */
-  name: string
+  name: string;
   /** URL */
-  path: string
+  path: string;
 }

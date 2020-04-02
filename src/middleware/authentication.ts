@@ -1,7 +1,7 @@
-import { PAGE_URL } from '@/constants'
+import { PAGE_URL } from '@/constants';
 
-export default function({ store, redirect }) {
+export default function ({ store, redirect }) {
   if (!store.state.user.userToken) {
-    return redirect(PAGE_URL.LOGIN)
+    return redirect(PAGE_URL.LOGIN);
   }
 }

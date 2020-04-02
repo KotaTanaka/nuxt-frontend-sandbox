@@ -17,39 +17,39 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
+import { Component, Vue } from 'nuxt-property-decorator';
 
 // from app
-import { PAGE_URL } from '@/constants'
+import { PAGE_URL } from '@/constants';
 
 /**
  * ログインページ
  * @author kotatanaka
  */
 @Component({
-  layout: 'default'
+  layout: 'default',
 })
 export default class SigninPage extends Vue {
-  id = ''
-  password = ''
-  valid = true
+  id = '';
+  password = '';
+  valid = true;
 
-  idRules = []
-  passRules = []
+  idRules = [];
+  passRules = [];
 
   async onClick() {
     try {
       await this.$store.dispatch('user/signin', {
         body: {
           id: this.id,
-          password: this.password
-        }
-      })
+          password: this.password,
+        },
+      });
 
-      this.$router.push(PAGE_URL.TOP)
+      this.$router.push(PAGE_URL.TOP);
     } catch (err) {
       // eslint-disable-next-line no-console
-      console.log(err)
+      console.log(err);
     }
   }
 }

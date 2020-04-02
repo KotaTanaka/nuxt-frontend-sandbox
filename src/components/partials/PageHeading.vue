@@ -9,11 +9,11 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { Component, Prop, Vue } from 'nuxt-property-decorator';
 
 // from app
-import Breadcrumb from '@/components/partials/Breadcrumb.vue'
-import { IBreadcrumb } from '@/interfaces/app'
+import Breadcrumb from '@/components/partials/Breadcrumb.vue';
+import { IBreadcrumb } from '@/interfaces/app';
 
 /**
  * ページ見出し
@@ -26,10 +26,10 @@ import { IBreadcrumb } from '@/interfaces/app'
 })
 export default class PageHeading extends Vue {
   @Prop({ type: String, required: true })
-  title: string
+  title: string;
 
   @Prop({ type: Array, required: true })
-  breadcrumbList: Array<IBreadcrumb>
+  breadcrumbList: Array<IBreadcrumb>;
 }
 </script>
 

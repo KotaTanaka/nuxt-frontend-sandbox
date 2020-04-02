@@ -5,17 +5,17 @@
  * type: Response
  */
 export interface IGoodsListingResponse {
-  total: number
-  goodsList: Array<IGoodsListElement>
+  total: number;
+  goodsList: Array<IGoodsListElement>;
 }
 
 /** 商品リスト要素 */
 export interface IGoodsListElement {
-  id: number
-  name: string
-  description: string
-  price: number
-  createdAt: string
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  createdAt: string;
 }
 
 /**
@@ -25,12 +25,12 @@ export interface IGoodsListElement {
  * type: Response
  */
 export interface IGoodsDetailResponse {
-  id: number
-  name: string
-  description: string
-  price: number
-  createdAt: string
-  updatedAt: string
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  createdAt: string;
+  updatedAt: string;
 }
 
 /**
@@ -59,5 +59,5 @@ export interface IDeleteGoodsResponse extends IGoodsIdResponse {}
 
 /** 商品IDのみのレスポンス */
 interface IGoodsIdResponse {
-  id: number
+  id: number;
 }

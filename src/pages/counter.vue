@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
+import { Component, Vue } from 'nuxt-property-decorator';
 
 /**
  * カウンターページ
@@ -17,18 +17,18 @@ import { Component, Vue } from 'nuxt-property-decorator'
  */
 @Component
 export default class CounterPage extends Vue {
-  count = 0
+  count = 0;
 
   get syobon() {
-    return this.count > 0 && this.count % 3 === 0 ? '(`･ω･´)' : '(´･ω･`)'
+    return this.count > 0 && this.count % 3 === 0 ? '(`･ω･´)' : '(´･ω･`)';
   }
 
   onClickPlus(): void {
-    this.count++
+    this.count++;
   }
 
   onClickMinus(): void {
-    this.count--
+    this.count--;
   }
 }
 </script>

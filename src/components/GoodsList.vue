@@ -6,11 +6,11 @@ v-container
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { Component, Prop, Vue } from 'nuxt-property-decorator';
 
 // from app
-import { IGoodsListElement } from '@/interfaces/api/response/Goods'
-import GoodsListItem from '@/components/GoodsListItem.vue'
+import { IGoodsListElement } from '@/interfaces/api/response/Goods';
+import GoodsListItem from '@/components/GoodsListItem.vue';
 
 /**
  * 商品リスト
@@ -18,12 +18,12 @@ import GoodsListItem from '@/components/GoodsListItem.vue'
  */
 @Component({
   components: {
-    GoodsListItem
-  }
+    GoodsListItem,
+  },
 })
 export default class GoodsList extends Vue {
   @Prop({ type: Array, required: true })
-  goodsList?: Array<IGoodsListElement>
+  goodsList?: Array<IGoodsListElement>;
 }
 </script>
 

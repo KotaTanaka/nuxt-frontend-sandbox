@@ -5,6 +5,6 @@
  * type: Response
  */
 export interface ILoginResponse {
-  id: string
-  loginToken: string
+  id: string;
+  loginToken: string;
 }
