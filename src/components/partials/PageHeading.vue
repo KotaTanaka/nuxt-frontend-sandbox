@@ -1,6 +1,7 @@
 <template lang="pug">
 .page-heading
-  h1 {{ title }}
+  h1(v-if="$mq === 'pc'") {{ title }}
+  h2(v-else) {{ title }}
   Breadcrumb(
     v-if="breadcrumbList.length > 1 && $mq === 'pc'"
     :breadcrumbList="breadcrumbList"
@@ -20,8 +21,8 @@ import { IBreadcrumb } from '@/interfaces/app'
  */
 @Component({
   components: {
-    Breadcrumb
-  }
+    Breadcrumb,
+  },
 })
 export default class PageHeading extends Vue {
   @Prop({ type: String, required: true })
@@ -33,7 +34,11 @@ export default class PageHeading extends Vue {
 </script>
 
 <style lang="scss">
+@import '@/assets/styles/resources';
+
 .page-heading {
-  margin-top: 50px;
+  color: $text;
+  width: 100%;
+  margin-top: 64px;
 }
 </style>

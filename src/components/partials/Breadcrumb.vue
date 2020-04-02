@@ -27,7 +27,7 @@ export default class Breadcrumb extends Vue {
 <style lang="scss">
 .breadcrumb {
   display: flex;
-  margin-top: 50px;
+  margin-top: 48px;
   background: white;
 
   > .breadcrumb-list > .breadcrumb-item > .span {
