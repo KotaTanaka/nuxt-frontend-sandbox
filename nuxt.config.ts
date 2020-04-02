@@ -13,7 +13,7 @@ const config: Configuration = {
   /* ビルドモジュール */
   buildModules: ['@nuxt/typescript-build'],
   /* 起動モード */
-  mode: 'spa',
+  mode: 'universal',
   /* ソースディレクトリ */
   srcDir: 'src/',
   /* ページヘッダ */
