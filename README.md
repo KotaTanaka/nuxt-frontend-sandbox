@@ -1,10 +1,10 @@
-# goods-spa-nuxt
+***goods-spa-nuxt***
 
 ## About
 
 商品管理SPA [Nuxt.js]
 
-*[バックエンドリポジトリ goods-api-kotlin](https://github.com/KotaTanaka/goods-api-kotlin)*
+*[Backend - goods-api-kotlin](https://github.com/KotaTanaka/goods-api-kotlin)*
 
 ## Technology
 
@@ -15,22 +15,17 @@
 
 ## Getting Started
 
-* ソースコードのクローン
+* Install
 
-```
+```bash
 $ git clone git@github.com:KotaTanaka/goods-spa-nuxt.git
-```
-
-* 依存パッケージのインストール
-
-```
 $ cd goods-spa-nuxt
 $ yarn
 ```
 
-* アプリケーション起動
+* Run
 
-```
+```bash
 $ yarn dev
 ```
 
