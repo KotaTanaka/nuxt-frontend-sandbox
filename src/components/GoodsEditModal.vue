@@ -68,9 +68,20 @@ export default class GoodsEditModal extends Vue {
 
   /** 一覧の再取得  */
   async reload() {
-    await this.$store.dispatch('goods/fetchGoodsList', {
-      token: this.$store.state.user.userToken,
-    });
+    try {
+      await this.$store.dispatch('goods/fetchGoodsList', {
+        token: this.$store.state.user.userToken,
+      });
+    } catch (err) {
+      const { status, ...errResponse } = err.response;
+      const errData = errResponse.data as IAPIError;
+
+      this.$nuxt.error({
+        message: `商品の取得に失敗しました: ${errData.message}`,
+        path: this.$route.path,
+        statusCode: status,
+      });
+    }
   }
 
   /** 更新実行 */

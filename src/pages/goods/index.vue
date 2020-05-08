@@ -12,6 +12,7 @@ import { PAGE_URL } from '@/constants';
 import PageHeading from '@/components/partials/PageHeading.vue';
 import GoodsList from '@/components/GoodsList.vue';
 import { IBreadcrumb } from '@/interfaces/app';
+import { IAPIError } from '@/interfaces/api/response/Error';
 import { IGoodsListElement } from '@/interfaces/api/response/Goods';
 
 /**
@@ -27,9 +28,20 @@ import { IGoodsListElement } from '@/interfaces/api/response/Goods';
 })
 export default class GoodsPage extends Vue {
   async fetch({ store }): Promise<void> {
-    await store.dispatch('goods/fetchGoodsList', {
-      token: store.state.user.userToken,
-    });
+    try {
+      await store.dispatch('goods/fetchGoodsList', {
+        token: store.state.user.userToken,
+      });
+    } catch (err) {
+      const { status, ...errResponse } = err.response;
+      const errData = errResponse.data as IAPIError;
+
+      this.$nuxt.error({
+        message: `商品の取得に失敗しました: ${errData.message}`,
+        path: this.$route.path,
+        statusCode: status,
+      });
+    }
   }
 
   get goodsList(): Array<IGoodsListElement> {
