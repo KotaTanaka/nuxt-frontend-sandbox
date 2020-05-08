@@ -2,10 +2,9 @@
 .error-page
   h1.heading ERROR ({{ error.statusCode }})
   .message {{ error.message }}
-  .route Page - {{ error.path }}
   .links
-    a(:href="$route.path") 再読み込み
-    a(href="/") トップページ
+    a(v-if="error.path" :href="error.path") ページに戻る
+    a(href="/") トップ
 </template>
 
 <script lang="ts">
@@ -39,10 +38,6 @@ export default class ErrorPage extends Vue {
     padding: 16px;
     background-color: whitesmoke;
     border-radius: 12px;
-  }
-
-  & > .route {
-    margin-top: 24px;
   }
 
   & > .links {
