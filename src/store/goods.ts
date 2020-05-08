@@ -66,20 +66,15 @@ export const mutations: MutationTree<GoodsStore> = {
 export const actions: ActionTree<GoodsStore, RootStore> = {
   /** 商品一覧取得 */
   async fetchGoodsList({ commit }, payload: { token: string }): Promise<void> {
-    try {
-      const response = await this.$axios.$get<IGoodsListingResponse>(
-        API_ENDPOINT.GOODS,
-        {
-          headers: {
-            Authorization: `Bearer ${payload.token}`,
-          },
+    const response = await this.$axios.$get<IGoodsListingResponse>(
+      API_ENDPOINT.GOODS,
+      {
+        headers: {
+          Authorization: `Bearer ${payload.token}`,
         },
-      );
-      commit('setGoodsListingResponse', response);
-    } catch (err) {
-      // eslint-disable-next-line no-console
-      console.log(err);
-    }
+      },
+    );
+    commit('setGoodsListingResponse', response);
   },
 
   /** 商品詳細取得 */
@@ -87,20 +82,15 @@ export const actions: ActionTree<GoodsStore, RootStore> = {
     { commit },
     payload: { token: string; id: string },
   ): Promise<void> {
-    try {
-      const response = await this.$axios.$get<IGoodsDetailResponse>(
-        API_ENDPOINT.GOODS_ONE.replace('$1', payload.id),
-        {
-          headers: {
-            Authorization: `Bearer ${payload.token}`,
-          },
+    const response = await this.$axios.$get<IGoodsDetailResponse>(
+      API_ENDPOINT.GOODS_ONE.replace('$1', payload.id),
+      {
+        headers: {
+          Authorization: `Bearer ${payload.token}`,
         },
-      );
-      commit('setGoodsDetailResponse', response);
-    } catch (err) {
-      // eslint-disable-next-line no-console
-      console.log(err);
-    }
+      },
+    );
+    commit('setGoodsDetailResponse', response);
   },
 
   /** 商品登録 */
@@ -109,20 +99,15 @@ export const actions: ActionTree<GoodsStore, RootStore> = {
     { commit },
     payload: { token: string; body: ICreateGoodsRequestBody },
   ): Promise<void> {
-    try {
-      await this.$axios.$post<ICreateGoodsResponse>(
-        API_ENDPOINT.GOODS,
-        payload.body,
-        {
-          headers: {
-            Authorization: `Bearer ${payload.token}`,
-          },
+    await this.$axios.$post<ICreateGoodsResponse>(
+      API_ENDPOINT.GOODS,
+      payload.body,
+      {
+        headers: {
+          Authorization: `Bearer ${payload.token}`,
         },
-      );
-    } catch (err) {
-      // eslint-disable-next-line no-console
-      console.log(err);
-    }
+      },
+    );
   },
 
   /** 商品編集 */
@@ -131,20 +116,15 @@ export const actions: ActionTree<GoodsStore, RootStore> = {
     { commit },
     payload: { token: string; id: string; body: IUpdateGoodsRequestBody },
   ): Promise<void> {
-    try {
-      await this.$axios.$put<IUpdateGoodsResponse>(
-        API_ENDPOINT.GOODS_ONE.replace('$1', payload.id),
-        payload.body,
-        {
-          headers: {
-            Authorization: `Bearer ${payload.token}`,
-          },
+    await this.$axios.$put<IUpdateGoodsResponse>(
+      API_ENDPOINT.GOODS_ONE.replace('$1', payload.id),
+      payload.body,
+      {
+        headers: {
+          Authorization: `Bearer ${payload.token}`,
         },
-      );
-    } catch (err) {
-      // eslint-disable-next-line no-console
-      console.log(err);
-    }
+      },
+    );
   },
 
   /** 商品削除 */
@@ -152,21 +132,16 @@ export const actions: ActionTree<GoodsStore, RootStore> = {
     { commit },
     payload: { token: string; id: string },
   ): Promise<void> {
-    try {
-      const response = await this.$axios.$delete<IDeleteGoodsResponse>(
-        API_ENDPOINT.GOODS_ONE.replace('$1', payload.id),
-        {
-          headers: {
-            Authorization: `Bearer ${payload.token}`,
-          },
+    const response = await this.$axios.$delete<IDeleteGoodsResponse>(
+      API_ENDPOINT.GOODS_ONE.replace('$1', payload.id),
+      {
+        headers: {
+          Authorization: `Bearer ${payload.token}`,
         },
-      );
+      },
+    );
 
-      commit('setNewGoodsListAfterDelete', response);
-    } catch (err) {
-      // eslint-disable-next-line no-console
-      console.log(err);
-    }
+    commit('setNewGoodsListAfterDelete', response);
   },
 };
 

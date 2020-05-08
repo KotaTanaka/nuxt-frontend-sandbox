@@ -32,18 +32,13 @@ export const actions: ActionTree<UserStore, RootStore> = {
     { commit },
     payload: { body: ILoginRequestBody },
   ): Promise<void> {
-    try {
-      const response = await this.$axios.$put<ILoginResponse>(
-        API_ENDPOINT.USER_LOGIN,
-        payload.body,
-      );
+    const response = await this.$axios.$put<ILoginResponse>(
+      API_ENDPOINT.USER_LOGIN,
+      payload.body,
+    );
 
-      Cookie.set('user_token', response.loginToken);
-      commit('setUserToken', response.loginToken);
-    } catch (err) {
-      // eslint-disable-next-line no-console
-      console.log(err);
-    }
+    Cookie.set('user_token', response.loginToken);
+    commit('setUserToken', response.loginToken);
   },
 };
 
