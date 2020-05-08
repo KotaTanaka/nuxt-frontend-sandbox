@@ -15,7 +15,6 @@ import { Component, Vue } from 'nuxt-property-decorator';
  * @author kotatanaka
  */
 @Component({
-  layout: 'default',
   middleware: 'authentication',
 })
 export default class TopPage extends Vue {}

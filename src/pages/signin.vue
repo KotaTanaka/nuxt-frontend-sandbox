@@ -26,9 +26,7 @@ import { PAGE_URL } from '@/constants';
  * ログインページ
  * @author kotatanaka
  */
-@Component({
-  layout: 'default',
-})
+@Component
 export default class SigninPage extends Vue {
   id = '';
   password = '';

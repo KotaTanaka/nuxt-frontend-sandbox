@@ -19,7 +19,6 @@ import { IGoodsListElement } from '@/interfaces/api/response/Goods';
  * @author kotatanaka
  */
 @Component({
-  layout: 'default',
   middleware: 'authentication',
   components: {
     PageHeading,

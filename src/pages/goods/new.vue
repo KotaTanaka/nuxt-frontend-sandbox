@@ -19,7 +19,6 @@ import { IBreadcrumb } from '@/interfaces/app';
  * @author kotatanaka
  */
 @Component({
-  layout: 'default',
   middleware: 'authentication',
   components: {
     PageHeading,
