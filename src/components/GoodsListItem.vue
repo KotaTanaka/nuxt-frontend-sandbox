@@ -82,6 +82,8 @@ export default class GoodsListItem extends Vue {
         id: this.goods.id,
       });
     } catch (err) {
+      if (!err.response) throw err;
+
       const { status, ...errResponse } = err.response;
       const errData = errResponse.data as IAPIError;
 

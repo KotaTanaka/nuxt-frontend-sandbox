@@ -55,6 +55,8 @@ export default class GoodsNewForm extends Vue {
         token: this.$store.state.user.userToken,
       });
     } catch (err) {
+      if (!err.response) throw err;
+
       const { status, ...errResponse } = err.response;
       const errData = errResponse.data as IAPIError;
 

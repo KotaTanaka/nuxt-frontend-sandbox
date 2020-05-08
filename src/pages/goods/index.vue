@@ -33,6 +33,8 @@ export default class GoodsPage extends Vue {
         token: store.state.user.userToken,
       });
     } catch (err) {
+      if (!err.response) throw err;
+
       const { status, ...errResponse } = err.response;
       const errData = errResponse.data as IAPIError;
 

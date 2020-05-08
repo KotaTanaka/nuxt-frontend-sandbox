@@ -73,6 +73,8 @@ export default class GoodsEditModal extends Vue {
         token: this.$store.state.user.userToken,
       });
     } catch (err) {
+      if (!err.response) throw err;
+
       const { status, ...errResponse } = err.response;
       const errData = errResponse.data as IAPIError;
 
@@ -101,6 +103,8 @@ export default class GoodsEditModal extends Vue {
         },
       });
     } catch (err) {
+      if (!err.response) throw err;
+
       const { status, ...errResponse } = err.response;
       const errData = errResponse.data as IAPIError;
 
