@@ -26,6 +26,7 @@ import { Component, Vue } from 'nuxt-property-decorator';
 
 // from app
 import { PAGE_URL } from '@/constants';
+import { IAPIError } from '@/interfaces/api/response/Error';
 
 /**
  * 商品登録フォーム
@@ -53,12 +54,20 @@ export default class GoodsNewForm extends Vue {
         },
         token: this.$store.state.user.userToken,
       });
-
-      this.$router.push(PAGE_URL.GOODS);
     } catch (err) {
-      // eslint-disable-next-line no-console
-      console.log(err);
+      const { status, ...errResponse } = err.response;
+      const errData = errResponse.data as IAPIError;
+
+      this.$nuxt.error({
+        message: `商品の登録に失敗しました: ${errData.message}`,
+        path: this.$route.path,
+        statusCode: status,
+      });
+
+      return;
     }
+
+    this.$router.push(PAGE_URL.GOODS);
   }
 }
 </script>

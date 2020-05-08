@@ -21,6 +21,7 @@ import { Component, Vue } from 'nuxt-property-decorator';
 
 // from app
 import { PAGE_URL } from '@/constants';
+import { IAPIError } from '@/interfaces/api/response/Error';
 
 /**
  * ログインページ
@@ -43,12 +44,20 @@ export default class SigninPage extends Vue {
           password: this.password,
         },
       });
-
-      this.$router.push(PAGE_URL.TOP);
     } catch (err) {
-      // eslint-disable-next-line no-console
-      console.log(err);
+      const { status, ...errResponse } = err.response;
+      const errData = errResponse.data as IAPIError;
+
+      this.$nuxt.error({
+        message: `ログインに失敗しました: ${errData.message}`,
+        path: this.$route.path,
+        statusCode: status,
+      });
+
+      return;
     }
+
+    this.$router.push(PAGE_URL.TOP);
   }
 }
 </script>

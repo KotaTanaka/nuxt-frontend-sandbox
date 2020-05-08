@@ -30,6 +30,7 @@ import { PAGE_URL } from '@/constants';
 import ConfirmDialog from '@/components/partials/ConfirmDialog.vue';
 import GoodsEditModal from '@/components/GoodsEditModal.vue';
 import { IGoodsListElement } from '@/interfaces/api/response/Goods';
+import { IAPIError } from '@/interfaces/api/response/Error';
 
 /**
  * 商品リスト要素
@@ -80,12 +81,20 @@ export default class GoodsListItem extends Vue {
         token: this.$store.state.user.userToken,
         id: this.goods.id,
       });
-
-      this.isDeleteModalVisible = false;
     } catch (err) {
-      // eslint-disable-next-line no-console
-      console.log(err);
+      const { status, ...errResponse } = err.response;
+      const errData = errResponse.data as IAPIError;
+
+      this.$nuxt.error({
+        message: `商品の削除に失敗しました: ${errData.message}`,
+        path: this.$route.path,
+        statusCode: status,
+      });
+
+      return;
     }
+
+    this.isDeleteModalVisible = false;
   }
 }
 </script>

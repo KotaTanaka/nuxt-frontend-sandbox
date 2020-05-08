@@ -31,6 +31,7 @@ v-dialog(v-model="dialog" persistent max-width="640")
 import { Component, Emit, Prop, Vue } from 'nuxt-property-decorator';
 
 // from app
+import { IAPIError } from '@/interfaces/api/response/Error';
 import { IGoodsDetailResponse } from '@/interfaces/api/response/Goods';
 
 /**
@@ -88,13 +89,21 @@ export default class GoodsEditModal extends Vue {
             this.priceValue !== this.goods.price ? this.priceValue : undefined,
         },
       });
-
-      await this.reload();
-      this.$emit('close');
     } catch (err) {
-      // eslint-disable-next-line no-console
-      console.log(err);
+      const { status, ...errResponse } = err.response;
+      const errData = errResponse.data as IAPIError;
+
+      this.$nuxt.error({
+        message: `商品情報の更新に失敗しました: ${errData.message}`,
+        path: this.$route.path,
+        statusCode: status,
+      });
+
+      return;
     }
+
+    await this.reload();
+    this.$emit('close');
   }
 }
 </script>
