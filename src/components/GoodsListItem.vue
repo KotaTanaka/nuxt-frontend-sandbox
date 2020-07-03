@@ -18,8 +18,9 @@ v-card(min-width="300").item
     :dialog="isDeleteModalVisible"
     title="商品の削除"
     message="本当に削除しますか？"
-    @close="closeDeleteModal"
+    label="削除"
     @submit="deleteGoods"
+    @cancel="closeDeleteModal"
   )
 </template>
 
