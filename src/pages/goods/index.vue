@@ -4,7 +4,10 @@ v-container
     title="商品一覧"
     :breadcrumbList="breadcrumbList"
   )
-  GoodsList(@updateGoods="updateGoods")
+  GoodsList(
+    @updateGoods="updateGoods"
+    @deleteGoods="deleteGoods"
+  )
 </template>
 
 <script lang="ts">
@@ -68,7 +71,11 @@ export default class GoodsPage extends Vue {
     }
   }
 
-  /** 商品更新 */
+  /**
+   * 商品更新
+   * @param payload.id 商品ID
+   * @param payload.body リクエストボディ
+   */
   async updateGoods(payload: {
     id: number;
     body: IUpdateGoodsRequestBody;
@@ -96,6 +103,30 @@ export default class GoodsPage extends Vue {
 
     // 一覧の再取得
     await this.fetchGoods();
+  }
+
+  /**
+   * 商品削除の実行
+   * @param id 商品ID
+   */
+  async deleteGoods(id: number) {
+    try {
+      await this.$store.dispatch('goods/deleteGoods', {
+        token: this.$store.state.user.userToken,
+        id,
+      });
+    } catch (err) {
+      if (!err.response) throw err;
+
+      const { status, ...errResponse } = err.response;
+      const errData = errResponse.data as IAPIError;
+
+      this.$nuxt.error({
+        message: `商品の削除に失敗しました: ${errData.message}`,
+        path: this.$route.path,
+        statusCode: status,
+      });
+    }
   }
 }
 </script>

@@ -5,6 +5,7 @@ v-container
       GoodsListItem(
         :goods="goods"
         @updateGoods="updateGoods"
+        @deleteGoods="deleteGoods"
       )
 </template>
 
@@ -33,6 +34,10 @@ export default class GoodsList extends Vue {
   /** 商品更新 */
   @Emit('updateGoods')
   updateGoods(): void {}
+
+  /** 商品削除 */
+  @Emit('deleteGoods')
+  deleteGoods(): void {}
 }
 </script>
 

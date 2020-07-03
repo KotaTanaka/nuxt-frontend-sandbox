@@ -32,7 +32,6 @@ import { PAGE_URL } from '@/constants';
 import ConfirmDialog from '@/components/partials/ConfirmDialog.vue';
 import GoodsEditModal from '@/components/GoodsEditModal.vue';
 import { IGoodsListElement } from '@/interfaces/api/response/Goods';
-import { IAPIError } from '@/interfaces/api/response/Error';
 
 /**
  * 商品リスト要素
@@ -86,29 +85,14 @@ export default class GoodsListItem extends Vue {
     this.closeEditModal();
   }
 
-  /** 商品削除の実行 */
-  async deleteGoods() {
-    try {
-      await this.$store.dispatch('goods/deleteGoods', {
-        token: this.$store.state.user.userToken,
-        id: this.goods.id,
-      });
-    } catch (err) {
-      if (!err.response) throw err;
-
-      const { status, ...errResponse } = err.response;
-      const errData = errResponse.data as IAPIError;
-
-      this.$nuxt.error({
-        message: `商品の削除に失敗しました: ${errData.message}`,
-        path: this.$route.path,
-        statusCode: status,
-      });
-
-      return;
-    }
-
-    this.isDeleteModalVisible = false;
+  /**
+   * 商品削除
+   * @return 商品ID
+   */
+  @Emit('deleteGoods')
+  deleteGoods(): number {
+    this.closeDeleteModal();
+    return this.goods.id;
   }
 }
 </script>
