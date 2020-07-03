@@ -28,7 +28,6 @@ v-card(min-width="300").item
 import { Component, Emit, Prop, Vue } from 'nuxt-property-decorator';
 
 // from app
-import { PAGE_URL } from '@/constants';
 import ConfirmDialog from '@/components/partials/ConfirmDialog.vue';
 import GoodsEditModal from '@/components/GoodsEditModal.vue';
 import { IGoodsListElement } from '@/interfaces/api/response/Goods';
@@ -57,7 +56,7 @@ export default class GoodsListItem extends Vue {
   /** 詳細画面への遷移 */
   async toDatail(): Promise<void> {
     await this.$router.push(
-      PAGE_URL.GOODS_DETAIL.replace('$id', `${this.goods.id}`),
+      this.$C.PAGE_URL.GOODS_DETAIL.replace('$id', `${this.goods.id}`),
     );
   }
 

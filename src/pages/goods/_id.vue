@@ -12,7 +12,6 @@ v-container
 import { Component, Vue } from 'nuxt-property-decorator';
 
 // from app
-import { PAGE_URL } from '@/constants';
 import PageHeading from '@/components/partials/PageHeading.vue';
 import GoodsDetailTable from '@/components/GoodsDetailTable.vue';
 import { IBreadcrumb } from '@/interfaces/app';
@@ -44,8 +43,8 @@ export default class GoodsDetailPage extends Vue {
   /** パンくず */
   get breadcrumbList(): IBreadcrumb[] {
     return [
-      { name: 'トップ', path: PAGE_URL.TOP },
-      { name: '商品一覧', path: PAGE_URL.GOODS },
+      { name: 'トップ', path: this.$C.PAGE_URL.TOP },
+      { name: '商品一覧', path: this.$C.PAGE_URL.GOODS },
       { name: this.goods.name, path: this.$route.path },
     ];
   }

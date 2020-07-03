@@ -12,7 +12,6 @@ v-container
 import { Component, Vue } from 'nuxt-property-decorator';
 
 // from app
-import { PAGE_URL } from '@/constants';
 import PageHeading from '@/components/partials/PageHeading.vue';
 import GoodsNewForm from '@/components/GoodsNewForm.vue';
 import { IBreadcrumb } from '@/interfaces/app';
@@ -39,7 +38,7 @@ export default class GoodsNewPage extends Vue {
   /** パンくず */
   get breadcrumbList(): IBreadcrumb[] {
     return [
-      { name: 'トップ', path: PAGE_URL.TOP },
+      { name: 'トップ', path: this.$C.PAGE_URL.TOP },
       { name: '商品登録', path: this.$route.path },
     ];
   }
@@ -69,7 +68,7 @@ export default class GoodsNewPage extends Vue {
       return;
     }
 
-    this.$router.push(PAGE_URL.GOODS);
+    this.$router.push(this.$C.PAGE_URL.GOODS);
   }
 }
 </script>

@@ -1,7 +1,6 @@
 import { ActionTree, GetterTree, MutationTree } from 'vuex';
 
 // from app
-import { API_ENDPOINT } from '@/constants';
 import { RootStore } from '@/store';
 import {
   ICreateGoodsRequestBody,
@@ -73,7 +72,7 @@ export const actions: ActionTree<GoodsStore, RootStore> = {
   /** 商品一覧取得 */
   async fetchGoodsList({ commit }, payload: { token: string }): Promise<void> {
     const response = await this.$axios.$get<IGoodsListingResponse>(
-      API_ENDPOINT.GOODS,
+      this.$C.API_ENDPOINT.GOODS,
       {
         headers: {
           Authorization: `Bearer ${payload.token}`,
@@ -89,7 +88,7 @@ export const actions: ActionTree<GoodsStore, RootStore> = {
     payload: { token: string; id: string },
   ): Promise<void> {
     const response = await this.$axios.$get<IGoodsDetailResponse>(
-      API_ENDPOINT.GOODS_ONE.replace('$1', payload.id),
+      this.$C.API_ENDPOINT.GOODS_ONE.replace('$1', payload.id),
       {
         headers: {
           Authorization: `Bearer ${payload.token}`,
@@ -106,7 +105,7 @@ export const actions: ActionTree<GoodsStore, RootStore> = {
     payload: { token: string; body: ICreateGoodsRequestBody },
   ): Promise<void> {
     await this.$axios.$post<ICreateGoodsResponse>(
-      API_ENDPOINT.GOODS,
+      this.$C.API_ENDPOINT.GOODS,
       payload.body,
       {
         headers: {
@@ -123,7 +122,7 @@ export const actions: ActionTree<GoodsStore, RootStore> = {
     payload: { token: string; id: string; body: IUpdateGoodsRequestBody },
   ): Promise<void> {
     await this.$axios.$put<IUpdateGoodsResponse>(
-      API_ENDPOINT.GOODS_ONE.replace('$1', payload.id),
+      this.$C.API_ENDPOINT.GOODS_ONE.replace('$1', payload.id),
       payload.body,
       {
         headers: {
@@ -139,7 +138,7 @@ export const actions: ActionTree<GoodsStore, RootStore> = {
     payload: { token: string; id: string },
   ): Promise<void> {
     const response = await this.$axios.$delete<IDeleteGoodsResponse>(
-      API_ENDPOINT.GOODS_ONE.replace('$1', payload.id),
+      this.$C.API_ENDPOINT.GOODS_ONE.replace('$1', payload.id),
       {
         headers: {
           Authorization: `Bearer ${payload.token}`,

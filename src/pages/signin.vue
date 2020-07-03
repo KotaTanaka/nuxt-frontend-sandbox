@@ -20,7 +20,6 @@
 import { Component, Vue } from 'nuxt-property-decorator';
 
 // from app
-import { PAGE_URL } from '@/constants';
 import { IAPIError } from '@/interfaces/api/response/Error';
 
 /**
@@ -64,7 +63,7 @@ export default class SigninPage extends Vue {
       return;
     }
 
-    this.$router.push(PAGE_URL.TOP);
+    this.$router.push(this.$C.PAGE_URL.TOP);
   }
 }
 </script>

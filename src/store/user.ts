@@ -2,7 +2,6 @@ import { ActionTree, GetterTree, MutationTree } from 'vuex';
 import Cookie from 'js-cookie';
 
 // from app
-import { API_ENDPOINT } from '@/constants';
 import { RootStore } from '@/store';
 import { ILoginRequestBody } from '@/interfaces/api/request/User';
 import { ILoginResponse } from '@/interfaces/api/response/User';
@@ -33,7 +32,7 @@ export const actions: ActionTree<UserStore, RootStore> = {
     payload: { body: ILoginRequestBody },
   ): Promise<void> {
     const response = await this.$axios.$put<ILoginResponse>(
-      API_ENDPOINT.USER_LOGIN,
+      this.$C.API_ENDPOINT.USER_LOGIN,
       payload.body,
     );
 
