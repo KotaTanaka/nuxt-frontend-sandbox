@@ -63,7 +63,7 @@ export default class SigninPage extends Vue {
       return;
     }
 
-    this.$router.push(this.$C.PAGE_URL.TOP);
+    await this.$router.push(this.$C.PAGE_URL.TOP);
   }
 }
 </script>

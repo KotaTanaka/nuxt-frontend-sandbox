@@ -68,7 +68,7 @@ export default class GoodsNewPage extends Vue {
       return;
     }
 
-    this.$router.push(this.$C.PAGE_URL.GOODS);
+    await this.$router.push(this.$C.PAGE_URL.GOODS);
   }
 }
 </script>
