@@ -11,7 +11,8 @@ v-card(min-width="300").item
   GoodsEditModal(
     :dialog="isEditModalVisible"
     :goods="goods"
-    @close="closeEditModal"
+    @submit="updateGoods"
+    @cancel="closeEditModal"
   )
   ConfirmDialog(
     :dialog="isDeleteModalVisible"
@@ -23,7 +24,7 @@ v-card(min-width="300").item
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator';
+import { Component, Emit, Prop, Vue } from 'nuxt-property-decorator';
 
 // from app
 import { PAGE_URL } from '@/constants';
@@ -43,10 +44,14 @@ import { IAPIError } from '@/interfaces/api/response/Error';
   },
 })
 export default class GoodsListItem extends Vue {
+  /** 商品情報 */
   @Prop({ type: Object, required: true })
   goods: IGoodsListElement;
 
+  /** 削除確認ダイアログの開閉状態 */
   isDeleteModalVisible = false;
+
+  /** 商品編集モーダルの開閉状態 */
   isEditModalVisible = false;
 
   /** 詳細画面への遷移 */
@@ -72,6 +77,12 @@ export default class GoodsListItem extends Vue {
   /** 商品編集キャンセル/完了 */
   closeEditModal() {
     this.isEditModalVisible = false;
+  }
+
+  /** 商品更新 */
+  @Emit('updateGoods')
+  updateGoods(): void {
+    this.closeEditModal();
   }
 
   /** 商品削除の実行 */

@@ -23,15 +23,19 @@ v-dialog(v-model="dialog" persistent max-width="640")
         )
     v-card-actions
       v-spacer
-      v-btn(@click="onClickCancel") キャンセル
-      v-btn(:disabled="!valid" color="green" @click="onClickUpdate") 更新
+      v-btn(@click="cancel") キャンセル
+      v-btn(
+        :disabled="!valid"
+        color="green"
+        @click="submit"
+      ) 更新
 </template>
 
 <script lang="ts">
 import { Component, Emit, Prop, Vue } from 'nuxt-property-decorator';
 
 // from app
-import { IAPIError } from '@/interfaces/api/response/Error';
+import { IUpdateGoodsRequestBody } from '@/interfaces/api/request/Goods';
 import { IGoodsDetailResponse } from '@/interfaces/api/response/Goods';
 
 /**
@@ -40,14 +44,21 @@ import { IGoodsDetailResponse } from '@/interfaces/api/response/Goods';
  */
 @Component
 export default class GoodsEditModal extends Vue {
+  /** モーダルの開閉状態 */
   @Prop({ type: Boolean, required: true })
   dialog: boolean;
 
+  /** 商品データ */
   @Prop({ type: Object, required: true })
   goods: IGoodsDetailResponse;
 
+  /** 商品名 */
   nameValue = '';
+
+  /** 商品説明 */
   descriptionValue = '';
+
+  /** 価格 */
   priceValue = 0;
 
   // TODO バリデーション
@@ -56,70 +67,37 @@ export default class GoodsEditModal extends Vue {
   descriptionRules = [];
   priceRules = [];
 
-  /** フォームの初期値に現在値をセット */
+  /** ライフサイクル */
   mounted() {
+    // フォームの初期値に現在値をセットする
     this.nameValue = this.goods.name;
     this.descriptionValue = this.goods.description;
     this.priceValue = this.goods.price;
   }
 
-  @Emit('close')
-  onClickCancel() {}
-
-  /** 一覧の再取得  */
-  async reload() {
-    try {
-      await this.$store.dispatch('goods/fetchGoodsList', {
-        token: this.$store.state.user.userToken,
-      });
-    } catch (err) {
-      if (!err.response) throw err;
-
-      const { status, ...errResponse } = err.response;
-      const errData = errResponse.data as IAPIError;
-
-      this.$nuxt.error({
-        message: `商品の取得に失敗しました: ${errData.message}`,
-        path: this.$route.path,
-        statusCode: status,
-      });
-    }
+  /**
+   * 更新ボタン押下時の処理
+   * @return IUpdateGoodsRequestBody
+   */
+  @Emit('submit')
+  submit(): { id: number; body: IUpdateGoodsRequestBody } {
+    return {
+      id: this.goods.id,
+      body: {
+        name: this.nameValue !== this.goods.name ? this.nameValue : undefined,
+        description:
+          this.descriptionValue !== this.goods.description
+            ? this.descriptionValue
+            : undefined,
+        price:
+          this.priceValue !== this.goods.price ? this.priceValue : undefined,
+      },
+    };
   }
 
-  /** 更新実行 */
-  async onClickUpdate() {
-    try {
-      await this.$store.dispatch('goods/updateGoods', {
-        token: this.$store.state.user.userToken,
-        id: this.goods.id,
-        body: {
-          name: this.nameValue !== this.goods.name ? this.nameValue : undefined,
-          description:
-            this.descriptionValue !== this.goods.description
-              ? this.descriptionValue
-              : undefined,
-          price:
-            this.priceValue !== this.goods.price ? this.priceValue : undefined,
-        },
-      });
-    } catch (err) {
-      if (!err.response) throw err;
-
-      const { status, ...errResponse } = err.response;
-      const errData = errResponse.data as IAPIError;
-
-      this.$nuxt.error({
-        message: `商品情報の更新に失敗しました: ${errData.message}`,
-        path: this.$route.path,
-        statusCode: status,
-      });
-
-      return;
-    }
-
-    await this.reload();
-    this.$emit('close');
-  }
+  /** キャンセルボタン押下時の処理 */
+  @Emit('cancel')
+  cancel() {}
 }
 </script>
 

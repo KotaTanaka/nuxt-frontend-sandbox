@@ -2,11 +2,14 @@
 v-container
   v-row
     v-col(v-for="goods in goodsList" :key="goods.id")
-      GoodsListItem(:goods="goods")
+      GoodsListItem(
+        :goods="goods"
+        @updateGoods="updateGoods"
+      )
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator';
+import { Component, Emit, Vue } from 'nuxt-property-decorator';
 
 // from app
 import { IGoodsListElement } from '@/interfaces/api/response/Goods';
@@ -22,8 +25,14 @@ import GoodsListItem from '@/components/GoodsListItem.vue';
   },
 })
 export default class GoodsList extends Vue {
-  @Prop({ type: Array, required: true })
-  goodsList?: Array<IGoodsListElement>;
+  /** 商品一覧 */
+  get goodsList(): Array<IGoodsListElement> {
+    return this.$store.state.goods.goodsList;
+  }
+
+  /** 商品更新 */
+  @Emit('updateGoods')
+  updateGoods(): void {}
 }
 </script>
 
