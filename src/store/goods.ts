@@ -21,7 +21,7 @@ export interface GoodsStore {
   /** 商品総数 */
   total: number;
   /** 商品リスト */
-  goodsList: Array<IGoodsListElement>;
+  goodsList: IGoodsListElement[];
   /** 商品詳細 */
   goods: IGoodsDetailResponse;
 }

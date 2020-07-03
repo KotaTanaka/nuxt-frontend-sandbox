@@ -6,7 +6,7 @@
  */
 export interface IGoodsListingResponse {
   total: number;
-  goodsList: Array<IGoodsListElement>;
+  goodsList: IGoodsListElement[];
 }
 
 /** 商品リスト要素 */

@@ -46,7 +46,7 @@ export default class GoodsDetailPage extends Vue {
   }
 
   /** パンくず */
-  get breadcrumbList(): Array<IBreadcrumb> {
+  get breadcrumbList(): IBreadcrumb[] {
     return [
       { name: 'トップ', path: PAGE_URL.TOP },
       { name: '商品一覧', path: PAGE_URL.GOODS },

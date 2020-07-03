@@ -24,7 +24,7 @@ import { IBreadcrumb } from '@/interfaces/app';
 export default class Breadcrumb extends Vue {
   /** パンくずリスト */
   @Prop({ type: Array, required: true })
-  breadcrumbList: Array<IBreadcrumb>;
+  breadcrumbList: IBreadcrumb[];
 }
 </script>
 

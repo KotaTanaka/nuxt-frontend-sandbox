@@ -5,5 +5,5 @@ export interface IAPIError {
   /** エラーメッセージ */
   message: string;
   /** エラー詳細 */
-  detailMessage: Array<string>;
+  detailMessage: string[];
 }

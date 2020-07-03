@@ -40,7 +40,7 @@ export default class GoodsNewPage extends Vue {
   }
 
   /** パンくず */
-  get breadcrumbList(): Array<IBreadcrumb> {
+  get breadcrumbList(): IBreadcrumb[] {
     return [
       { name: 'トップ', path: PAGE_URL.TOP },
       { name: '商品登録', path: this.$route.path },

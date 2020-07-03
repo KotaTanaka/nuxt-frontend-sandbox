@@ -31,7 +31,7 @@ export default class PageHeading extends Vue {
 
   /** パンくずリスト */
   @Prop({ type: Array, required: true })
-  breadcrumbList: Array<IBreadcrumb>;
+  breadcrumbList: IBreadcrumb[];
 }
 </script>
 

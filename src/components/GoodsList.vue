@@ -29,7 +29,7 @@ import { RootStore } from '@/store';
 })
 export default class GoodsList extends Vue {
   /** 商品一覧 */
-  get goodsList(): Array<IGoodsListElement> {
+  get goodsList(): IGoodsListElement[] {
     const { state }: Store<RootStore> = this.$store;
     return state.goods.goodsList;
   }
