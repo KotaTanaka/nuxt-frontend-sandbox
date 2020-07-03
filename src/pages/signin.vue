@@ -43,7 +43,7 @@ export default class SigninPage extends Vue {
   /** ログイン */
   async signIn(): Promise<void> {
     try {
-      await this.$store.dispatch('user/signin', {
+      await this.$store.dispatch('user/signIn', {
         body: {
           id: this.id,
           password: this.password,
