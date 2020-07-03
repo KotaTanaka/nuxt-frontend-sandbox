@@ -3,8 +3,8 @@
     <h1>Counter</h1>
     <p>Count: {{ count }}</p>
     <p>{{ syobon }}</p>
-    <button @click="onClickPlus">+</button>
-    <button @click="onClickMinus">-</button>
+    <button @click="countPlus">+</button>
+    <button @click="countMinus">-</button>
   </div>
 </template>
 
@@ -23,11 +23,11 @@ export default class CounterPage extends Vue {
     return this.count > 0 && this.count % 3 === 0 ? '(`･ω･´)' : '(´･ω･`)';
   }
 
-  onClickPlus(): void {
+  countPlus(): void {
     this.count++;
   }
 
-  onClickMinus(): void {
+  countMinus(): void {
     this.count--;
   }
 }

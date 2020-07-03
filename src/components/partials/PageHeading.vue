@@ -25,9 +25,11 @@ import { IBreadcrumb } from '@/interfaces/app';
   },
 })
 export default class PageHeading extends Vue {
+  /** ページタイトル */
   @Prop({ type: String, required: true })
   title: string;
 
+  /** パンくずリスト */
   @Prop({ type: Array, required: true })
   breadcrumbList: Array<IBreadcrumb>;
 }

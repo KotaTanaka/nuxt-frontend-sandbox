@@ -13,7 +13,7 @@
       label="パスワード"
       required
     )
-    v-btn(:disabled="!valid" @click="onClick") ログイン
+    v-btn(:disabled="!valid" @click="signIn") ログイン
 </template>
 
 <script lang="ts">
@@ -29,14 +29,19 @@ import { IAPIError } from '@/interfaces/api/response/Error';
  */
 @Component
 export default class SigninPage extends Vue {
+  /** ID */
   id = '';
-  password = '';
-  valid = true;
 
+  /** パスワード */
+  password = '';
+
+  // TODO バリデーション
+  valid = true;
   idRules = [];
   passRules = [];
 
-  async onClick() {
+  /** ログイン */
+  async signIn(): Promise<void> {
     try {
       await this.$store.dispatch('user/signin', {
         body: {

@@ -1,5 +1,9 @@
 <template lang="pug">
-v-dialog(v-model="dialog" persistent max-width="640")
+v-dialog(
+  v-model="dialog"
+  persistent
+  max-width="640"
+)
   v-card.goods-edit
     v-card-title(class="headline") 商品情報編集
     v-card-text
