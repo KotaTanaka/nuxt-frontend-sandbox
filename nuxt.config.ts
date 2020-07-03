@@ -35,7 +35,7 @@ const config: Configuration = {
   /* グローバルCSS */
   css: [],
   /* プラグイン */
-  plugins: ['@/plugins/typedStore'],
+  plugins: ['@/plugins/typedStore', '@/plugins/constants'],
   /* Nuxtモジュール */
   modules: [
     '@nuxtjs/axios',
