@@ -1,12 +1,9 @@
 import { Context, Middleware } from '@nuxt/types';
 
-// from app
-import { PAGE_URL } from '@/constants';
-
 /** トークンチェックミドルウェア */
-const authentication: Middleware = ({ redirect, store }: Context) => {
+const authentication: Middleware = ({ app, redirect, store }: Context) => {
   if (!store.state.user.userToken) {
-    return redirect(PAGE_URL.LOGIN);
+    return redirect(app.$C.PAGE_URL.LOGIN);
   }
 };
 
