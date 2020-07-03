@@ -12,6 +12,7 @@ v-container
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator';
+import { Store } from 'vuex';
 
 // from app
 import { PAGE_URL } from '@/constants';
@@ -20,6 +21,7 @@ import GoodsList from '@/components/GoodsList.vue';
 import { IBreadcrumb } from '@/interfaces/app';
 import { IUpdateGoodsRequestBody } from '@/interfaces/api/request/Goods';
 import { IAPIError } from '@/interfaces/api/response/Error';
+import { RootStore } from '@/store';
 
 /**
  * 商品一覧ページ
@@ -35,7 +37,8 @@ import { IAPIError } from '@/interfaces/api/response/Error';
 export default class GoodsPage extends Vue {
   /** トークン */
   get userToken(): string {
-    return this.$store.state.user.userToken;
+    const { state }: Store<RootStore> = this.$store;
+    return state.user.userToken;
   }
 
   /** パンくず */
@@ -112,7 +115,7 @@ export default class GoodsPage extends Vue {
   async deleteGoods(id: number) {
     try {
       await this.$store.dispatch('goods/deleteGoods', {
-        token: this.$store.state.user.userToken,
+        token: this.userToken,
         id,
       });
     } catch (err) {

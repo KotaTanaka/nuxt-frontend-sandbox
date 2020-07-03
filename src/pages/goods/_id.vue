@@ -10,6 +10,7 @@ v-container
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator';
+import { Store } from 'vuex';
 
 // from app
 import { PAGE_URL } from '@/constants';
@@ -18,6 +19,7 @@ import GoodsDetailTable from '@/components/GoodsDetailTable.vue';
 import { IBreadcrumb } from '@/interfaces/app';
 import { IAPIError } from '@/interfaces/api/response/Error';
 import { IGoodsDetailResponse } from '@/interfaces/api/response/Goods';
+import { RootStore } from '@/store';
 
 /**
  * 商品詳細ページ
@@ -33,12 +35,14 @@ import { IGoodsDetailResponse } from '@/interfaces/api/response/Goods';
 export default class GoodsDetailPage extends Vue {
   /** トークン */
   get userToken(): string {
-    return this.$store.state.user.userToken;
+    const { state }: Store<RootStore> = this.$store;
+    return state.user.userToken;
   }
 
   /** 商品データ */
   get goods(): IGoodsDetailResponse {
-    return this.$store.state.goods.goods;
+    const { state }: Store<RootStore> = this.$store;
+    return state.goods.goods;
   }
 
   /** パンくず */

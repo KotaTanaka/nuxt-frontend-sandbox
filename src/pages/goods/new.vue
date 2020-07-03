@@ -10,6 +10,7 @@ v-container
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator';
+import { Store } from 'vuex';
 
 // from app
 import { PAGE_URL } from '@/constants';
@@ -18,6 +19,7 @@ import GoodsNewForm from '@/components/GoodsNewForm.vue';
 import { IBreadcrumb } from '@/interfaces/app';
 import { ICreateGoodsRequestBody } from '@/interfaces/api/request/Goods';
 import { IAPIError } from '@/interfaces/api/response/Error';
+import { RootStore } from '@/store';
 
 /**
  * 商品登録ページ
@@ -31,6 +33,12 @@ import { IAPIError } from '@/interfaces/api/response/Error';
   },
 })
 export default class GoodsNewPage extends Vue {
+  /** トークン */
+  get userToken(): string {
+    const { state }: Store<RootStore> = this.$store;
+    return state.user.userToken;
+  }
+
   /** パンくず */
   get breadcrumbList(): Array<IBreadcrumb> {
     return [
@@ -47,7 +55,7 @@ export default class GoodsNewPage extends Vue {
     try {
       await this.$store.dispatch('goods/registerGoods', {
         body: payload,
-        token: this.$store.state.user.userToken,
+        token: this.userToken,
       });
     } catch (err) {
       if (!err.response) throw err;
