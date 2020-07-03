@@ -11,12 +11,10 @@ v-container
 
 <script lang="ts">
 import { Component, Emit, Vue } from 'nuxt-property-decorator';
-import { Store } from 'vuex';
 
 // from app
 import GoodsListItem from '@/components/GoodsListItem.vue';
 import { IGoodsListElement } from '@/interfaces/api/response/Goods';
-import { RootStore } from '@/store';
 
 /**
  * 商品リスト
@@ -30,8 +28,7 @@ import { RootStore } from '@/store';
 export default class GoodsList extends Vue {
   /** 商品一覧 */
   get goodsList(): IGoodsListElement[] {
-    const { state }: Store<RootStore> = this.$store;
-    return state.goods.goodsList;
+    return this.$typedStore.state.goods.goodsList;
   }
 
   /** 商品更新 */

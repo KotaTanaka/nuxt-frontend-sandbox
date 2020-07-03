@@ -11,7 +11,6 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator';
-import { Store } from 'vuex';
 
 // from app
 import {
@@ -19,7 +18,6 @@ import {
   IVuetifyTableItem,
 } from '@/interfaces/app/vuetify';
 import { IGoodsDetailResponse } from '@/interfaces/api/response/Goods';
-import { RootStore } from '@/store';
 
 /**
  * 商品詳細テーブル
@@ -29,8 +27,7 @@ import { RootStore } from '@/store';
 export default class GoodsDetailTable extends Vue {
   /** 商品データ */
   get goods(): IGoodsDetailResponse {
-    const { state }: Store<RootStore> = this.$store;
-    return state.goods.goods;
+    return this.$typedStore.state.goods.goods;
   }
 
   /** テーブルヘッダ */
