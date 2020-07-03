@@ -19,7 +19,7 @@ import { Component, Vue } from 'nuxt-property-decorator';
 export default class CounterPage extends Vue {
   count = 0;
 
-  get syobon() {
+  get syobon(): string {
     return this.count > 0 && this.count % 3 === 0 ? '(`･ω･´)' : '(´･ω･`)';
   }
 

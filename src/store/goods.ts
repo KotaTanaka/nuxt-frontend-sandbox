@@ -43,19 +43,25 @@ export const state = (): GoodsStore => ({
 /** Mutations */
 export const mutations: MutationTree<GoodsStore> = {
   /** 商品一覧データのセット */
-  setGoodsListingResponse(state: GoodsStore, response: IGoodsListingResponse) {
+  setGoodsListingResponse(
+    state: GoodsStore,
+    response: IGoodsListingResponse,
+  ): void {
     state.total = response.total;
     state.goodsList = response.goodsList;
   },
   /** 商品詳細データのセット */
-  setGoodsDetailResponse(state: GoodsStore, response: IGoodsDetailResponse) {
+  setGoodsDetailResponse(
+    state: GoodsStore,
+    response: IGoodsDetailResponse,
+  ): void {
     state.goods = response;
   },
   /** 商品削除後の一覧更新 */
   setNewGoodsListAfterDelete(
     state: GoodsStore,
     response: IDeleteGoodsResponse,
-  ) {
+  ): void {
     state.goodsList = state.goodsList.filter(
       (goods) => goods.id !== response.id,
     );

@@ -72,7 +72,7 @@ export default class GoodsEditModal extends Vue {
   priceRules = [];
 
   /** ライフサイクル */
-  mounted() {
+  mounted(): void {
     // フォームの初期値に現在値をセットする
     this.nameValue = this.goods.name;
     this.descriptionValue = this.goods.description;
@@ -101,7 +101,7 @@ export default class GoodsEditModal extends Vue {
 
   /** キャンセルボタン押下時の処理 */
   @Emit('cancel')
-  cancel() {}
+  cancel(): void {}
 }
 </script>
 

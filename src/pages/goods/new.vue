@@ -51,7 +51,7 @@ export default class GoodsNewPage extends Vue {
    * 商品登録
    * @param payload リクエストボディ
    */
-  async registerGoods(payload: ICreateGoodsRequestBody) {
+  async registerGoods(payload: ICreateGoodsRequestBody): Promise<void> {
     try {
       await this.$store.dispatch('goods/registerGoods', {
         body: payload,

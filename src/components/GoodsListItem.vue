@@ -55,27 +55,29 @@ export default class GoodsListItem extends Vue {
   isEditModalVisible = false;
 
   /** 詳細画面への遷移 */
-  toDatail() {
-    this.$router.push(PAGE_URL.GOODS_DETAIL.replace('$id', `${this.goods.id}`));
+  async toDatail(): Promise<void> {
+    await this.$router.push(
+      PAGE_URL.GOODS_DETAIL.replace('$id', `${this.goods.id}`),
+    );
   }
 
   /** 商品削除確認 */
-  openDeleteModal() {
+  openDeleteModal(): void {
     this.isDeleteModalVisible = true;
   }
 
   /** 商品情報編集 */
-  openEditModal() {
+  openEditModal(): void {
     this.isEditModalVisible = true;
   }
 
   /** 商品削除キャンセル */
-  closeDeleteModal() {
+  closeDeleteModal(): void {
     this.isDeleteModalVisible = false;
   }
 
   /** 商品編集キャンセル/完了 */
-  closeEditModal() {
+  closeEditModal(): void {
     this.isEditModalVisible = false;
   }
 

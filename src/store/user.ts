@@ -20,7 +20,7 @@ export const state = (): UserStore => ({
 /** Mutations */
 export const mutations: MutationTree<UserStore> = {
   /** ユーザートークンのセット */
-  setUserToken(state: UserStore, userToken: string) {
+  setUserToken(state: UserStore, userToken: string): void {
     state.userToken = userToken;
   },
 };
@@ -28,7 +28,7 @@ export const mutations: MutationTree<UserStore> = {
 /** Actions */
 export const actions: ActionTree<UserStore, RootStore> = {
   /** ログイン */
-  async signin(
+  async signIn(
     { commit },
     payload: { body: ILoginRequestBody },
   ): Promise<void> {
