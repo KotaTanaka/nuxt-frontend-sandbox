@@ -14,6 +14,10 @@ import { Component, Vue } from 'nuxt-property-decorator';
 import { Store } from 'vuex';
 
 // from app
+import {
+  IVuetifyTableHeader,
+  IVuetifyTableItem,
+} from '@/interfaces/app/vuetify';
 import { IGoodsDetailResponse } from '@/interfaces/api/response/Goods';
 import { RootStore } from '@/store';
 
@@ -30,12 +34,12 @@ export default class GoodsDetailTable extends Vue {
   }
 
   /** テーブルヘッダ */
-  get tableHeaders() {
+  get tableHeaders(): IVuetifyTableHeader[] {
     return [{ value: 'name' }, { value: 'value' }];
   }
 
   /** テーブル項目 */
-  get tableItems() {
+  get tableItems(): IVuetifyTableItem[] {
     const { id, description, price, createdAt, updatedAt } = this.goods;
 
     return [
