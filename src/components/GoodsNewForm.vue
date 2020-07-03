@@ -18,15 +18,14 @@
       label="価格"
       required
     )
-    v-btn(:disabled="!valid" @click="onClick") 登録
+    v-btn(:disabled="!valid" @click="submit") 登録
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator';
+import { Component, Emit, Vue } from 'nuxt-property-decorator';
 
 // from app
-import { PAGE_URL } from '@/constants';
-import { IAPIError } from '@/interfaces/api/response/Error';
+import { ICreateGoodsRequestBody } from '@/interfaces/api/request/Goods';
 
 /**
  * 商品登録フォーム
@@ -34,8 +33,11 @@ import { IAPIError } from '@/interfaces/api/response/Error';
  */
 @Component
 export default class GoodsNewForm extends Vue {
+  /** 商品名 */
   nameValue = '';
+  /** 商品説明 */
   descriptionValue = '';
+  /** 価格 */
   priceValue = 0;
 
   // TODO バリデーション
@@ -44,32 +46,17 @@ export default class GoodsNewForm extends Vue {
   descriptionRules = [];
   priceRules = [];
 
-  async onClick() {
-    try {
-      await this.$store.dispatch('goods/registerGoods', {
-        body: {
-          name: this.nameValue,
-          description: this.descriptionValue,
-          price: this.priceValue,
-        },
-        token: this.$store.state.user.userToken,
-      });
-    } catch (err) {
-      if (!err.response) throw err;
-
-      const { status, ...errResponse } = err.response;
-      const errData = errResponse.data as IAPIError;
-
-      this.$nuxt.error({
-        message: `商品の登録に失敗しました: ${errData.message}`,
-        path: this.$route.path,
-        statusCode: status,
-      });
-
-      return;
-    }
-
-    this.$router.push(PAGE_URL.GOODS);
+  /**
+   * 登録ボタン押下時の処理
+   * @return ICreateGoodsRequestBody
+   */
+  @Emit('submit')
+  submit(): ICreateGoodsRequestBody {
+    return {
+      name: this.nameValue,
+      description: this.descriptionValue,
+      price: this.priceValue,
+    };
   }
 }
 </script>
