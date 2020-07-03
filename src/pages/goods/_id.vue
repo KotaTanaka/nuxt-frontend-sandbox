@@ -1,8 +1,11 @@
 <template lang="pug">
 v-container
-  PageHeading(title="商品詳細" :breadcrumbList="breadcrumbList")
+  PageHeading(
+    title="商品詳細"
+    :breadcrumbList="breadcrumbList"
+  )
   .contents
-    GoodsDetailTable(:goods="goods")
+    GoodsDetailTable
 </template>
 
 <script lang="ts">
@@ -28,11 +31,36 @@ import { IGoodsDetailResponse } from '@/interfaces/api/response/Goods';
   },
 })
 export default class GoodsDetailPage extends Vue {
-  async fetch({ store, route }): Promise<void> {
+  /** トークン */
+  get userToken(): string {
+    return this.$store.state.user.userToken;
+  }
+
+  /** 商品データ */
+  get goods(): IGoodsDetailResponse {
+    return this.$store.state.goods.goods;
+  }
+
+  /** パンくず */
+  get breadcrumbList(): Array<IBreadcrumb> {
+    return [
+      { name: 'トップ', path: PAGE_URL.TOP },
+      { name: '商品一覧', path: PAGE_URL.GOODS },
+      { name: this.goods.name, path: this.$route.path },
+    ];
+  }
+
+  /** ライフサイクル */
+  async fetch(): Promise<void> {
+    await this.fetchGoods();
+  }
+
+  /** 商品詳細取得 */
+  async fetchGoods(): Promise<void> {
     try {
-      await store.dispatch('goods/fetchGoodsDetail', {
-        token: store.state.user.userToken,
-        id: route.params.id,
+      await this.$store.dispatch('goods/fetchGoodsDetail', {
+        token: this.userToken,
+        id: this.$route.params.id,
       });
     } catch (err) {
       if (!err.response) throw err;
@@ -46,18 +74,6 @@ export default class GoodsDetailPage extends Vue {
         statusCode: status,
       });
     }
-  }
-
-  get goods(): IGoodsDetailResponse {
-    return this.$store.state.goods.goods;
-  }
-
-  get breadcrumbList(): Array<IBreadcrumb> {
-    return [
-      { name: 'トップ', path: PAGE_URL.TOP },
-      { name: '商品一覧', path: PAGE_URL.GOODS },
-      { name: this.goods.name, path: this.$route.path },
-    ];
   }
 }
 </script>
