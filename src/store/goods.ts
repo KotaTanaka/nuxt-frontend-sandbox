@@ -1,4 +1,4 @@
-import { ActionTree, GetterTree, MutationTree } from 'vuex';
+import { ActionContext, ActionTree, GetterTree, MutationTree } from 'vuex';
 
 // from app
 import { RootStore } from '@/store';
@@ -70,7 +70,10 @@ export const mutations: MutationTree<GoodsStore> = {
 /** Actions */
 export const actions: ActionTree<GoodsStore, RootStore> = {
   /** 商品一覧取得 */
-  async fetchGoodsList({ commit }, payload: { token: string }): Promise<void> {
+  async fetchGoodsList(
+    { commit }: ActionContext<GoodsStore, RootStore>,
+    payload: { token: string }
+  ): Promise<void> {
     const response = await this.$axios.$get<IGoodsListingResponse>(
       this.$C.API_ENDPOINT.GOODS,
       {
@@ -84,7 +87,7 @@ export const actions: ActionTree<GoodsStore, RootStore> = {
 
   /** 商品詳細取得 */
   async fetchGoodsDetail(
-    { commit },
+    { commit }: ActionContext<GoodsStore, RootStore>,
     payload: { token: string; id: string },
   ): Promise<void> {
     const response = await this.$axios.$get<IGoodsDetailResponse>(
@@ -100,8 +103,7 @@ export const actions: ActionTree<GoodsStore, RootStore> = {
 
   /** 商品登録 */
   async registerGoods(
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    { commit },
+    _: ActionContext<GoodsStore, RootStore>,
     payload: { token: string; body: ICreateGoodsRequestBody },
   ): Promise<void> {
     await this.$axios.$post<ICreateGoodsResponse>(
@@ -117,8 +119,7 @@ export const actions: ActionTree<GoodsStore, RootStore> = {
 
   /** 商品編集 */
   async updateGoods(
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    { commit },
+    _: ActionContext<GoodsStore, RootStore>,
     payload: { token: string; id: string; body: IUpdateGoodsRequestBody },
   ): Promise<void> {
     await this.$axios.$put<IUpdateGoodsResponse>(
@@ -134,7 +135,7 @@ export const actions: ActionTree<GoodsStore, RootStore> = {
 
   /** 商品削除 */
   async deleteGoods(
-    { commit },
+    { commit }: ActionContext<GoodsStore, RootStore>,
     payload: { token: string; id: string },
   ): Promise<void> {
     const response = await this.$axios.$delete<IDeleteGoodsResponse>(

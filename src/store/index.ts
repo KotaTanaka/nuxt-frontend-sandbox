@@ -1,4 +1,4 @@
-import { ActionTree, GetterTree, MutationTree } from 'vuex';
+import { ActionContext, ActionTree, GetterTree, MutationTree } from 'vuex';
 import { Context } from '@nuxt/types';
 import { NuxtAxiosInstance } from '@nuxtjs/axios';
 import cookieparser from 'cookieparser';
@@ -19,7 +19,10 @@ export const mutations: MutationTree<RootStore> = {};
 
 /** Actions */
 export const actions: ActionTree<RootStore, RootStore> = {
-  nuxtServerInit({ commit }, { req }: Context): void {
+  nuxtServerInit(
+    { commit }: ActionContext<RootStore, RootStore>,
+    { req }: Context
+  ): void {
     if (req.headers.cookie) {
       const parsedCookie = cookieparser.parse(req.headers.cookie);
       try {
@@ -27,7 +30,7 @@ export const actions: ActionTree<RootStore, RootStore> = {
         commit('user/setUserToken', userToken);
       } catch (err) {
         // eslint-disable-next-line no-console
-        console.log(err);
+        console.error(err);
       }
     }
   },

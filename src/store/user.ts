@@ -1,4 +1,4 @@
-import { ActionTree, GetterTree, MutationTree } from 'vuex';
+import { ActionContext, ActionTree, GetterTree, MutationTree } from 'vuex';
 import Cookie from 'js-cookie';
 
 // from app
@@ -28,7 +28,7 @@ export const mutations: MutationTree<UserStore> = {
 export const actions: ActionTree<UserStore, RootStore> = {
   /** ログイン */
   async signIn(
-    { commit },
+    { commit }: ActionContext<UserStore, RootStore>,
     payload: { body: ILoginRequestBody },
   ): Promise<void> {
     const response = await this.$axios.$put<ILoginResponse>(
