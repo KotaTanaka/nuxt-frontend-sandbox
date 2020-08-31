@@ -35,7 +35,7 @@ const config: Configuration = {
   /* グローバルCSS */
   css: [],
   /* プラグイン */
-  plugins: ['@/plugins/typedStore', '@/plugins/constants'],
+  plugins: ['@/plugins/typedStore', '@/plugins/constants', '@/plugins/vuetifyPreset'],
   /* Nuxtモジュール */
   modules: [
     '@nuxtjs/axios',
@@ -51,11 +51,16 @@ const config: Configuration = {
   },
   /* Vuetify */
   vuetify: {
+    customVariables: ['@/assets/styles/_variables.scss'],
     theme: {
-      primary: '#3f51b5',
-      secondary: '#b0bec5',
-      accent: '#8c9eff',
-      error: '#b71c1c',
+      themes: {
+        light: {
+          primary: '#8A0868',
+          secondary: '#B40486',
+          tertiary: '#DF01A5',
+          error: '#b71c1c',
+        }
+      }
     },
   },
   mq: {

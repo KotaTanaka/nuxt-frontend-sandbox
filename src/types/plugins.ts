@@ -1,4 +1,5 @@
 import { Store } from 'vuex';
+import { VuetifyPreset } from 'vuetify';
 
 // from app
 import { RootStore } from '@/store';
@@ -11,6 +12,8 @@ declare module 'vue/types/vue' {
     readonly $typedStore: Store<RootStore>;
     /** 定数 */
     readonly $C: typeof C;
+    /** Vuetify preset */
+    readonly $vuetifyPreset: VuetifyPreset;
   }
 }
 
