@@ -35,7 +35,10 @@ const config: Configuration = {
   /* グローバルCSS */
   css: [],
   /* プラグイン */
-  plugins: ['@/plugins/typedStore', '@/plugins/constants', '@/plugins/vuetifyPreset'],
+  plugins: [
+    '@/plugins/constants',
+    '@/plugins/typedStore',
+  ],
   /* Nuxtモジュール */
   modules: [
     '@nuxtjs/axios',
