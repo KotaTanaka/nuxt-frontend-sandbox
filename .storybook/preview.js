@@ -1,14 +1,23 @@
 import { addDecorator } from '@storybook/vue'
+import { action } from '@storybook/addon-actions'
+
 import Vue from 'vue';
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 
-export const parameters = {
-  actions: { argTypesRegex: "^on[A-Z].*" },
-}
+/** nuxt-link */
+Vue.component('nuxt-link', {
+  props: ['to'],
+    methods: {
+      log() {
+        action('nuxt-link to')(this.to)
+      },
+    },
+  template: '<a href="#" @click.prevent="log()"><slot /></a>',
+})
 
+/** Vuetify */
 Vue.use(Vuetify);
-
 addDecorator(() => ({
   vuetify: new Vuetify({
     customVariables: ['../src/assets/styles/_variables.scss'],
