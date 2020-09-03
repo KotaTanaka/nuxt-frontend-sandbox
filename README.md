@@ -30,3 +30,11 @@ $ yarn dev
 ```
 
 → http://localhost:5050
+
+* Storybook (Component Catalog)
+
+```bash
+$ yarn storybook
+```
+
+→ http://localhost:6006
