@@ -34,7 +34,7 @@
     "cookieparser": "^0.1.0",
     "js-cookie": "^2.2.1",
     "node-sass": "^4.13.1",
-    "nuxt": "^2.12.2",
+    "nuxt": "^2.14.4",
     "nuxt-mq": "^2.0.1",
     "nuxt-property-decorator": "^2.5.1",
     "pug": "^2.0.4",
@@ -45,7 +45,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.11.5",
-    "@nuxt/typescript-build": "^0.6.1",
+    "@nuxt/typescript-build": "^2.0.3",
     "@nuxtjs/eslint-config": "^2.0.2",
     "@nuxtjs/eslint-config-typescript": "^1.0.2",
     "@nuxtjs/eslint-module": "^1.1.0",
