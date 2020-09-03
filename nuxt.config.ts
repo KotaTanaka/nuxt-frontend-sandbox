@@ -35,10 +35,7 @@ const config: Configuration = {
   /* グローバルCSS */
   css: [],
   /* プラグイン */
-  plugins: [
-    '@/plugins/constants',
-    '@/plugins/typedStore',
-  ],
+  plugins: ['@/plugins/constants', '@/plugins/typedStore'],
   /* Nuxtモジュール */
   modules: [
     '@nuxtjs/axios',
@@ -62,8 +59,8 @@ const config: Configuration = {
           secondary: '#B40486',
           tertiary: '#DF01A5',
           error: '#b71c1c',
-        }
-      }
+        },
+      },
     },
   },
   mq: {

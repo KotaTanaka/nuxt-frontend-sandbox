@@ -72,7 +72,7 @@ export const actions: ActionTree<GoodsStore, RootStore> = {
   /** 商品一覧取得 */
   async fetchGoodsList(
     { commit }: ActionContext<GoodsStore, RootStore>,
-    payload: { token: string }
+    payload: { token: string },
   ): Promise<void> {
     const response = await this.$axios.$get<IGoodsListingResponse>(
       this.$C.API_ENDPOINT.GOODS,

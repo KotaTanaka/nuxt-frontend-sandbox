@@ -21,7 +21,7 @@ export const mutations: MutationTree<RootStore> = {};
 export const actions: ActionTree<RootStore, RootStore> = {
   nuxtServerInit(
     { commit }: ActionContext<RootStore, RootStore>,
-    { req }: Context
+    { req }: Context,
   ): void {
     if (req.headers.cookie) {
       const parsedCookie = cookieparser.parse(req.headers.cookie);
