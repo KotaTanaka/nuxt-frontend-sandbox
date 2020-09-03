@@ -5,7 +5,7 @@ export default {
   component: AppHeader,
 };
 
-export const Base = () => ({
+export const Template = () => ({
   components: { AppHeader },
   template: '<AppHeader />',
 });
