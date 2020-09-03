@@ -9,12 +9,12 @@ import '@mdi/font/css/materialdesignicons.css';
 /** nuxt-link */
 Vue.component('nuxt-link', {
   props: ['to'],
-    methods: {
-      log() {
-        action('nuxt-link to')(this.to)
-      },
+  methods: {
+    onClickLink() {
+      action('nuxt-link to')(this.to)
     },
-  template: '<a href="#" @click.prevent="log()"><slot /></a>',
+  },
+  template: '<a href="#" @click.prevent="onClickLink()"><slot /></a>',
 })
 
 /** Vuetify */
