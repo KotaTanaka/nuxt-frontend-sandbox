@@ -1,9 +1,10 @@
-import { addDecorator } from '@storybook/vue'
-import { action } from '@storybook/addon-actions'
+import { addDecorator } from '@storybook/vue';
+import { action } from '@storybook/addon-actions';
 
 import Vue from 'vue';
-import Vuetify from 'vuetify'
-import 'vuetify/dist/vuetify.min.css'
+import Vuetify from 'vuetify';
+import 'vuetify/dist/vuetify.min.css';
+import '@mdi/font/css/materialdesignicons.css';
 
 /** nuxt-link */
 Vue.component('nuxt-link', {
