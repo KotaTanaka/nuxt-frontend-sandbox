@@ -2,10 +2,10 @@ module.exports = {
   root: true,
   env: {
     browser: true,
-    node: true
+    node: true,
   },
   parserOptions: {
-    parser: '@typescript-eslint/parser'
+    parser: '@typescript-eslint/parser',
   },
   extends: [
     '@nuxtjs',
@@ -13,12 +13,12 @@ module.exports = {
     'prettier',
     'prettier/vue',
     'plugin:prettier/recommended',
-    'plugin:nuxt/recommended'
+    'plugin:nuxt/recommended',
   ],
-  plugins: [
-    'prettier'
-  ],
-  // add your custom rules here
+  plugins: ['prettier'],
   rules: {
-  }
-}
+    'no-unused-vars': 'off',
+    'no-use-before-define': 'off',
+    '@typescript-eslint/no-unused-vars': 'off',
+  },
+};
