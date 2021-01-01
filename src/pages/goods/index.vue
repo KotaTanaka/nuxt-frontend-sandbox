@@ -11,7 +11,12 @@ v-container
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator';
+import {
+  computed,
+  defineComponent,
+  onBeforeMount,
+  SetupContext,
+} from '@nuxtjs/composition-api';
 import PageHeading from '@/components/partials/PageHeading.vue';
 import GoodsList from '@/components/GoodsList.vue';
 import { IBreadcrumb } from '@/interfaces/app';
@@ -19,110 +24,108 @@ import { IUpdateGoodsRequestBody } from '@/interfaces/api/request/Goods';
 import { IAPIError } from '@/interfaces/api/response/Error';
 
 /** 商品一覧ページ */
-@Component({
-  middleware: 'authentication',
+export default defineComponent({
   components: {
     PageHeading,
     GoodsList,
   },
-})
-export default class GoodsPage extends Vue {
-  /** トークン */
-  get userToken(): string {
-    return this.$typedStore.state.user.userToken;
-  }
+  middleware: 'authentication',
+  setup(_, { root }: SetupContext) {
+    /** パンくず */
+    const breadcrumbList = computed<IBreadcrumb[]>(() => {
+      return [
+        { name: 'トップ', path: root.$C.PAGE_URL.TOP },
+        { name: '商品一覧', path: root.$route.path },
+      ];
+    });
 
-  /** パンくず */
-  get breadcrumbList(): IBreadcrumb[] {
-    return [
-      { name: 'トップ', path: this.$C.PAGE_URL.TOP },
-      { name: '商品一覧', path: this.$route.path },
-    ];
-  }
+    /** ライフサイクル */
+    onBeforeMount(async () => {
+      await fetchGoods();
+    });
 
-  /** ライフサイクル */
-  async fetch(): Promise<void> {
-    await this.fetchGoods();
-  }
+    /** 商品一覧取得 */
+    const fetchGoods = async () => {
+      try {
+        await root.$store.dispatch('goods/fetchGoodsList', {
+          token: root.$typedStore.state.user.userToken,
+        });
+      } catch (err) {
+        if (!err.response) throw err;
 
-  /** 商品一覧取得 */
-  async fetchGoods(): Promise<void> {
-    try {
-      await this.$store.dispatch('goods/fetchGoodsList', {
-        token: this.userToken,
-      });
-    } catch (err) {
-      if (!err.response) throw err;
+        const { status, ...errResponse } = err.response;
+        const errData = errResponse.data as IAPIError;
 
-      const { status, ...errResponse } = err.response;
-      const errData = errResponse.data as IAPIError;
+        root.$nuxt.error({
+          message: `商品の取得に失敗しました: ${errData.message}`,
+          path: root.$route.path,
+          statusCode: status,
+        });
+      }
+    };
 
-      this.$nuxt.error({
-        message: `商品の取得に失敗しました: ${errData.message}`,
-        path: this.$route.path,
-        statusCode: status,
-      });
-    }
-  }
+    /**
+     * 商品更新
+     * @param id 商品ID
+     * @param body リクエストボディ
+     */
+    const updateGoods = async (id: number, body: IUpdateGoodsRequestBody) => {
+      try {
+        await root.$store.dispatch('goods/updateGoods', {
+          token: root.$typedStore.state.user.userToken,
+          id,
+          body,
+        });
+      } catch (err) {
+        if (!err.response) throw err;
 
-  /**
-   * 商品更新
-   * @param payload.id 商品ID
-   * @param payload.body リクエストボディ
-   */
-  async updateGoods(payload: {
-    id: number;
-    body: IUpdateGoodsRequestBody;
-  }): Promise<void> {
-    try {
-      await this.$store.dispatch('goods/updateGoods', {
-        token: this.userToken,
-        id: payload.id,
-        body: payload.body,
-      });
-    } catch (err) {
-      if (!err.response) throw err;
+        const { status, ...errResponse } = err.response;
+        const errData = errResponse.data as IAPIError;
 
-      const { status, ...errResponse } = err.response;
-      const errData = errResponse.data as IAPIError;
+        root.$nuxt.error({
+          message: `商品情報の更新に失敗しました: ${errData.message}`,
+          path: root.$route.path,
+          statusCode: status,
+        });
 
-      this.$nuxt.error({
-        message: `商品情報の更新に失敗しました: ${errData.message}`,
-        path: this.$route.path,
-        statusCode: status,
-      });
+        return;
+      }
 
-      return;
-    }
+      // 一覧の再取得
+      await fetchGoods();
+    };
 
-    // 一覧の再取得
-    await this.fetchGoods();
-  }
+    /**
+     * 商品削除
+     * @param id 商品ID
+     */
+    const deleteGoods = async (id: number) => {
+      try {
+        await root.$store.dispatch('goods/deleteGoods', {
+          token: root.$typedStore.state.user.userToken,
+          id,
+        });
+      } catch (err) {
+        if (!err.response) throw err;
 
-  /**
-   * 商品削除の実行
-   * @param id 商品ID
-   */
-  async deleteGoods(id: number) {
-    try {
-      await this.$store.dispatch('goods/deleteGoods', {
-        token: this.userToken,
-        id,
-      });
-    } catch (err) {
-      if (!err.response) throw err;
+        const { status, ...errResponse } = err.response;
+        const errData = errResponse.data as IAPIError;
 
-      const { status, ...errResponse } = err.response;
-      const errData = errResponse.data as IAPIError;
+        root.$nuxt.error({
+          message: `商品の削除に失敗しました: ${errData.message}`,
+          path: root.$route.path,
+          statusCode: status,
+        });
+      }
+    };
 
-      this.$nuxt.error({
-        message: `商品の削除に失敗しました: ${errData.message}`,
-        path: this.$route.path,
-        statusCode: status,
-      });
-    }
-  }
-}
+    return {
+      breadcrumbList,
+      updateGoods,
+      deleteGoods,
+    };
+  },
+});
 </script>
 
 <style lang="scss"></style>

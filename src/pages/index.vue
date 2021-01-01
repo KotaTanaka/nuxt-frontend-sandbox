@@ -8,13 +8,12 @@ v-container.top-page
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator';
+import { defineComponent } from '@nuxtjs/composition-api';
 
 /** トップページ */
-@Component({
+export default defineComponent({
   middleware: 'authentication',
-})
-export default class TopPage extends Vue {}
+});
 </script>
 
 <style lang="scss">

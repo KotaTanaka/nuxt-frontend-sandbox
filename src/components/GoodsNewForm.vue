@@ -2,18 +2,18 @@
 .goods-new
   v-form(v-model="valid").form
     v-text-field(
-      v-model="nameValue"
+      v-model="formState.name"
       :rules="nameRules"
       label="商品名"
       required
     )
     v-text-field(
-      v-model="descriptionValue"
+      v-model="formState.description"
       :rules="descriptionRules"
       label="商品説明"
     )
     v-text-field(
-      v-model="priceValue"
+      v-model="formState.price"
       :rules="priceRules"
       label="価格"
       required
@@ -22,38 +22,54 @@
 </template>
 
 <script lang="ts">
-import { Component, Emit, Vue } from 'nuxt-property-decorator';
+import {
+  defineComponent,
+  reactive,
+  ref,
+  SetupContext,
+} from '@nuxtjs/composition-api';
 import { ICreateGoodsRequestBody } from '@/interfaces/api/request/Goods';
 
 /** 商品登録フォーム */
-@Component
-export default class GoodsNewForm extends Vue {
-  /** 商品名 */
-  nameValue = '';
-  /** 商品説明 */
-  descriptionValue = '';
-  /** 価格 */
-  priceValue = 0;
+export default defineComponent({
+  setup(_, { emit }: SetupContext) {
+    /** 入力値 */
+    const formState = reactive({
+      // 商品名
+      name: '',
+      // 商品説明
+      description: '',
+      // 価格
+      price: 0,
+    });
 
-  // TODO バリデーション
-  valid = true;
-  nameRules = [];
-  descriptionRules = [];
-  priceRules = [];
+    // TODO バリデーション
+    const valid = ref<boolean>(true);
+    const nameRules = [];
+    const descriptionRules = [];
+    const priceRules = [];
 
-  /**
-   * 登録ボタン押下時の処理
-   * @return ICreateGoodsRequestBody
-   */
-  @Emit('submit')
-  submit(): ICreateGoodsRequestBody {
-    return {
-      name: this.nameValue,
-      description: this.descriptionValue,
-      price: this.priceValue,
+    /** 登録ボタン押下時の処理 */
+    const submit = () => {
+      const body: ICreateGoodsRequestBody = {
+        name: formState.name,
+        description: formState.description,
+        price: formState.price,
+      };
+
+      emit('submit', body);
     };
-  }
-}
+
+    return {
+      formState,
+      valid,
+      nameRules,
+      descriptionRules,
+      priceRules,
+      submit,
+    };
+  },
+});
 </script>
 
 <style lang="scss">

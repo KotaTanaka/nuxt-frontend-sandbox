@@ -6,16 +6,15 @@ v-app
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator';
+import { defineComponent } from '@nuxtjs/composition-api';
 import AppHeader from '@/components/partials/AppHeader.vue';
 
 /** デフォルトレイアウト */
-@Component({
+export default defineComponent({
   components: {
     AppHeader,
   },
-})
-export default class DefaultLayout extends Vue {}
+});
 </script>
 
 <style lang="scss">

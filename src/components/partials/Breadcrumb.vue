@@ -11,16 +11,20 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator';
+import { defineComponent } from '@nuxtjs/composition-api';
 import { IBreadcrumb } from '@/interfaces/app';
 
-/** パンくず */
-@Component
-export default class Breadcrumb extends Vue {
-  /** パンくずリスト */
-  @Prop({ type: Array, required: true })
+// eslint-disable-next-line no-unused-vars
+interface Props {
   breadcrumbList: IBreadcrumb[];
 }
+
+/** パンくず */
+export default defineComponent({
+  props: {
+    breadcrumbList: { type: Array, required: true },
+  },
+});
 </script>
 
 <style lang="scss">

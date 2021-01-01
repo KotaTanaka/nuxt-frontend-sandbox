@@ -11,11 +11,10 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator';
+import { defineComponent } from '@nuxtjs/composition-api';
 
 /** 共通ヘッダー */
-@Component
-export default class AppHeader extends Vue {}
+export default defineComponent({});
 </script>
 
 <style lang="scss"></style>

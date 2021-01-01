@@ -9,25 +9,28 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator';
+import { computed, defineComponent, ref } from '@nuxtjs/composition-api';
 
-/** カウンターページ */
-@Component
-export default class CounterPage extends Vue {
-  count = 0;
+/** カウンター */
+export default defineComponent({
+  setup() {
+    const count = ref<number>(0);
 
-  get syobon(): string {
-    return this.count > 0 && this.count % 3 === 0 ? '(`･ω･´)' : '(´･ω･`)';
-  }
+    const syobon = computed<string>(() => {
+      return count.value > 0 && count.value % 3 === 0 ? '(`･ω･´)' : '(´･ω･`)';
+    });
 
-  countPlus(): void {
-    this.count++;
-  }
+    const countPlus = () => count.value++;
+    const countMinus = () => count.value--;
 
-  countMinus(): void {
-    this.count--;
-  }
-}
+    return {
+      count,
+      syobon,
+      countPlus,
+      countMinus,
+    };
+  },
+});
 </script>
 
 <style lang="scss"></style>

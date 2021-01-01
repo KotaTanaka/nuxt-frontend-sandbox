@@ -10,30 +10,40 @@ v-container
 </template>
 
 <script lang="ts">
-import { Component, Emit, Vue } from 'nuxt-property-decorator';
+import {
+  computed,
+  defineComponent,
+  SetupContext,
+} from '@nuxtjs/composition-api';
 import GoodsListItem from '@/components/GoodsListItem.vue';
+import { IUpdateGoodsRequestBody } from '@/interfaces/api/request/Goods';
 import { IGoodsListElement } from '@/interfaces/api/response/Goods';
 
 /** 商品リスト */
-@Component({
+export default defineComponent({
   components: {
     GoodsListItem,
   },
-})
-export default class GoodsList extends Vue {
-  /** 商品一覧 */
-  get goodsList(): IGoodsListElement[] {
-    return this.$typedStore.state.goods.goodsList;
-  }
+  setup(_, { emit, root }: SetupContext) {
+    /** 商品一覧 */
+    const goodsList = computed<IGoodsListElement[]>(() => {
+      return root.$typedStore.state.goods.goodsList;
+    });
 
-  /** 商品更新 */
-  @Emit('updateGoods')
-  updateGoods(): void {}
+    /** 商品更新 */
+    const updateGoods = (id: number, body: IUpdateGoodsRequestBody) =>
+      emit('updateGoods', id, body);
 
-  /** 商品削除 */
-  @Emit('deleteGoods')
-  deleteGoods(): void {}
-}
+    /** 商品削除 */
+    const deleteGoods = (id: number) => emit('deleteGoods', id);
+
+    return {
+      goodsList,
+      updateGoods,
+      deleteGoods,
+    };
+  },
+});
 </script>
 
 <style lang="scss"></style>

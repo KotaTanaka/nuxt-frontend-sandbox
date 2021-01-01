@@ -8,15 +8,20 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from '@nuxtjs/composition-api';
 import { NuxtError } from '@nuxt/types';
-import { Component, Prop, Vue } from 'nuxt-property-decorator';
 
-/** エラーページ */
-@Component
-export default class ErrorPage extends Vue {
-  @Prop({ type: Object, required: true })
+// eslint-disable-next-line no-unused-vars
+interface Props {
   error: NuxtError;
 }
+
+/** エラーページ */
+export default defineComponent({
+  props: {
+    error: { type: Object, required: true },
+  },
+});
 </script>
 
 <style lang="scss">

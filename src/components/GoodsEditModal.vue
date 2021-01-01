@@ -9,18 +9,18 @@ v-dialog(
     v-card-text
       v-form(v-model="valid").form
         v-text-field(
-          v-model="nameValue"
+          v-model="formState.name"
           :rules="nameRules"
           label="商品名"
           required
         )
         v-text-field(
-          v-model="descriptionValue"
+          v-model="formState.description"
           :rules="descriptionRules"
           label="商品説明"
         )
         v-text-field(
-          v-model="priceValue"
+          v-model="formState.price"
           :rules="priceRules"
           label="価格"
           required
@@ -36,68 +36,81 @@ v-dialog(
 </template>
 
 <script lang="ts">
-import { Component, Emit, Prop, Vue } from 'nuxt-property-decorator';
+import {
+  defineComponent,
+  onBeforeMount,
+  reactive,
+  ref,
+  SetupContext,
+} from '@nuxtjs/composition-api';
 import { IUpdateGoodsRequestBody } from '@/interfaces/api/request/Goods';
 import { IGoodsDetailResponse } from '@/interfaces/api/response/Goods';
 
-/** 商品編集モーダル */
-@Component
-export default class GoodsEditModal extends Vue {
-  /** モーダルの開閉状態 */
-  @Prop({ type: Boolean, required: true })
+interface Props {
   dialog: boolean;
-
-  /** 商品データ */
-  @Prop({ type: Object, required: true })
   goods: IGoodsDetailResponse;
+}
 
-  /** 商品名 */
-  nameValue = '';
+/** 商品編集モーダル */
+export default defineComponent({
+  props: {
+    dialog: { type: Boolean, required: true },
+    goods: { type: Object, required: true },
+  },
+  setup(props: Props, { emit }: SetupContext) {
+    /** 入力値 */
+    const formState = reactive({
+      // 商品名
+      name: '',
+      // 商品説明
+      description: '',
+      // 価格
+      price: 0,
+    });
 
-  /** 商品説明 */
-  descriptionValue = '';
+    // TODO バリデーション
+    const valid = ref<boolean>(true);
+    const nameRules = [];
+    const descriptionRules = [];
+    const priceRules = [];
 
-  /** 価格 */
-  priceValue = 0;
+    /** ライフサイクル */
+    onBeforeMount(() => {
+      // フォームの初期値に現在値をセットする
+      formState.name = props.goods.name;
+      formState.description = props.goods.description;
+      formState.price = props.goods.price;
+    });
 
-  // TODO バリデーション
-  valid = true;
-  nameRules = [];
-  descriptionRules = [];
-  priceRules = [];
-
-  /** ライフサイクル */
-  mounted(): void {
-    // フォームの初期値に現在値をセットする
-    this.nameValue = this.goods.name;
-    this.descriptionValue = this.goods.description;
-    this.priceValue = this.goods.price;
-  }
-
-  /**
-   * 更新ボタン押下時の処理
-   * @return IUpdateGoodsRequestBody
-   */
-  @Emit('submit')
-  submit(): { id: number; body: IUpdateGoodsRequestBody } {
-    return {
-      id: this.goods.id,
-      body: {
-        name: this.nameValue !== this.goods.name ? this.nameValue : undefined,
+    /** 更新ボタン押下時の処理 */
+    const submit = () => {
+      const body: IUpdateGoodsRequestBody = {
+        name: formState.name !== props.goods.name ? formState.name : undefined,
         description:
-          this.descriptionValue !== this.goods.description
-            ? this.descriptionValue
+          formState.description !== props.goods.description
+            ? formState.description
             : undefined,
         price:
-          this.priceValue !== this.goods.price ? this.priceValue : undefined,
-      },
-    };
-  }
+          formState.price !== props.goods.price ? formState.price : undefined,
+      };
 
-  /** キャンセルボタン押下時の処理 */
-  @Emit('cancel')
-  cancel(): void {}
-}
+      emit('submit', props.goods.id, body);
+    };
+
+    /** キャンセルボタン押下時の処理 */
+    const cancel = () => emit('cancel');
+
+    return {
+      formState,
+      valid,
+      nameRules,
+      descriptionRules,
+      priceRules,
+      submit,
+      cancel,
+    };
+  },
+});
 </script>
 
 <style lang="scss">

@@ -9,25 +9,26 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator';
+import { defineComponent } from '@nuxtjs/composition-api';
 import Breadcrumb from '@/components/partials/Breadcrumb.vue';
 import { IBreadcrumb } from '@/interfaces/app';
 
+// eslint-disable-next-line no-unused-vars
+interface Props {
+  title: string;
+  breadcrumbList: IBreadcrumb[];
+}
+
 /** ページ見出し */
-@Component({
+export default defineComponent({
   components: {
     Breadcrumb,
   },
-})
-export default class PageHeading extends Vue {
-  /** ページタイトル */
-  @Prop({ type: String, required: true })
-  title: string;
-
-  /** パンくずリスト */
-  @Prop({ type: Array, required: true })
-  breadcrumbList: IBreadcrumb[];
-}
+  props: {
+    title: { type: String, required: true },
+    breadcrumbList: { type: Array, required: true },
+  },
+});
 </script>
 
 <style lang="scss">
