@@ -17,35 +17,37 @@ v-dialog(
 </template>
 
 <script lang="ts">
-import { Component, Emit, Prop, Vue } from 'nuxt-property-decorator';
+import { defineComponent } from '@nuxtjs/composition-api';
+
+// eslint-disable-next-line no-unused-vars
+interface Props {
+  dialog: boolean;
+  title: string;
+  message: string;
+  label: string;
+}
 
 /** 最終確認モーダル */
-@Component
-export default class ConfirmDialog extends Vue {
-  /** モーダルの開閉状態 */
-  @Prop({ type: Boolean, required: true })
-  dialog: boolean;
+export default defineComponent({
+  props: {
+    dialog: { type: Boolean, required: true },
+    title: { type: String, required: true },
+    message: { type: String, required: true },
+    label: { type: String, required: true },
+  },
+  setup(_, { emit }) {
+    /** OKボタン押下時の処理 */
+    const submit = () => emit('submit');
 
-  /** タイトル */
-  @Prop({ type: String, required: true })
-  title: string;
+    /** キャンセルボタン押下時の処理 */
+    const cancel = () => emit('cancel');
 
-  /** メッセージ */
-  @Prop({ type: String, required: true })
-  message: string;
-
-  /** OKボタンラベル */
-  @Prop({ type: String, required: true })
-  label: string;
-
-  /** OKボタン押下時の処理 */
-  @Emit('submit')
-  submit(): void {}
-
-  /** キャンセルボタン押下時の処理 */
-  @Emit('cancel')
-  cancel(): void {}
-}
+    return {
+      submit,
+      cancel,
+    };
+  },
+});
 </script>
 
 <style lang="scss">

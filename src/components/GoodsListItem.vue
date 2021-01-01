@@ -1,6 +1,6 @@
 <template lang="pug">
 v-card(min-width="300").item
-  v-card-text(@click="toDatail").content
+  v-card-text(@click="toDetail").content
     div 商品ID: {{ goods.id }}
     p(class="display-1 text--primary") {{ goods.name }}
     p {{ goods.price }} 円
@@ -25,72 +25,76 @@ v-card(min-width="300").item
 </template>
 
 <script lang="ts">
-import { Component, Emit, Prop, Vue } from 'nuxt-property-decorator';
+import { defineComponent, ref, SetupContext } from '@nuxtjs/composition-api';
 import ConfirmDialog from '@/components/partials/ConfirmDialog.vue';
 import GoodsEditModal from '@/components/GoodsEditModal.vue';
+import { IUpdateGoodsRequestBody } from '@/interfaces/api/request/Goods';
 import { IGoodsListElement } from '@/interfaces/api/response/Goods';
 
+interface Props {
+  goods: IGoodsListElement;
+}
+
 /** 商品リスト要素 */
-@Component({
+export default defineComponent({
   components: {
     ConfirmDialog,
     GoodsEditModal,
   },
-})
-export default class GoodsListItem extends Vue {
-  /** 商品情報 */
-  @Prop({ type: Object, required: true })
-  goods: IGoodsListElement;
+  props: {
+    goods: { type: Object, required: true },
+  },
+  setup(props: Props, { emit, root }: SetupContext) {
+    /** 削除確認ダイアログの開閉状態 */
+    const isDeleteModalVisible = ref<boolean>(false);
 
-  /** 削除確認ダイアログの開閉状態 */
-  isDeleteModalVisible = false;
+    /** 商品編集モーダルの開閉状態 */
+    const isEditModalVisible = ref<boolean>(false);
 
-  /** 商品編集モーダルの開閉状態 */
-  isEditModalVisible = false;
+    /** 詳細画面への遷移 */
+    const toDetail = async () => {
+      await root.$router.push(
+        root.$C.PAGE_URL.GOODS_DETAIL.replace('$id', `${props.goods.id}`),
+      );
+    };
 
-  /** 詳細画面への遷移 */
-  async toDatail(): Promise<void> {
-    await this.$router.push(
-      this.$C.PAGE_URL.GOODS_DETAIL.replace('$id', `${this.goods.id}`),
-    );
-  }
+    /** 商品削除確認 */
+    const openDeleteModal = () => (isDeleteModalVisible.value = true);
 
-  /** 商品削除確認 */
-  openDeleteModal(): void {
-    this.isDeleteModalVisible = true;
-  }
+    /** 商品情報編集 */
+    const openEditModal = () => (isEditModalVisible.value = true);
 
-  /** 商品情報編集 */
-  openEditModal(): void {
-    this.isEditModalVisible = true;
-  }
+    /** 商品削除キャンセル */
+    const closeDeleteModal = () => (isDeleteModalVisible.value = false);
 
-  /** 商品削除キャンセル */
-  closeDeleteModal(): void {
-    this.isDeleteModalVisible = false;
-  }
+    /** 商品編集キャンセル/完了 */
+    const closeEditModal = () => (isEditModalVisible.value = false);
 
-  /** 商品編集キャンセル/完了 */
-  closeEditModal(): void {
-    this.isEditModalVisible = false;
-  }
+    /** 商品更新 */
+    const updateGoods = (id: number, body: IUpdateGoodsRequestBody) => {
+      emit('updateGoods', id, body);
+      closeEditModal();
+    };
 
-  /** 商品更新 */
-  @Emit('updateGoods')
-  updateGoods(): void {
-    this.closeEditModal();
-  }
+    /** 商品削除 */
+    const deleteGoods = () => {
+      emit('deleteGoods', props.goods.id);
+      closeDeleteModal();
+    };
 
-  /**
-   * 商品削除
-   * @return 商品ID
-   */
-  @Emit('deleteGoods')
-  deleteGoods(): number {
-    this.closeDeleteModal();
-    return this.goods.id;
-  }
-}
+    return {
+      isDeleteModalVisible,
+      isEditModalVisible,
+      toDetail,
+      openDeleteModal,
+      openEditModal,
+      closeDeleteModal,
+      closeEditModal,
+      updateGoods,
+      deleteGoods,
+    };
+  },
+});
 </script>
 
 <style lang="scss">
