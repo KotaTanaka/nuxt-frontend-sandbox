@@ -13,6 +13,7 @@ import {
   computed,
   defineComponent,
   onBeforeMount,
+  SetupContext,
 } from '@nuxtjs/composition-api';
 import PageHeading from '@/components/partials/PageHeading.vue';
 import GoodsDetailTable from '@/components/GoodsDetailTable.vue';
@@ -27,12 +28,7 @@ export default defineComponent({
     GoodsDetailTable,
   },
   middleware: 'authentication',
-  setup(_, { root }) {
-    /** トークン */
-    const userToken = computed<string>(() => {
-      return root.$typedStore.state.user.userToken;
-    });
-
+  setup(_, { root }: SetupContext) {
     /** 商品データ */
     const goods = computed<IGoodsDetailResponse>(() => {
       return root.$typedStore.state.goods.goods;
@@ -56,7 +52,7 @@ export default defineComponent({
     const fetchGoodsDetail = async () => {
       try {
         await root.$store.dispatch('goods/fetchGoodsDetail', {
-          token: userToken.value,
+          token: root.$typedStore.state.user.userToken,
           id: root.$route.params.id,
         });
       } catch (err) {

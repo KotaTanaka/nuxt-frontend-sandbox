@@ -28,6 +28,7 @@ import { IAPIError } from '@/interfaces/api/response/Error';
 /** ログインページ */
 export default defineComponent({
   setup(_, { root }: SetupContext) {
+    /** 入力値 */
     const formState = reactive<{ id: string; password: string }>({
       id: '',
       password: '',

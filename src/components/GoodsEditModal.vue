@@ -9,18 +9,18 @@ v-dialog(
     v-card-text
       v-form(v-model="valid").form
         v-text-field(
-          v-model="formState.nameValue"
+          v-model="formState.name"
           :rules="nameRules"
           label="商品名"
           required
         )
         v-text-field(
-          v-model="formState.descriptionValue"
+          v-model="formState.description"
           :rules="descriptionRules"
           label="商品説明"
         )
         v-text-field(
-          v-model="formState.priceValue"
+          v-model="formState.price"
           :rules="priceRules"
           label="価格"
           required
@@ -58,13 +58,14 @@ export default defineComponent({
     goods: { type: Object, required: true },
   },
   setup(props: Props, { emit }: SetupContext) {
+    /** 入力値 */
     const formState = reactive({
       // 商品名
-      nameValue: '',
+      name: '',
       // 商品説明
-      descriptionValue: '',
+      description: '',
       // 価格
-      priceValue: 0,
+      price: 0,
     });
 
     // TODO バリデーション
@@ -76,26 +77,21 @@ export default defineComponent({
     /** ライフサイクル */
     onBeforeMount(() => {
       // フォームの初期値に現在値をセットする
-      formState.nameValue = props.goods.name;
-      formState.descriptionValue = props.goods.description;
-      formState.priceValue = props.goods.price;
+      formState.name = props.goods.name;
+      formState.description = props.goods.description;
+      formState.price = props.goods.price;
     });
 
     /** 更新ボタン押下時の処理 */
     const submit = () => {
       const body: IUpdateGoodsRequestBody = {
-        name:
-          formState.nameValue !== props.goods.name
-            ? formState.nameValue
-            : undefined,
+        name: formState.name !== props.goods.name ? formState.name : undefined,
         description:
-          formState.descriptionValue !== props.goods.description
-            ? formState.descriptionValue
+          formState.description !== props.goods.description
+            ? formState.description
             : undefined,
         price:
-          formState.priceValue !== props.goods.price
-            ? formState.priceValue
-            : undefined,
+          formState.price !== props.goods.price ? formState.price : undefined,
       };
 
       emit('submit', props.goods.id, body);

@@ -28,11 +28,6 @@ export default defineComponent({
   },
   middleware: 'authentication',
   setup(_, { root }: SetupContext) {
-    /** トークン */
-    const userToken = computed<string>(() => {
-      return root.$typedStore.state.user.userToken;
-    });
-
     /** パンくず */
     const breadcrumbList = computed<IBreadcrumb[]>(() => {
       return [
@@ -49,7 +44,7 @@ export default defineComponent({
       try {
         await root.$store.dispatch('goods/registerGoods', {
           body: payload,
-          token: userToken.value,
+          token: root.$typedStore.state.user.userToken,
         });
       } catch (err) {
         if (!err.response) throw err;

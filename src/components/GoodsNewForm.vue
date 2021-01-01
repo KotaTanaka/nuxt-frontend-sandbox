@@ -2,18 +2,18 @@
 .goods-new
   v-form(v-model="valid").form
     v-text-field(
-      v-model="formState.nameValue"
+      v-model="formState.name"
       :rules="nameRules"
       label="商品名"
       required
     )
     v-text-field(
-      v-model="formState.descriptionValue"
+      v-model="formState.description"
       :rules="descriptionRules"
       label="商品説明"
     )
     v-text-field(
-      v-model="formState.priceValue"
+      v-model="formState.price"
       :rules="priceRules"
       label="価格"
       required
@@ -33,13 +33,14 @@ import { ICreateGoodsRequestBody } from '@/interfaces/api/request/Goods';
 /** 商品登録フォーム */
 export default defineComponent({
   setup(_, { emit }: SetupContext) {
+    /** 入力値 */
     const formState = reactive({
       // 商品名
-      nameValue: '',
+      name: '',
       // 商品説明
-      descriptionValue: '',
+      description: '',
       // 価格
-      priceValue: 0,
+      price: 0,
     });
 
     // TODO バリデーション
@@ -51,9 +52,9 @@ export default defineComponent({
     /** 登録ボタン押下時の処理 */
     const submit = () => {
       const body: ICreateGoodsRequestBody = {
-        name: formState.nameValue,
-        description: formState.descriptionValue,
-        price: formState.priceValue,
+        name: formState.name,
+        description: formState.description,
+        price: formState.price,
       };
 
       emit('submit', body);

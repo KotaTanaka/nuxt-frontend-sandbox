@@ -31,11 +31,6 @@ export default defineComponent({
   },
   middleware: 'authentication',
   setup(_, { root }: SetupContext) {
-    /** トークン */
-    const userToken = computed<string>(() => {
-      return root.$typedStore.state.user.userToken;
-    });
-
     /** パンくず */
     const breadcrumbList = computed<IBreadcrumb[]>(() => {
       return [
@@ -53,7 +48,7 @@ export default defineComponent({
     const fetchGoods = async () => {
       try {
         await root.$store.dispatch('goods/fetchGoodsList', {
-          token: userToken.value,
+          token: root.$typedStore.state.user.userToken,
         });
       } catch (err) {
         if (!err.response) throw err;
@@ -71,13 +66,13 @@ export default defineComponent({
 
     /**
      * 商品更新
-     * @param payload.id 商品ID
-     * @param payload.body リクエストボディ
+     * @param id 商品ID
+     * @param body リクエストボディ
      */
     const updateGoods = async (id: number, body: IUpdateGoodsRequestBody) => {
       try {
         await root.$store.dispatch('goods/updateGoods', {
-          token: userToken.value,
+          token: root.$typedStore.state.user.userToken,
           id,
           body,
         });
@@ -107,7 +102,7 @@ export default defineComponent({
     const deleteGoods = async (id: number) => {
       try {
         await root.$store.dispatch('goods/deleteGoods', {
-          token: userToken.value,
+          token: root.$typedStore.state.user.userToken,
           id,
         });
       } catch (err) {
@@ -125,7 +120,6 @@ export default defineComponent({
     };
 
     return {
-      userToken,
       breadcrumbList,
       updateGoods,
       deleteGoods,
