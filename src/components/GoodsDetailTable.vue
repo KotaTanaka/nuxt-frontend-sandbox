@@ -11,18 +11,13 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator';
-
-// from app
 import {
   IVuetifyTableHeader,
   IVuetifyTableItem,
 } from '@/interfaces/app/vuetify';
 import { IGoodsDetailResponse } from '@/interfaces/api/response/Goods';
 
-/**
- * 商品詳細テーブル
- * @author kotatanaka
- */
+/** 商品詳細テーブル */
 @Component
 export default class GoodsDetailTable extends Vue {
   /** 商品データ */

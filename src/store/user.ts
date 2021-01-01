@@ -1,7 +1,5 @@
 import { ActionContext, ActionTree, GetterTree, MutationTree } from 'vuex';
 import Cookie from 'js-cookie';
-
-// from app
 import { RootStore } from '@/store';
 import { ILoginRequestBody } from '@/interfaces/api/request/User';
 import { ILoginResponse } from '@/interfaces/api/response/User';

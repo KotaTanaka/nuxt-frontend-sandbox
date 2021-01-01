@@ -9,10 +9,7 @@ v-app
 import { Component, Vue } from 'nuxt-property-decorator';
 import AppHeader from '@/components/partials/AppHeader.vue';
 
-/**
- * デフォルトレイアウト
- * @author kotatanaka
- */
+/** デフォルトレイアウト */
 @Component({
   components: {
     AppHeader,

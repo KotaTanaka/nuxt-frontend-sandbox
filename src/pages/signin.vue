@@ -18,14 +18,9 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator';
-
-// from app
 import { IAPIError } from '@/interfaces/api/response/Error';
 
-/**
- * ログインページ
- * @author kotatanaka
- */
+/** ログインページ */
 @Component
 export default class SigninPage extends Vue {
   /** ID */

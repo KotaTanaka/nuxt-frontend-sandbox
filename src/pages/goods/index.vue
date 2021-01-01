@@ -12,18 +12,13 @@ v-container
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator';
-
-// from app
 import PageHeading from '@/components/partials/PageHeading.vue';
 import GoodsList from '@/components/GoodsList.vue';
 import { IBreadcrumb } from '@/interfaces/app';
 import { IUpdateGoodsRequestBody } from '@/interfaces/api/request/Goods';
 import { IAPIError } from '@/interfaces/api/response/Error';
 
-/**
- * 商品一覧ページ
- * @author kotatanaka
- */
+/** 商品一覧ページ */
 @Component({
   middleware: 'authentication',
   components: {

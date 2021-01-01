@@ -26,16 +26,11 @@ v-card(min-width="300").item
 
 <script lang="ts">
 import { Component, Emit, Prop, Vue } from 'nuxt-property-decorator';
-
-// from app
 import ConfirmDialog from '@/components/partials/ConfirmDialog.vue';
 import GoodsEditModal from '@/components/GoodsEditModal.vue';
 import { IGoodsListElement } from '@/interfaces/api/response/Goods';
 
-/**
- * 商品リスト要素
- * @author kotatanaka
- */
+/** 商品リスト要素 */
 @Component({
   components: {
     ConfirmDialog,

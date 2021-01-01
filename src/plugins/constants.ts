@@ -1,6 +1,4 @@
 import { Plugin } from '@nuxt/types';
-
-// from app
 import * as C from '@/constants';
 
 /**

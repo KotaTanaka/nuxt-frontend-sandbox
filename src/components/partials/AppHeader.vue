@@ -13,10 +13,7 @@
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator';
 
-/**
- * 共通ヘッダー
- * @author kotatanaka
- */
+/** 共通ヘッダー */
 @Component
 export default class AppHeader extends Vue {}
 </script>

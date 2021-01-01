@@ -11,10 +11,7 @@
 import { NuxtError } from '@nuxt/types';
 import { Component, Prop, Vue } from 'nuxt-property-decorator';
 
-/**
- * エラーページ
- * @author kotatanaka
- */
+/** エラーページ */
 @Component
 export default class ErrorPage extends Vue {
   @Prop({ type: Object, required: true })

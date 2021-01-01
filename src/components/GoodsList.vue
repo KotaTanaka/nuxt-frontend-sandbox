@@ -11,15 +11,10 @@ v-container
 
 <script lang="ts">
 import { Component, Emit, Vue } from 'nuxt-property-decorator';
-
-// from app
 import GoodsListItem from '@/components/GoodsListItem.vue';
 import { IGoodsListElement } from '@/interfaces/api/response/Goods';
 
-/**
- * 商品リスト
- * @author kotatanaka
- */
+/** 商品リスト */
 @Component({
   components: {
     GoodsListItem,

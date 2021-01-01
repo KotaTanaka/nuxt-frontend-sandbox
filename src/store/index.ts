@@ -2,8 +2,6 @@ import { ActionContext, ActionTree, GetterTree, MutationTree } from 'vuex';
 import { Context } from '@nuxt/types';
 import { NuxtAxiosInstance } from '@nuxtjs/axios';
 import cookieparser from 'cookieparser';
-
-// from app
 import { GoodsStore } from './goods';
 import { UserStore } from './user';
 

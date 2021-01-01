@@ -1,6 +1,4 @@
 import { ActionContext, ActionTree, GetterTree, MutationTree } from 'vuex';
-
-// from app
 import { RootStore } from '@/store';
 import {
   ICreateGoodsRequestBody,

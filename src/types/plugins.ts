@@ -1,9 +1,4 @@
 import { Store } from 'vuex';
-
-// $vuetify をVeturに認識させるために必要
-import _ from 'vuetify';
-
-// from app
 import { RootStore } from '@/store';
 import * as C from '@/constants';
 

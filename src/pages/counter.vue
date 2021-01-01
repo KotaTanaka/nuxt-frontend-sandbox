@@ -11,10 +11,7 @@
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator';
 
-/**
- * カウンターページ
- * @author kotatanaka
- */
+/** カウンターページ */
 @Component
 export default class CounterPage extends Vue {
   count = 0;

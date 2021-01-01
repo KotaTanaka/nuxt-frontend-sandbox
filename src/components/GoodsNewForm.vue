@@ -23,14 +23,9 @@
 
 <script lang="ts">
 import { Component, Emit, Vue } from 'nuxt-property-decorator';
-
-// from app
 import { ICreateGoodsRequestBody } from '@/interfaces/api/request/Goods';
 
-/**
- * 商品登録フォーム
- * @author kotatanaka
- */
+/** 商品登録フォーム */
 @Component
 export default class GoodsNewForm extends Vue {
   /** 商品名 */

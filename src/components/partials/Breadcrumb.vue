@@ -12,14 +12,9 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator';
-
-// from app
 import { IBreadcrumb } from '@/interfaces/app';
 
-/**
- * パンくず
- * @author kotatanaka
- */
+/** パンくず */
 @Component
 export default class Breadcrumb extends Vue {
   /** パンくずリスト */

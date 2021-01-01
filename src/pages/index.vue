@@ -10,10 +10,7 @@ v-container.top-page
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator';
 
-/**
- * トップページ
- * @author kotatanaka
- */
+/** トップページ */
 @Component({
   middleware: 'authentication',
 })

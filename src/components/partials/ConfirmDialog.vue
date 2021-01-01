@@ -19,10 +19,7 @@ v-dialog(
 <script lang="ts">
 import { Component, Emit, Prop, Vue } from 'nuxt-property-decorator';
 
-/**
- * 最終確認モーダル
- * @author kotatanaka
- */
+/** 最終確認モーダル */
 @Component
 export default class ConfirmDialog extends Vue {
   /** モーダルの開閉状態 */

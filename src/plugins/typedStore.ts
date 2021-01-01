@@ -1,7 +1,5 @@
 import { Store } from 'vuex';
 import { Context, Plugin } from '@nuxt/types';
-
-// from app
 import { RootStore } from '@/store';
 
 /**
