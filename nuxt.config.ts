@@ -42,7 +42,6 @@ const config: Configuration = {
     '@nuxtjs/pwa',
     '@nuxtjs/vuetify',
     '@nuxtjs/font-awesome',
-    'bootstrap-vue/nuxt',
     'nuxt-mq',
   ],
   /* Axios */
