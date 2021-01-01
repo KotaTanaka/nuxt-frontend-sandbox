@@ -1,14 +1,15 @@
-***goods-spa-nuxt***
+***nuxt-frontend-sandbox***
 
 ## About
 
-商品管理SPA [Nuxt.js]
+Nuxt + TypeScript でのフロントエンド開発の実験場  
+商品管理アプリ
 
-*[Backend - goods-api-kotlin](https://github.com/KotaTanaka/goods-api-kotlin)*
+*[Backend - springboot-api-sandbox](https://github.com/KotaTanaka/springboot-api-sandbox)*
 
 ## Technology
 
-* **Nuxt.js**
+* **Nuxt.js** `v2`
 * script - **TypeScript**
 * template - **pug**
 * style - **SCSS**
@@ -18,8 +19,6 @@
 * Install
 
 ```bash
-$ git clone git@github.com:KotaTanaka/goods-spa-nuxt.git
-$ cd goods-spa-nuxt
 $ yarn
 ```
 
@@ -29,9 +28,15 @@ $ yarn
 $ yarn dev
 ```
 
+* Build
+
+```bash
+$ yarn build
+```
+
 → http://localhost:5050
 
-* Storybook (Component Catalog)
+* Open Storybook (Component Catalog)
 
 ```bash
 $ yarn storybook
