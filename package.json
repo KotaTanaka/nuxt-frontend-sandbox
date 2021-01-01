@@ -47,7 +47,6 @@
     "@storybook/addon-links": "^6.1.11",
     "@storybook/vue": "^6.1.11",
     "@typescript-eslint/parser": "^4.11.1",
-    "@vue/test-utils": "^1.1.2",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.2",
     "eslint": "^7.16.0",
@@ -61,7 +60,6 @@
     "pug": "^3.0.0",
     "pug-plain-loader": "^1.1.0",
     "react-is": "^17.0.1",
-    "sass-loader": "8.0.2",
-    "vue-docgen-loader": "^1.5.0"
+    "sass-loader": "8.0.2"
   }
 }
