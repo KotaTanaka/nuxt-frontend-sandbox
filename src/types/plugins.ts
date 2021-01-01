@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 import { Store } from 'vuex';
 import { RootStore } from '@/store';
 import * as C from '@/constants';
