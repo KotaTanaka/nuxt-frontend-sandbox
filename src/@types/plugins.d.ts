@@ -1,14 +1,13 @@
 /* eslint-disable no-unused-vars */
 
-import { Store } from 'vuex';
-import { RootStore } from '@/store';
+import { TypedStore } from '@/@types/vuex';
 import * as C from '@/constants';
 
 /** Vueインスタンスのコンテキスト(context.root)から使うカスタムプラグインの型定義 */
 declare module 'vue/types/vue' {
   interface Vue {
-    /** Store<RootStore> をあてた $store */
-    readonly $typedStore: Store<RootStore>;
+    /** タイプセーフな $store */
+    readonly $typedStore: TypedStore;
     /** 定数 */
     readonly $C: typeof C;
   }
@@ -17,6 +16,8 @@ declare module 'vue/types/vue' {
 /** Vuexのthisから使うカスタムプラグインの型定義 */
 declare module 'vuex/types/index' {
   interface Store<S> {
+    /** タイプセーフな $store */
+    readonly $typedStore: TypedStore;
     /** 定数 */
     readonly $C: typeof C;
   }
@@ -25,6 +26,8 @@ declare module 'vuex/types/index' {
 /** コンテキスト(context.app)から使うカスタムプラグインの型定義 */
 declare module '@nuxt/types' {
   interface NuxtAppOptions {
+    /** タイプセーフな $store */
+    readonly $typedStore: TypedStore;
     /** 定数 */
     readonly $C: typeof C;
   }
