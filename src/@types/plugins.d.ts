@@ -4,7 +4,7 @@ import { Store } from 'vuex';
 import { RootStore } from '@/store';
 import * as C from '@/constants';
 
-/** Vueインスタンスのthisで参照するカスタムプラグインの型定義 */
+/** Vueインスタンスのコンテキスト(context.root)から使うカスタムプラグインの型定義 */
 declare module 'vue/types/vue' {
   interface Vue {
     /** Store<RootStore> をあてた $store */
@@ -14,7 +14,7 @@ declare module 'vue/types/vue' {
   }
 }
 
-/** Vuexストアのthisで参照するカスタムプラグインの型定義 */
+/** Vuexのthisから使うカスタムプラグインの型定義 */
 declare module 'vuex/types/index' {
   interface Store<S> {
     /** 定数 */
@@ -22,7 +22,7 @@ declare module 'vuex/types/index' {
   }
 }
 
-/** コンテキスト(context.app)で参照するカスタムプラグインの型定義 */
+/** コンテキスト(context.app)から使うカスタムプラグインの型定義 */
 declare module '@nuxt/types' {
   interface NuxtAppOptions {
     /** 定数 */

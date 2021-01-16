@@ -1,15 +1,13 @@
 import { Plugin } from '@nuxt/types';
+import { Inject } from '@nuxt/types/app';
 import * as C from '@/constants';
 
 /**
- * this.$C や context.app.$C を認識させるためのプラグイン
- * @param context
- * @param inject
+ * 定数参照 $C
+ * @param {Context} context
+ * @param {Inject} inject
  */
-const ConstantsPlugin: Plugin = (
-  _,
-  inject: (key: string, value: any) => void,
-): void => {
+const ConstantsPlugin: Plugin = (_, inject: Inject): void => {
   inject('C', C);
 };
 
