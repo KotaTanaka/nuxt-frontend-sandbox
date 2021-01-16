@@ -1,6 +1,11 @@
 import { ActionContext, ActionTree, GetterTree, MutationTree } from 'vuex';
 import { RootStore } from '@/store';
 import {
+  BaseActionTypes,
+  BaseGetterTypes,
+  BaseMutationTypes,
+} from '@/@types/vuex';
+import {
   ICreateGoodsRequestBody,
   IUpdateGoodsRequestBody,
 } from '@/interfaces/api/request/Goods';
@@ -37,6 +42,12 @@ export const state = (): GoodsStore => ({
   },
 });
 
+/** Getters */
+export const getters: GetterTree<GoodsStore, GoodsStore> = {};
+export interface GetterTypes extends BaseGetterTypes {
+  // 'goods/GetterName': { returnType: GetterReturnType }
+}
+
 /** Mutations */
 export const mutations: MutationTree<GoodsStore> = {
   /** 商品一覧データのセット */
@@ -64,6 +75,11 @@ export const mutations: MutationTree<GoodsStore> = {
     );
   },
 };
+export interface MutationTypes extends BaseMutationTypes {
+  'goods/setGoodsListingResponse': { payload: IGoodsListingResponse };
+  'goods/setGoodsDetailResponse': { payload: IGoodsDetailResponse };
+  'goods/setNewGoodsListAfterDelete': { payload: IDeleteGoodsResponse };
+}
 
 /** Actions */
 export const actions: ActionTree<GoodsStore, RootStore> = {
@@ -89,7 +105,7 @@ export const actions: ActionTree<GoodsStore, RootStore> = {
     payload: { token: string; id: string },
   ): Promise<void> {
     const response = await this.$axios.$get<IGoodsDetailResponse>(
-      this.$C.API_ENDPOINT.GOODS_ONE.replace('$1', payload.id),
+      this.$C.API_ENDPOINT.GOODS_ONE.replace('$1', `${payload.id}`),
       {
         headers: {
           Authorization: `Bearer ${payload.token}`,
@@ -103,8 +119,8 @@ export const actions: ActionTree<GoodsStore, RootStore> = {
   async registerGoods(
     _: ActionContext<GoodsStore, RootStore>,
     payload: { token: string; body: ICreateGoodsRequestBody },
-  ): Promise<void> {
-    await this.$axios.$post<ICreateGoodsResponse>(
+  ): Promise<ICreateGoodsResponse> {
+    return await this.$axios.$post<ICreateGoodsResponse>(
       this.$C.API_ENDPOINT.GOODS,
       payload.body,
       {
@@ -119,9 +135,9 @@ export const actions: ActionTree<GoodsStore, RootStore> = {
   async updateGoods(
     _: ActionContext<GoodsStore, RootStore>,
     payload: { token: string; id: string; body: IUpdateGoodsRequestBody },
-  ): Promise<void> {
-    await this.$axios.$put<IUpdateGoodsResponse>(
-      this.$C.API_ENDPOINT.GOODS_ONE.replace('$1', payload.id),
+  ): Promise<IUpdateGoodsResponse> {
+    return await this.$axios.$put<IUpdateGoodsResponse>(
+      this.$C.API_ENDPOINT.GOODS_ONE.replace('$1', `${payload.id}`),
       payload.body,
       {
         headers: {
@@ -135,9 +151,9 @@ export const actions: ActionTree<GoodsStore, RootStore> = {
   async deleteGoods(
     { commit }: ActionContext<GoodsStore, RootStore>,
     payload: { token: string; id: string },
-  ): Promise<void> {
+  ): Promise<IDeleteGoodsResponse> {
     const response = await this.$axios.$delete<IDeleteGoodsResponse>(
-      this.$C.API_ENDPOINT.GOODS_ONE.replace('$1', payload.id),
+      this.$C.API_ENDPOINT.GOODS_ONE.replace('$1', `${payload.id}`),
       {
         headers: {
           Authorization: `Bearer ${payload.token}`,
@@ -146,8 +162,26 @@ export const actions: ActionTree<GoodsStore, RootStore> = {
     );
 
     commit('setNewGoodsListAfterDelete', response);
+
+    return response;
   },
 };
-
-/** Getters */
-export const getters: GetterTree<GoodsStore, GoodsStore> = {};
+export interface ActionTypes extends BaseActionTypes {
+  'goods/fetchGoodsList': { payload: { token: string }; returnType: void };
+  'goods/fetchGoodsDetail': {
+    payload: { token: string; id: string };
+    returnType: void;
+  };
+  'goods/registerGoods': {
+    payload: { token: string; body: ICreateGoodsRequestBody };
+    returnType: ICreateGoodsResponse;
+  };
+  'goods/updateGoods': {
+    payload: { token: string; id: string; body: IUpdateGoodsRequestBody };
+    returnType: IUpdateGoodsResponse;
+  };
+  'goods/deleteGoods': {
+    payload: { token: string; id: string };
+    returnType: IDeleteGoodsResponse;
+  };
+}

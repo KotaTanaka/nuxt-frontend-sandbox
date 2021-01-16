@@ -1,5 +1,10 @@
 import { ActionContext, ActionTree, GetterTree, MutationTree } from 'vuex';
 import Cookie from 'js-cookie';
+import {
+  BaseActionTypes,
+  BaseGetterTypes,
+  BaseMutationTypes,
+} from '@/@types/vuex';
 import { RootStore } from '@/store';
 import { ILoginRequestBody } from '@/interfaces/api/request/User';
 import { ILoginResponse } from '@/interfaces/api/response/User';
@@ -14,6 +19,12 @@ export const state = (): UserStore => ({
   userToken: '',
 });
 
+/** Getters */
+export const getters: GetterTree<UserStore, UserStore> = {};
+export interface GetterTypes extends BaseGetterTypes {
+  // 'user/GetterName': { returnType: GetterReturnType }
+}
+
 /** Mutations */
 export const mutations: MutationTree<UserStore> = {
   /** ユーザートークンのセット */
@@ -21,6 +32,9 @@ export const mutations: MutationTree<UserStore> = {
     state.userToken = userToken;
   },
 };
+export interface MutationTypes extends BaseMutationTypes {
+  'user/setUserToken': { payload: string };
+}
 
 /** Actions */
 export const actions: ActionTree<UserStore, RootStore> = {
@@ -38,6 +52,6 @@ export const actions: ActionTree<UserStore, RootStore> = {
     commit('setUserToken', response.loginToken);
   },
 };
-
-/** Getters */
-export const getters: GetterTree<UserStore, UserStore> = {};
+export interface ActionTypes extends BaseActionTypes {
+  'user/signIn': { payload: { body: ILoginRequestBody }; returnType: void };
+}
