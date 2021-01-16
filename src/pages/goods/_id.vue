@@ -51,10 +51,13 @@ export default defineComponent({
     /** 商品詳細取得 */
     const fetchGoodsDetail = async () => {
       try {
-        await root.$store.dispatch('goods/fetchGoodsDetail', {
-          token: root.$typedStore.state.user.userToken,
-          id: root.$route.params.id,
-        });
+        await root.$typedStore.dispatch<'goods/fetchGoodsDetail'>(
+          'goods/fetchGoodsDetail',
+          {
+            token: root.$typedStore.state.user.userToken,
+            id: root.$route.params.id,
+          },
+        );
       } catch (err) {
         if (!err.response) throw err;
 

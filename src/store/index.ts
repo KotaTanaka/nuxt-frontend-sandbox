@@ -1,19 +1,22 @@
 import { ActionContext, ActionTree, GetterTree, MutationTree } from 'vuex';
 import { Context } from '@nuxt/types';
-import { NuxtAxiosInstance } from '@nuxtjs/axios';
 import cookieparser from 'cookieparser';
-import { GoodsStore } from './goods';
-import { UserStore } from './user';
+import * as goods from '@/store/goods';
+import * as user from '@/store/user';
 
 /** Store */
 export interface RootStore {
-  $axios: NuxtAxiosInstance;
-  goods: GoodsStore;
-  user: UserStore;
+  goods: goods.GoodsStore;
+  user: user.UserStore;
 }
+
+/** Getters */
+export const getters: GetterTree<RootStore, RootStore> = {};
+export type RootGetterTypes = goods.GetterTypes & user.GetterTypes;
 
 /** Mutations */
 export const mutations: MutationTree<RootStore> = {};
+export type RootMutationTypes = goods.MutationTypes & user.MutationTypes;
 
 /** Actions */
 export const actions: ActionTree<RootStore, RootStore> = {
@@ -33,6 +36,4 @@ export const actions: ActionTree<RootStore, RootStore> = {
     }
   },
 };
-
-/** Getters */
-export const getters: GetterTree<RootStore, RootStore> = {};
+export type RootActionTypes = goods.ActionTypes & user.ActionTypes;

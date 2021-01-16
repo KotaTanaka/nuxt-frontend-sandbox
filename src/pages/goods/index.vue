@@ -47,9 +47,12 @@ export default defineComponent({
     /** 商品一覧取得 */
     const fetchGoods = async () => {
       try {
-        await root.$store.dispatch('goods/fetchGoodsList', {
-          token: root.$typedStore.state.user.userToken,
-        });
+        await root.$typedStore.dispatch<'goods/fetchGoodsList'>(
+          'goods/fetchGoodsList',
+          {
+            token: root.$typedStore.state.user.userToken,
+          },
+        );
       } catch (err) {
         if (!err.response) throw err;
 
@@ -71,11 +74,14 @@ export default defineComponent({
      */
     const updateGoods = async (id: number, body: IUpdateGoodsRequestBody) => {
       try {
-        await root.$store.dispatch('goods/updateGoods', {
-          token: root.$typedStore.state.user.userToken,
-          id,
-          body,
-        });
+        await root.$typedStore.dispatch<'goods/updateGoods'>(
+          'goods/updateGoods',
+          {
+            token: root.$typedStore.state.user.userToken,
+            id: String(id),
+            body,
+          },
+        );
       } catch (err) {
         if (!err.response) throw err;
 
@@ -101,10 +107,13 @@ export default defineComponent({
      */
     const deleteGoods = async (id: number) => {
       try {
-        await root.$store.dispatch('goods/deleteGoods', {
-          token: root.$typedStore.state.user.userToken,
-          id,
-        });
+        await root.$typedStore.dispatch<'goods/deleteGoods'>(
+          'goods/deleteGoods',
+          {
+            token: root.$typedStore.state.user.userToken,
+            id: String(id),
+          },
+        );
       } catch (err) {
         if (!err.response) throw err;
 

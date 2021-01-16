@@ -23,6 +23,7 @@ import {
   ref,
   SetupContext,
 } from '@nuxtjs/composition-api';
+import { ILoginRequestBody } from '@/interfaces/api/request/User';
 import { IAPIError } from '@/interfaces/api/response/Error';
 
 /** ログインページ */
@@ -41,13 +42,13 @@ export default defineComponent({
 
     /** ログイン */
     const signIn = async () => {
+      const body: ILoginRequestBody = {
+        id: formState.id,
+        password: formState.password,
+      };
+
       try {
-        await root.$store.dispatch('user/signIn', {
-          body: {
-            id: formState.id,
-            password: formState.password,
-          },
-        });
+        await root.$typedStore.dispatch<'user/signIn'>('user/signIn', { body });
       } catch (err) {
         if (!err.response) throw err;
 
