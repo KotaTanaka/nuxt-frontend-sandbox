@@ -1,7 +1,6 @@
-import { Store } from 'vuex';
 import { Context, Plugin } from '@nuxt/types';
 import { Inject } from '@nuxt/types/app';
-import { RootStore } from '@/store';
+import { TypedStore } from '@/@types/vuex';
 
 /**
  * $store に型をあてた $typedStore
@@ -9,7 +8,7 @@ import { RootStore } from '@/store';
  * @param {Inject} inject
  */
 const TypedStorePlugin: Plugin = ({ app }: Context, inject: Inject): void => {
-  const store: Store<RootStore> = app.store;
+  const store: TypedStore = app.store;
   inject('typedStore', store);
 };
 
