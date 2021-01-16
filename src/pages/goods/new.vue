@@ -38,14 +38,17 @@ export default defineComponent({
 
     /**
      * 商品登録
-     * @param payload リクエストボディ
+     * @param body リクエストボディ
      */
-    const registerGoods = async (payload: ICreateGoodsRequestBody) => {
+    const registerGoods = async (body: ICreateGoodsRequestBody) => {
       try {
-        await root.$store.dispatch('goods/registerGoods', {
-          body: payload,
-          token: root.$typedStore.state.user.userToken,
-        });
+        await root.$typedStore.dispatch<'goods/registerGoods'>(
+          'goods/registerGoods',
+          {
+            body,
+            token: root.$typedStore.state.user.userToken,
+          },
+        );
       } catch (err) {
         if (!err.response) throw err;
 
