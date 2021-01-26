@@ -1,2 +1,7 @@
-@import 'variables';
-@import 'mixins';
+// Variables
+@import 'variables/color';
+@import 'variables/font';
+@import 'variables/layout';
+
+// Mixins
+@import 'mixins/responsive';
