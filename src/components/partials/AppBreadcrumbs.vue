@@ -19,7 +19,7 @@ interface Props {
   breadcrumbList: IBreadcrumb[];
 }
 
-/** パンくず */
+/** パンくずリスト */
 export default defineComponent({
   props: {
     breadcrumbList: { type: Array, required: true },

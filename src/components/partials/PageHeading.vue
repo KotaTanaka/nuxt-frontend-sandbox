@@ -2,7 +2,7 @@
 .page-heading
   h1(v-if="$mq === 'pc'") {{ title }}
   h2(v-else) {{ title }}
-  Breadcrumb(
+  AppBreadcrumbs(
     v-if="breadcrumbList.length > 1 && $mq === 'pc'"
     :breadcrumbList="breadcrumbList"
   )
@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api';
-import Breadcrumb from '@/components/partials/Breadcrumb.vue';
+import AppBreadcrumbs from '@/components/partials/AppBreadcrumbs.vue';
 import { IBreadcrumb } from '@/interfaces/app';
 
 // eslint-disable-next-line no-unused-vars
@@ -22,7 +22,7 @@ interface Props {
 /** ページ見出し */
 export default defineComponent({
   components: {
-    Breadcrumb,
+    AppBreadcrumbs,
   },
   props: {
     title: { type: String, required: true },
