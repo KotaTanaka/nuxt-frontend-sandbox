@@ -1,5 +1,5 @@
 <template lang="pug">
-v-container.top-page
+.page-container
   h1(v-if="$mq === 'pc'") 商品管理コンソール
   h2(v-else) 商品管理コンソール
   .links
@@ -19,13 +19,10 @@ export default defineComponent({
 <style lang="scss">
 @import 'resources';
 
-.top-page {
-  color: $text;
-  margin-top: $pc-header-height + 64px;
+.page-container {
+  @include page-container;
 
-  @include sp {
-    margin-top: $sp-header-height + 32px;
-  }
+  color: $text;
 
   > .links {
     margin-top: 24px;

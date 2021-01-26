@@ -1,0 +1,12 @@
+/** Layout */
+
+// ページコンテナ
+@mixin page-container {
+  width: 80%;
+  margin: $pc-header-height + 64px auto 0;
+
+  @include sp {
+    width: 90%;
+    margin: $sp-header-height + 32px auto 0;
+  }
+}

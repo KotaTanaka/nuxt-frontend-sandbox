@@ -1,5 +1,5 @@
 <template lang="pug">
-v-container
+.page-container
   PageHeading(
     title="商品詳細"
     :breadcrumbList="breadcrumbList"
@@ -81,4 +81,10 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+@import 'resources';
+
+.page-container {
+  @include page-container;
+}
+</style>

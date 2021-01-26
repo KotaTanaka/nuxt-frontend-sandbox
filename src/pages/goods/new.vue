@@ -1,5 +1,5 @@
 <template lang="pug">
-v-container
+.page-container
   PageHeading(
     title="商品登録"
     :breadcrumbList="breadcrumbList"
@@ -78,7 +78,13 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-.contents {
-  margin-top: 64px;
+@import 'resources';
+
+.page-container {
+  @include page-container;
+
+  > .contents {
+    margin-top: 64px;
+  }
 }
 </style>

@@ -1,5 +1,5 @@
 <template lang="pug">
-v-container
+.goods-list
   v-row
     v-col(v-for="goods in goodsList" :key="goods.id")
       GoodsListItem(
