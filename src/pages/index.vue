@@ -17,7 +17,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-@import '@/assets/styles/resources';
+@import 'resources';
 
 .top-page {
   color: $text;

@@ -1,3 +1,4 @@
+import path from 'path';
 import { NuxtConfig } from '@nuxt/types';
 
 /** 環境変数 */
@@ -50,7 +51,7 @@ const config: NuxtConfig = {
   },
   /* Vuetify */
   vuetify: {
-    customVariables: ['@/assets/styles/_variables.scss'],
+    customVariables: ['@/assets/styles/vuetify.scss'],
     theme: {
       themes: {
         light: {
@@ -71,6 +72,13 @@ const config: NuxtConfig = {
   },
   /* Build configuration */
   build: {
+    loaders: {
+      scss: {
+        sassOptions: {
+          includePaths: [path.resolve(__dirname, 'src/assets/styles')],
+        },
+      },
+    },
     /* Webpack の拡張 */
     extend() {},
   },

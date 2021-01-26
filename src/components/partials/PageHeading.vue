@@ -32,7 +32,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-@import '@/assets/styles/resources';
+@import 'resources';
 
 .page-heading {
   color: $text;
