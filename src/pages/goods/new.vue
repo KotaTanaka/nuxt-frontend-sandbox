@@ -12,7 +12,7 @@ v-container
 import {
   computed,
   defineComponent,
-  SetupContext,
+  getCurrentInstance,
 } from '@nuxtjs/composition-api';
 import PageHeading from '@/components/partials/PageHeading.vue';
 import GoodsNewForm from '@/components/GoodsNewForm.vue';
@@ -27,7 +27,9 @@ export default defineComponent({
     GoodsNewForm,
   },
   middleware: 'authentication',
-  setup(_, { root }: SetupContext) {
+  setup() {
+    const root = getCurrentInstance();
+
     /** パンくず */
     const breadcrumbList = computed<IBreadcrumb[]>(() => {
       return [

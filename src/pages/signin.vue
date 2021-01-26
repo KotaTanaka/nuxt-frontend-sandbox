@@ -19,16 +19,18 @@
 <script lang="ts">
 import {
   defineComponent,
+  getCurrentInstance,
   reactive,
   ref,
-  SetupContext,
 } from '@nuxtjs/composition-api';
 import { ILoginRequestBody } from '@/interfaces/api/request/User';
 import { IAPIError } from '@/interfaces/api/response/Error';
 
 /** ログインページ */
 export default defineComponent({
-  setup(_, { root }: SetupContext) {
+  setup() {
+    const root = getCurrentInstance();
+
     /** 入力値 */
     const formState = reactive<{ id: string; password: string }>({
       id: '',

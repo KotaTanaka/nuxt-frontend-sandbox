@@ -13,7 +13,7 @@
 import {
   computed,
   defineComponent,
-  SetupContext,
+  getCurrentInstance,
 } from '@nuxtjs/composition-api';
 import {
   IVuetifyTableHeader,
@@ -23,7 +23,9 @@ import { IGoodsDetailResponse } from '@/interfaces/api/response/Goods';
 
 /** 商品詳細テーブル */
 export default defineComponent({
-  setup(_, { root }: SetupContext) {
+  setup() {
+    const root = getCurrentInstance();
+
     /** 商品データ */
     const goodsDetail = computed<IGoodsDetailResponse>(() => {
       return root.$typedStore.state.goods.goods;

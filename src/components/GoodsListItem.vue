@@ -25,7 +25,12 @@ v-card(min-width="300").item
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, SetupContext } from '@nuxtjs/composition-api';
+import {
+  defineComponent,
+  getCurrentInstance,
+  ref,
+  SetupContext,
+} from '@nuxtjs/composition-api';
 import ConfirmDialog from '@/components/partials/ConfirmDialog.vue';
 import GoodsEditModal from '@/components/GoodsEditModal.vue';
 import { IUpdateGoodsRequestBody } from '@/interfaces/api/request/Goods';
@@ -44,7 +49,9 @@ export default defineComponent({
   props: {
     goods: { type: Object, required: true },
   },
-  setup(props: Props, { emit, root }: SetupContext) {
+  setup(props: Props, { emit }: SetupContext) {
+    const root = getCurrentInstance();
+
     /** 削除確認ダイアログの開閉状態 */
     const isDeleteModalVisible = ref<boolean>(false);
 

@@ -13,6 +13,7 @@ v-container
 import {
   computed,
   defineComponent,
+  getCurrentInstance,
   SetupContext,
 } from '@nuxtjs/composition-api';
 import GoodsListItem from '@/components/GoodsListItem.vue';
@@ -24,7 +25,9 @@ export default defineComponent({
   components: {
     GoodsListItem,
   },
-  setup(_, { emit, root }: SetupContext) {
+  setup(_, { emit }: SetupContext) {
+    const root = getCurrentInstance();
+
     /** 商品一覧 */
     const goodsList = computed<IGoodsListElement[]>(() => {
       return root.$typedStore.state.goods.goodsList;

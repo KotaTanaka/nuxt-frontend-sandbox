@@ -14,8 +14,8 @@ v-container
 import {
   computed,
   defineComponent,
+  getCurrentInstance,
   onBeforeMount,
-  SetupContext,
 } from '@nuxtjs/composition-api';
 import PageHeading from '@/components/partials/PageHeading.vue';
 import GoodsList from '@/components/GoodsList.vue';
@@ -30,7 +30,9 @@ export default defineComponent({
     GoodsList,
   },
   middleware: 'authentication',
-  setup(_, { root }: SetupContext) {
+  setup() {
+    const root = getCurrentInstance();
+
     /** パンくず */
     const breadcrumbList = computed<IBreadcrumb[]>(() => {
       return [

@@ -12,8 +12,8 @@ v-container
 import {
   computed,
   defineComponent,
+  getCurrentInstance,
   onBeforeMount,
-  SetupContext,
 } from '@nuxtjs/composition-api';
 import PageHeading from '@/components/partials/PageHeading.vue';
 import GoodsDetailTable from '@/components/GoodsDetailTable.vue';
@@ -28,7 +28,9 @@ export default defineComponent({
     GoodsDetailTable,
   },
   middleware: 'authentication',
-  setup(_, { root }: SetupContext) {
+  setup() {
+    const root = getCurrentInstance();
+
     /** 商品データ */
     const goods = computed<IGoodsDetailResponse>(() => {
       return root.$typedStore.state.goods.goods;
