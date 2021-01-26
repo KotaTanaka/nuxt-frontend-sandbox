@@ -21,10 +21,15 @@ export default defineComponent({
 
 .top-page {
   color: $text;
-  margin-top: 64px;
+  margin-top: $pc-header-height + 64px;
+
+  @include sp {
+    margin-top: $sp-header-height + 32px;
+  }
 
   > .links {
     margin-top: 24px;
+
     @include sp {
       display: flex;
       flex-direction: column;
@@ -33,6 +38,7 @@ export default defineComponent({
 
   > .links > .link {
     padding: 0 16px;
+
     @include sp {
       margin-top: 16px;
     }

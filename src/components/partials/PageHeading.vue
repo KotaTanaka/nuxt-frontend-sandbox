@@ -37,6 +37,10 @@ export default defineComponent({
 .page-heading {
   color: $text;
   width: 100%;
-  margin-top: 64px;
+  margin-top: $pc-header-height + 64px;
+
+  @include sp {
+    margin-top: $sp-header-height + 32px;
+  }
 }
 </style>
