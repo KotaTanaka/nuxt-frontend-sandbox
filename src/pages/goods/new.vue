@@ -5,7 +5,7 @@
     :breadcrumbList="breadcrumbList"
   )
   .contents
-    GoodsNewForm(@submit="registerGoods")
+    GoodsNewForm(@submit="registerGoodsAndBack")
 </template>
 
 <script lang="ts">
@@ -16,9 +16,9 @@ import {
 } from '@nuxtjs/composition-api';
 import PageHeading from '@/components/partials/PageHeading.vue';
 import GoodsNewForm from '@/components/GoodsNewForm.vue';
+import useGoods from '@/composables/useGoods';
 import { IBreadcrumb } from '@/interfaces/app';
 import { ICreateGoodsRequestBody } from '@/interfaces/api/request/Goods';
-import { IAPIError } from '@/interfaces/api/response/Error';
 
 /** 商品登録ページ */
 export default defineComponent({
@@ -29,6 +29,7 @@ export default defineComponent({
   middleware: 'authentication',
   setup() {
     const root = getCurrentInstance();
+    const { registerGoods } = useGoods();
 
     /** パンくず */
     const breadcrumbList = computed<IBreadcrumb[]>(() => {
@@ -40,38 +41,18 @@ export default defineComponent({
 
     /**
      * 商品登録
-     * @param body リクエストボディ
+     * @param {ICreateGoodsRequestBody} body リクエストボディ
      */
-    const registerGoods = async (body: ICreateGoodsRequestBody) => {
-      try {
-        await root.$typedStore.dispatch<'goods/registerGoods'>(
-          'goods/registerGoods',
-          {
-            body,
-            token: root.$typedStore.state.user.userToken,
-          },
-        );
-      } catch (err) {
-        if (!err.response) throw err;
+    const registerGoodsAndBack = async (body: ICreateGoodsRequestBody) => {
+      await registerGoods(body);
 
-        const { status, ...errResponse } = err.response;
-        const errData = errResponse.data as IAPIError;
-
-        root.$nuxt.error({
-          message: `商品の登録に失敗しました: ${errData.message}`,
-          path: root.$route.path,
-          statusCode: status,
-        });
-
-        return;
-      }
-
+      // 一覧ページに遷移
       await root.$router.push(root.$C.PAGE_URL.GOODS);
     };
 
     return {
       breadcrumbList,
-      registerGoods,
+      registerGoodsAndBack,
     };
   },
 });

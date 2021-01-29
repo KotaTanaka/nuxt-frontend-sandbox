@@ -5,7 +5,7 @@
     :breadcrumbList="breadcrumbList"
   )
   GoodsList(
-    @updateGoods="updateGoods"
+    @updateGoods="updateGoodsWithReload"
     @deleteGoods="deleteGoods"
   )
 </template>
@@ -19,9 +19,9 @@ import {
 } from '@nuxtjs/composition-api';
 import PageHeading from '@/components/partials/PageHeading.vue';
 import GoodsList from '@/components/GoodsList.vue';
+import useGoods from '@/composables/useGoods';
 import { IBreadcrumb } from '@/interfaces/app';
 import { IUpdateGoodsRequestBody } from '@/interfaces/api/request/Goods';
-import { IAPIError } from '@/interfaces/api/response/Error';
 
 /** 商品一覧ページ */
 export default defineComponent({
@@ -32,6 +32,7 @@ export default defineComponent({
   middleware: 'authentication',
   setup() {
     const root = getCurrentInstance();
+    const { fetchGoodsList, updateGoods, deleteGoods } = useGoods();
 
     /** パンくず */
     const breadcrumbList = computed<IBreadcrumb[]>(() => {
@@ -43,97 +44,28 @@ export default defineComponent({
 
     /** ライフサイクル */
     onBeforeMount(async () => {
-      await fetchGoods();
+      await fetchGoodsList();
     });
-
-    /** 商品一覧取得 */
-    const fetchGoods = async () => {
-      try {
-        await root.$typedStore.dispatch<'goods/fetchGoodsList'>(
-          'goods/fetchGoodsList',
-          {
-            token: root.$typedStore.state.user.userToken,
-          },
-        );
-      } catch (err) {
-        if (!err.response) throw err;
-
-        const { status, ...errResponse } = err.response;
-        const errData = errResponse.data as IAPIError;
-
-        root.$nuxt.error({
-          message: `商品の取得に失敗しました: ${errData.message}`,
-          path: root.$route.path,
-          statusCode: status,
-        });
-      }
-    };
 
     /**
      * 商品更新
-     * @param id 商品ID
-     * @param body リクエストボディ
+     * @param {number} id 商品ID
+     * @param {IUpdateGoodsRequestBody} body リクエストボディ
      */
-    const updateGoods = async (id: number, body: IUpdateGoodsRequestBody) => {
-      try {
-        await root.$typedStore.dispatch<'goods/updateGoods'>(
-          'goods/updateGoods',
-          {
-            token: root.$typedStore.state.user.userToken,
-            id: String(id),
-            body,
-          },
-        );
-      } catch (err) {
-        if (!err.response) throw err;
+    const updateGoodsWithReload = async (
+      id: number,
+      body: IUpdateGoodsRequestBody,
+    ) => {
+      await updateGoods(id, body);
 
-        const { status, ...errResponse } = err.response;
-        const errData = errResponse.data as IAPIError;
-
-        root.$nuxt.error({
-          message: `商品情報の更新に失敗しました: ${errData.message}`,
-          path: root.$route.path,
-          statusCode: status,
-        });
-
-        return;
-      }
-
-      // 一覧の再取得
-      await fetchGoods();
-    };
-
-    /**
-     * 商品削除
-     * @param id 商品ID
-     */
-    const deleteGoods = async (id: number) => {
-      try {
-        await root.$typedStore.dispatch<'goods/deleteGoods'>(
-          'goods/deleteGoods',
-          {
-            token: root.$typedStore.state.user.userToken,
-            id: String(id),
-          },
-        );
-      } catch (err) {
-        if (!err.response) throw err;
-
-        const { status, ...errResponse } = err.response;
-        const errData = errResponse.data as IAPIError;
-
-        root.$nuxt.error({
-          message: `商品の削除に失敗しました: ${errData.message}`,
-          path: root.$route.path,
-          statusCode: status,
-        });
-      }
+      // 一覧を更新
+      await fetchGoodsList();
     };
 
     return {
       breadcrumbList,
-      updateGoods,
       deleteGoods,
+      updateGoodsWithReload,
     };
   },
 });
