@@ -1,5 +1,5 @@
 <template lang="pug">
-.error-page
+.page-container
   h1.heading ERROR ({{ error.statusCode }})
   .message {{ error.message }}
   .links
@@ -25,27 +25,29 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-.error-page {
+@import 'resources';
+
+.page-container {
+  @include page-container;
+
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  & > .heading {
-    margin: 64px auto 32px;
+  > .heading {
     color: darkred;
   }
 
-  & > .message {
+  > .message {
     width: 80%;
     padding: 16px;
-    background-color: whitesmoke;
+    margin-top: 32px;
+    background: whitesmoke;
     border-radius: 12px;
   }
 
-  & > .links {
+  > .links {
     margin-top: 24px;
-    display: flex;
-    flex-direction: column;
   }
 }
 </style>
