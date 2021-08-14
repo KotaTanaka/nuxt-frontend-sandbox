@@ -7,12 +7,9 @@ Nuxt + TypeScript でのフロントエンド開発の素振り
 
 *[Backend - springboot-api-sandbox](https://github.com/KotaTanaka/springboot-api-sandbox)*
 
-## Technology
+## Keywords
 
-* **Nuxt.js** `v2`
-* script - **TypeScript**
-* template - **pug**
-* style - **SCSS**
+`Nuxt.js v2` `TypeScript` `Vue Composition API` `Pug` `SCSS` `Vuetify`
 
 ## Required
 

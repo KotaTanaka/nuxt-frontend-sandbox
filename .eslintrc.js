@@ -11,11 +11,18 @@ module.exports = {
     '@nuxtjs',
     '@nuxtjs/eslint-config-typescript',
     'prettier',
-    'prettier/vue',
     'plugin:prettier/recommended',
     'plugin:nuxt/recommended',
   ],
   plugins: ['prettier'],
+  settings: {
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts', '.tsx'],
+    },
+    'import/resolver': {
+      typescript: {},
+    },
+  },
   rules: {
     'no-unused-vars': 'warn',
     'no-use-before-define': 'off',
