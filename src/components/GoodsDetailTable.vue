@@ -38,13 +38,8 @@ export default defineComponent({
 
     /** テーブル項目 */
     const tableItems = computed<IVuetifyTableItem[]>(() => {
-      const {
-        id,
-        description,
-        price,
-        createdAt,
-        updatedAt,
-      } = goodsDetail.value;
+      const { id, description, price, createdAt, updatedAt } =
+        goodsDetail.value;
 
       return [
         { name: 'ID', value: id },
