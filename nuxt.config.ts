@@ -12,7 +12,7 @@ const config: NuxtConfig = {
     port: NUXT_PORT,
   },
   /* ビルドモジュール */
-  buildModules: ['@nuxt/typescript-build', '@nuxtjs/composition-api'],
+  buildModules: ['@nuxt/typescript-build', '@nuxtjs/composition-api/module'],
   /* 起動モード */
   ssr: true,
   /* ソースディレクトリ */
