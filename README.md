@@ -2,7 +2,7 @@
 
 ## About
 
-Nuxt + TypeScript でのフロントエンド開発の実験場  
+Nuxt + TypeScript でのフロントエンド開発の素振り  
 商品管理アプリ
 
 *[Backend - springboot-api-sandbox](https://github.com/KotaTanaka/springboot-api-sandbox)*
@@ -13,6 +13,10 @@ Nuxt + TypeScript でのフロントエンド開発の実験場
 * script - **TypeScript**
 * template - **pug**
 * style - **SCSS**
+
+## Required
+
+* Node.js `v15.x`
 
 ## Getting Started
 

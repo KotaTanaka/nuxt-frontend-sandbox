@@ -4,6 +4,9 @@
   "description": "Goods Management App",
   "author": "KotaTanaka",
   "private": true,
+  "engines": {
+    "node": "15.x"
+  },
   "scripts": {
     "dev": "nuxt-ts",
     "build": "nuxt-ts build",
