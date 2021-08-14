@@ -31,14 +31,14 @@ export default defineComponent({
   },
   middleware: 'authentication',
   setup() {
-    const root = getCurrentInstance();
+    const { proxy } = getCurrentInstance();
     const { fetchGoodsList, updateGoods, deleteGoods } = useGoods();
 
     /** パンくず */
     const breadcrumbList = computed<IBreadcrumb[]>(() => {
       return [
-        { name: 'トップ', path: root.$C.PAGE_URL.TOP },
-        { name: '商品一覧', path: root.$route.path },
+        { name: 'トップ', path: proxy.$C.PAGE_URL.TOP },
+        { name: '商品一覧', path: proxy.$route.path },
       ];
     });
 

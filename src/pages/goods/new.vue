@@ -28,14 +28,14 @@ export default defineComponent({
   },
   middleware: 'authentication',
   setup() {
-    const root = getCurrentInstance();
+    const { proxy } = getCurrentInstance();
     const { registerGoods } = useGoods();
 
     /** パンくず */
     const breadcrumbList = computed<IBreadcrumb[]>(() => {
       return [
-        { name: 'トップ', path: root.$C.PAGE_URL.TOP },
-        { name: '商品登録', path: root.$route.path },
+        { name: 'トップ', path: proxy.$C.PAGE_URL.TOP },
+        { name: '商品登録', path: proxy.$route.path },
       ];
     });
 
@@ -47,7 +47,7 @@ export default defineComponent({
       await registerGoods(body);
 
       // 一覧ページに遷移
-      await root.$router.push(root.$C.PAGE_URL.GOODS);
+      await proxy.$router.push(proxy.$C.PAGE_URL.GOODS);
     };
 
     return {

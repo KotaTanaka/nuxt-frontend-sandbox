@@ -24,11 +24,11 @@ import { IGoodsDetailResponse } from '@/interfaces/api/response/Goods';
 /** 商品詳細テーブル */
 export default defineComponent({
   setup() {
-    const root = getCurrentInstance();
+    const { proxy } = getCurrentInstance();
 
     /** 商品データ */
     const goodsDetail = computed<IGoodsDetailResponse>(() => {
-      return root.$typedStore.state.goods.goods;
+      return proxy.$typedStore.state.goods.goods;
     });
 
     /** テーブルヘッダ */

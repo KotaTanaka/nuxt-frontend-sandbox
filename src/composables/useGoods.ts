@@ -7,17 +7,17 @@ import { IAPIError } from '@/interfaces/api/response/Error';
 
 /** 商品操作 */
 const useGoods = () => {
-  const root = getCurrentInstance();
+  const { proxy } = getCurrentInstance();
 
   /** 認証トークン */
   const useToken = computed<string>(() => {
-    return root.$typedStore.state.user.userToken;
+    return proxy.$typedStore.state.user.userToken;
   });
 
   /** 商品一覧取得 */
   const fetchGoodsList = async () => {
     try {
-      await root.$typedStore.dispatch<'goods/fetchGoodsList'>(
+      await proxy.$typedStore.dispatch<'goods/fetchGoodsList'>(
         'goods/fetchGoodsList',
         {
           token: useToken.value,
@@ -29,9 +29,9 @@ const useGoods = () => {
       const { status, ...errResponse } = err.response;
       const errData = errResponse.data as IAPIError;
 
-      root.$nuxt.error({
+      proxy.$nuxt.error({
         message: `商品の取得に失敗しました: ${errData.message}`,
-        path: root.$route.path,
+        path: proxy.$route.path,
         statusCode: status,
       });
 
@@ -42,11 +42,11 @@ const useGoods = () => {
   /** 商品詳細取得 */
   const fetchGoodsDetail = async () => {
     try {
-      await root.$typedStore.dispatch<'goods/fetchGoodsDetail'>(
+      await proxy.$typedStore.dispatch<'goods/fetchGoodsDetail'>(
         'goods/fetchGoodsDetail',
         {
           token: useToken.value,
-          id: root.$route.params.id,
+          id: proxy.$route.params.id,
         },
       );
     } catch (err) {
@@ -55,9 +55,9 @@ const useGoods = () => {
       const { status, ...errResponse } = err.response;
       const errData = errResponse.data as IAPIError;
 
-      root.$nuxt.error({
+      proxy.$nuxt.error({
         message: `商品の取得に失敗しました: ${errData.message}`,
-        path: root.$route.path,
+        path: proxy.$route.path,
         statusCode: status,
       });
 
@@ -71,7 +71,7 @@ const useGoods = () => {
    */
   const registerGoods = async (body: ICreateGoodsRequestBody) => {
     try {
-      await root.$typedStore.dispatch<'goods/registerGoods'>(
+      await proxy.$typedStore.dispatch<'goods/registerGoods'>(
         'goods/registerGoods',
         {
           token: useToken.value,
@@ -84,9 +84,9 @@ const useGoods = () => {
       const { status, ...errResponse } = err.response;
       const errData = errResponse.data as IAPIError;
 
-      root.$nuxt.error({
+      proxy.$nuxt.error({
         message: `商品の登録に失敗しました: ${errData.message}`,
-        path: root.$route.path,
+        path: proxy.$route.path,
         statusCode: status,
       });
 
@@ -101,7 +101,7 @@ const useGoods = () => {
    */
   const updateGoods = async (id: number, body: IUpdateGoodsRequestBody) => {
     try {
-      await root.$typedStore.dispatch<'goods/updateGoods'>(
+      await proxy.$typedStore.dispatch<'goods/updateGoods'>(
         'goods/updateGoods',
         {
           token: useToken.value,
@@ -115,9 +115,9 @@ const useGoods = () => {
       const { status, ...errResponse } = err.response;
       const errData = errResponse.data as IAPIError;
 
-      root.$nuxt.error({
+      proxy.$nuxt.error({
         message: `商品情報の更新に失敗しました: ${errData.message}`,
-        path: root.$route.path,
+        path: proxy.$route.path,
         statusCode: status,
       });
 
@@ -131,7 +131,7 @@ const useGoods = () => {
    */
   const deleteGoods = async (id: number) => {
     try {
-      await root.$typedStore.dispatch<'goods/deleteGoods'>(
+      await proxy.$typedStore.dispatch<'goods/deleteGoods'>(
         'goods/deleteGoods',
         {
           token: useToken.value,
@@ -144,9 +144,9 @@ const useGoods = () => {
       const { status, ...errResponse } = err.response;
       const errData = errResponse.data as IAPIError;
 
-      root.$nuxt.error({
+      proxy.$nuxt.error({
         message: `商品の削除に失敗しました: ${errData.message}`,
-        path: root.$route.path,
+        path: proxy.$route.path,
         statusCode: status,
       });
 

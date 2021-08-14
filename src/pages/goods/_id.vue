@@ -29,20 +29,20 @@ export default defineComponent({
   },
   middleware: 'authentication',
   setup() {
-    const root = getCurrentInstance();
+    const { proxy } = getCurrentInstance();
     const { fetchGoodsDetail } = useGoods();
 
     /** 商品データ */
     const goods = computed<IGoodsDetailResponse>(() => {
-      return root.$typedStore.state.goods.goods;
+      return proxy.$typedStore.state.goods.goods;
     });
 
     /** パンくず */
     const breadcrumbList = computed<IBreadcrumb[]>(() => {
       return [
-        { name: 'トップ', path: root.$C.PAGE_URL.TOP },
-        { name: '商品一覧', path: root.$C.PAGE_URL.GOODS },
-        { name: goods.value.name, path: root.$route.path },
+        { name: 'トップ', path: proxy.$C.PAGE_URL.TOP },
+        { name: '商品一覧', path: proxy.$C.PAGE_URL.GOODS },
+        { name: goods.value.name, path: proxy.$route.path },
       ];
     });
 

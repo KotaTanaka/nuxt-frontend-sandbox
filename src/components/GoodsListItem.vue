@@ -50,7 +50,7 @@ export default defineComponent({
     goods: { type: Object, required: true },
   },
   setup(props: Props, { emit }: SetupContext) {
-    const root = getCurrentInstance();
+    const { proxy } = getCurrentInstance();
 
     /** 削除確認ダイアログの開閉状態 */
     const isDeleteModalVisible = ref<boolean>(false);
@@ -60,8 +60,8 @@ export default defineComponent({
 
     /** 詳細画面への遷移 */
     const toDetail = async () => {
-      await root.$router.push(
-        root.$C.PAGE_URL.GOODS_DETAIL.replace('$id', `${props.goods.id}`),
+      await proxy.$router.push(
+        proxy.$C.PAGE_URL.GOODS_DETAIL.replace('$id', `${props.goods.id}`),
       );
     };
 

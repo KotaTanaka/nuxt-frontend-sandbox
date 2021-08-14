@@ -26,11 +26,11 @@ export default defineComponent({
     GoodsListItem,
   },
   setup(_, { emit }: SetupContext) {
-    const root = getCurrentInstance();
+    const { proxy } = getCurrentInstance();
 
     /** 商品一覧 */
     const goodsList = computed<IGoodsListElement[]>(() => {
-      return root.$typedStore.state.goods.goodsList;
+      return proxy.$typedStore.state.goods.goodsList;
     });
 
     /** 商品更新 */

@@ -29,7 +29,7 @@ import { IAPIError } from '@/interfaces/api/response/Error';
 /** ログインページ */
 export default defineComponent({
   setup() {
-    const root = getCurrentInstance();
+    const { proxy } = getCurrentInstance();
 
     /** 入力値 */
     const formState = reactive<{ id: string; password: string }>({
@@ -50,23 +50,25 @@ export default defineComponent({
       };
 
       try {
-        await root.$typedStore.dispatch<'user/signIn'>('user/signIn', { body });
+        await proxy.$typedStore.dispatch<'user/signIn'>('user/signIn', {
+          body,
+        });
       } catch (err) {
         if (!err.response) throw err;
 
         const { status, ...errResponse } = err.response;
         const errData = errResponse.data as IAPIError;
 
-        root.$nuxt.error({
+        proxy.$nuxt.error({
           message: `ログインに失敗しました: ${errData.message}`,
-          path: root.$route.path,
+          path: proxy.$route.path,
           statusCode: status,
         });
 
         return;
       }
 
-      await root.$router.push(root.$C.PAGE_URL.TOP);
+      await proxy.$router.push(proxy.$C.PAGE_URL.TOP);
     };
 
     return {
