@@ -35,8 +35,8 @@ export default defineComponent({
 @import 'resources';
 
 .page-heading {
-  color: $text;
   width: 100%;
   margin-bottom: 32px;
+  color: $text;
 }
 </style>
