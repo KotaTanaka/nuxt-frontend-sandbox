@@ -29,13 +29,13 @@ $ yarn
 $ yarn dev
 ```
 
+→ Serve at http://localhost:5050
+
 * Build
 
 ```bash
 $ yarn build
 ```
-
-→ http://localhost:5050
 
 * Open Storybook (Component Catalog)
 
@@ -43,4 +43,4 @@ $ yarn build
 $ yarn storybook
 ```
 
-→ http://localhost:6006
+→ Serve at http://localhost:5053
