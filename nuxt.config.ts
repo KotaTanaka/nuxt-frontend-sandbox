@@ -40,7 +40,6 @@ const config: NuxtConfig = {
   /* Nuxtモジュール */
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/pwa',
     '@nuxtjs/vuetify',
     '@nuxtjs/font-awesome',
     'nuxt-mq',
