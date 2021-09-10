@@ -30,7 +30,6 @@ export default defineComponent({
 <style lang="scss">
 .breadcrumb {
   display: flex;
-  margin-top: 48px;
   background: white;
 
   > .breadcrumb-list > .breadcrumb-item > .span {
