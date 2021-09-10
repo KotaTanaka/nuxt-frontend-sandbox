@@ -14,7 +14,7 @@
     "generate": "nuxt generate",
     "lint": "eslint --ext .ts,.js,.vue --ignore-path .gitignore .",
     "lint:fix": "eslint --ext .ts,.js,.vue --ignore-path .gitignore --fix .",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "nuxt storybook",
     "build-storybook": "build-storybook",
     "prepare": "husky install"
   },
@@ -29,20 +29,15 @@
     "nuxt-mq": "^2.0.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.10",
-    "@mdi/font": "^5.8.55",
     "@nuxt/types": "^2.14.12",
     "@nuxt/typescript-build": "^2.0.3",
     "@nuxtjs/eslint-config-typescript": "^6.0.1",
     "@nuxtjs/eslint-module": "^3.0.2",
+    "@nuxtjs/storybook": "^4.1.1",
     "@nuxtjs/stylelint-module": "^4.0.0",
-    "@storybook/addon-actions": "^6.1.11",
-    "@storybook/addon-essentials": "^6.1.11",
-    "@storybook/addon-links": "^6.1.11",
-    "@storybook/vue": "^6.1.11",
+    "@storybook/addon-actions": "^6.3.8",
     "@typescript-eslint/parser": "^4.11.1",
     "babel-eslint": "^10.1.0",
-    "babel-loader": "^8.2.2",
     "css-loader": "^4.2.0",
     "eslint": "^7.16.0",
     "eslint-config-prettier": "^8.3.0",
@@ -52,10 +47,10 @@
     "husky": "^7.0.1",
     "lint-staged": "^11.1.2",
     "node-sass": "^6.0.1",
+    "postcss": "^8.3.6",
     "prettier": "^2.2.1",
     "pug": "^3.0.1",
     "pug-plain-loader": "^1.1.0",
-    "react-is": "^17.0.1",
     "sass-loader": "^10.1.1",
     "stylelint": "^13.13.1",
     "stylelint-config-prettier": "^8.0.2",
@@ -63,7 +58,8 @@
     "stylelint-config-recommended-scss": "^4.3.0",
     "stylelint-config-standard": "^22.0.0",
     "stylelint-prettier": "^1.2.0",
-    "stylelint-scss": "^3.20.1"
+    "stylelint-scss": "^3.20.1",
+    "ts-node": "^10.2.1"
   },
   "lint-staged": {
     "*.{ts,js,vue}": "yarn lint"

@@ -2,10 +2,11 @@
 .page-heading
   h1(v-if="$mq === 'pc'") {{ title }}
   h2(v-else) {{ title }}
-  AppBreadcrumbs(
-    v-if="breadcrumbList.length > 1 && $mq === 'pc'"
-    :breadcrumbList="breadcrumbList"
-  )
+  .breadcrumbs
+    AppBreadcrumbs(
+      v-if="breadcrumbList.length > 1 && $mq === 'pc'"
+      :breadcrumbList="breadcrumbList"
+    )
 </template>
 
 <script lang="ts">
@@ -38,5 +39,10 @@ export default defineComponent({
   width: 100%;
   margin-bottom: 32px;
   color: $text;
+  text-align: center;
+
+  > .breadcrumbs {
+    margin-top: 48px;
+  }
 }
 </style>

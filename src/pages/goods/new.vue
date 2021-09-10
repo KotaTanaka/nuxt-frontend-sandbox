@@ -35,7 +35,7 @@ export default defineComponent({
     const breadcrumbList = computed<IBreadcrumb[]>(() => {
       return [
         { name: 'トップ', path: proxy.$C.PAGE_URL.TOP },
-        { name: '商品登録', path: proxy.$route.path },
+        { name: '商品登録', path: '' },
       ];
     });
 
