@@ -20,6 +20,6 @@ DetailPage.args = {
   breadcrumbList: [
     { name: 'トップ', path: '/' },
     { name: '商品一覧', path: '/goods' },
-    { name: '商品詳細', path: '/goods/1' },
+    { name: '商品詳細', path: '' },
   ],
 };

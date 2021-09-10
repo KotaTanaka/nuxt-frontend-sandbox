@@ -42,7 +42,7 @@ export default defineComponent({
       return [
         { name: 'トップ', path: proxy.$C.PAGE_URL.TOP },
         { name: '商品一覧', path: proxy.$C.PAGE_URL.GOODS },
-        { name: goods.value.name, path: proxy.$route.path },
+        { name: goods.value.name, path: '' },
       ];
     });
 

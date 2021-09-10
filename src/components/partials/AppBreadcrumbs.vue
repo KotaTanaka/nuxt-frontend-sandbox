@@ -3,7 +3,7 @@
   .breadcrumb-list(v-for="(item, i) in breadcrumbList")
     .breadcrumb-item(:key="i")
       nuxt-link.span(
-        v-if="item.path !== $route.path"
+        v-if="item.path"
         :to="item.path"
       ) {{ item.name }}
       span.span(v-else) {{ item.name }}
