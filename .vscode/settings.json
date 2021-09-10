@@ -1,6 +1,14 @@
 {
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+    "source.fixAll.eslint": true,
+    "source.fixAll.stylelint": true
   },
-  "cSpell.words": ["nuxtjs"]
+  "cSpell.words": [
+    "cookieparser",
+    "nuxt",
+    "nuxtjs",
+    "stylelint",
+    "vuetify",
+    "vuex"
+  ]
 }
