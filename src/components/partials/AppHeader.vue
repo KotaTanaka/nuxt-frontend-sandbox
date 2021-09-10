@@ -17,6 +17,7 @@ export default defineComponent({});
 .app-header {
   position: fixed;
   top: 0;
+  left: 0;
   z-index: $z-index-header;
   display: flex;
   align-items: center;
