@@ -77,6 +77,7 @@ const config: NuxtConfig = {
   storybook: {
     port: 5053,
     stories: ['@/stories/*.stories.js'],
+    decorators: ['<v-app><story/></v-app>'],
   },
   /* Build configuration */
   build: {
