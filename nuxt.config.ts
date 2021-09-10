@@ -73,6 +73,10 @@ const config: NuxtConfig = {
       pc: Infinity,
     },
   },
+  /* Storybook */
+  storybook: {
+    stories: ['@/stories/*.stories.js'],
+  },
   /* Build configuration */
   build: {
     loaders: {
